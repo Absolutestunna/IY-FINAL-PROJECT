@@ -1,0 +1,45 @@
+
+// Bootstrap Variables
+$icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
+
+// Import Bootstrap
+@import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
+
+// @import "variables";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+#welcome-body {
+  padding: 0 190px;
+
+  .joinIn {
+    display: block;
+    width: 60%;
+    background-color: green;
+    margin-bottom: 10px;
+  }
+  .signIn {
+    display: block;
+    width: 60%;
+  }
+}
+
+
+@media (min-width: 768px) and (max-width: 991px){
+  #welcome-body {
+    padding: 0 190px;
+  }
+
+}
+@media (min-width: 400px) and (max-width: 767px){
+  #welcome-body {
+    padding: 0 80px;
+
+  }
+
+}
