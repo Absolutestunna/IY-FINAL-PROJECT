@@ -4,8 +4,14 @@ var ReactDOM = require('react-dom');
 var $ = require('jquery');
 require('backbone-react-component');
 
-var LogOnComponent = React.createClass({
-
+var ProfilePageComponent = React.createClass({
+  render: function(){
+    return (
+      <div>
+        
+      </div>
+    );
+  }
 });
 
-module.exports = LogOnComponent;
+module.exports = ProfilePageComponent;
