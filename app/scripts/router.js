@@ -9,7 +9,8 @@ var WelcomePageComponent = require('./components/welcomePage.jsx');
 var SignInComponent = require('./components/signin.jsx');
 var SignUpComponent = require('./components/signup.jsx');
 var ProfilePageComponent = require('./components/profile-page.jsx');
-
+var CrewComponent = require('./components/crew.jsx');
+var GamesComponent = require('./components/games.jsx');
 
 
 
@@ -21,7 +22,9 @@ var Router = Backbone.Router.extend({
     '': 'welcomePage',
     'signUp': 'signUp',
     'signIn': 'signIn',
-    'profile': 'profile'
+    'profile': 'profile',
+    'crew': 'crew',
+    'games': 'games'
   },
   welcomePage: function(){
     ReactDOM.render(
@@ -41,6 +44,16 @@ var Router = Backbone.Router.extend({
   profile: function(){
     ReactDOM.render(
       React.createElement(ProfilePageComponent), document.getElementById('app')
+    );
+  },
+  crew: function(){
+    ReactDOM.render(
+      React.createElement(CrewComponent), document.getElementById('app')
+    );
+  },
+  games: function(){
+    ReactDOM.render(
+      React.createElement(GamesComponent), document.getElementById('app')
     );
   }
 });

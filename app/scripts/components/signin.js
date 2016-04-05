@@ -5,9 +5,8 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var SignInComponent = React.createClass({displayName: "SignInComponent",
+  mixins: [Backbone.React.Component.mixin],
   handleSignIn: function(e){
-    console.log('your');
-
    var username = $('#username1').val();
    var password = $('#password1').val();
    console.log(username, password);
@@ -29,19 +28,17 @@ var SignInComponent = React.createClass({displayName: "SignInComponent",
   render: function(){
     return (
       React.createElement("div", {className: "row sign-in"}, 
-        React.createElement("div", {className: "row"}, 
+        React.createElement("div", {className: "col m12 logo1"}, "logo"), 
+        React.createElement("div", {className: "col m12 create1"}, "LOG IN TO KICK"), 
           React.createElement("div", {className: "input-field col-md-12"}, 
             React.createElement("input", {id: "username1", type: "text", className: "validate"}), 
             React.createElement("label", {htmlFor: "email"}, "Username")
-          )
-        ), 
+          ), 
 
-        React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "input-field col-md-12"}, 
             React.createElement("input", {id: "password1", type: "password", className: "validate"}), 
             React.createElement("label", {htmlFor: "password"}, "Password")
-          )
-        ), 
+          ), 
 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "input-field col-md-12"}, 

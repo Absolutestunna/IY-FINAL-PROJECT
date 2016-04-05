@@ -6,9 +6,8 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var SignInComponent = React.createClass({
+  mixins: [Backbone.React.Component.mixin],
   handleSignIn: function(e){
-    console.log('your');
-
    var username = $('#username1').val();
    var password = $('#password1').val();
    console.log(username, password);
@@ -30,19 +29,17 @@ var SignInComponent = React.createClass({
   render: function(){
     return (
       <div className="row sign-in">
-        <div className="row">
+        <div className="col m12 logo1">logo</div>
+        <div className="col m12 create1">LOG IN TO KICK</div>
           <div className="input-field col-md-12">
             <input id="username1" type="text" className="validate" />
             <label htmlFor="email">Username</label>
           </div>
-        </div>
 
-        <div className="row">
           <div className="input-field col-md-12">
             <input id="password1" type="password" className="validate" />
             <label htmlFor="password">Password</label>
           </div>
-        </div>
 
         <div className="row">
           <div className="input-field col-md-12">

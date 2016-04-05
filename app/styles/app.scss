@@ -12,33 +12,72 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 *::after {
   box-sizing: border-box;
 }
+// body {
+//   background-color: black;
+// }
 
 
 #welcome-body {
-  padding: 0 190px;
+  padding: 70px 190px 0 190px;
 
-  .signUp {
-    display: block;
-    width: 60%;
-    background-color: green;
-    margin-bottom: 10px;
+  .welcome-container {
+    padding: 0 50px;
+    h2 {
+      padding: 0 auto;
+
+      // margin-left: 80px;
+      // margin-right: 80px;
+      // margin-bottom: 150px;
+    }
+    button {
+      // margin-left: 127px;
+    }
   }
-  .signIn {
-    display: block;
-    width: 60%;
+
+}
+
+.signUp {
+  display: block;
+  width: 100%;
+}
+
+.signIn {
+  display: block;
+  width: 100%;
+}
+
+.user-information {
+  margin-top: 120px;
+  .create {
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+}
+.sign-in {
+  margin-top: 120px;
+  .create1 {
+    margin-bottom: 30px;
+    font-size: 20px;
   }
 }
 
 
 @media (min-width: 768px) and (max-width: 991px){
   #welcome-body {
-    padding: 0 190px;
+    // padding: 0 190px;
   }
 
 }
 @media (min-width: 400px) and (max-width: 767px){
   #welcome-body {
-    padding: 0 80px;
+    margin-top: 120px;
+    padding: 0 10px;
+  }
+  .play {
+    h2 {
+      font-size: 24px;
+      margin: 0 auto;
+    }
 
   }
 

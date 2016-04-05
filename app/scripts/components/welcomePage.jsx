@@ -12,17 +12,28 @@ var WelcomePageComponent = React.createClass({
   handleSignIn: function(e){
     e.preventDefault();
     Backbone.history.navigate('signIn', {trigger: true});
-
-
   },
   render: function(){
     return (
+
       <div>
         <div className="row" id="welcome-body">
-          <div className="col-md-12 col-sm-12 col-xs-12">
-            <h2>Welcome to Let's Play</h2>
-            <button onClick={this.handleSignUp} className="btn btn-default signUp">JOIN IN</button>
-            <button onClick={this.handleSignIn} className="btn btn-default signIn">SIGN IN</button>
+          <div className="col m12 col s12 welcome-container">
+            <div className="row play">
+              <div className="col m12 col m12 col s12">
+                <h2>Welcome to Let's Play</h2>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col m12 col m12 col s12">
+                <button onClick={this.handleSignUp} className="btn waves-effect waves-light signUp">JOIN IN</button>
+              </div>
+           </div>
+              <div className="row">
+                <div className="col m12 col m12 col s12">
+                  <button onClick={this.handleSignIn} className="btn waves-effect waves-light signIn">SIGN IN</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
