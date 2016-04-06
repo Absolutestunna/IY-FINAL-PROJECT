@@ -11,7 +11,7 @@ var SignUpComponent = require('./components/signup.jsx');
 var ProfilePageComponent = require('./components/profile-page.jsx');
 var CrewComponent = require('./components/crew.jsx');
 var GamesComponent = require('./components/games.jsx');
-
+var MessagesComponent = require('./components/messagesList.jsx');
 
 
 
@@ -24,7 +24,8 @@ var Router = Backbone.Router.extend({
     'signIn': 'signIn',
     'profile': 'profile',
     'crew': 'crew',
-    'games': 'games'
+    'games': 'games',
+    'message': 'message'
   },
   welcomePage: function(){
     ReactDOM.render(
@@ -54,6 +55,11 @@ var Router = Backbone.Router.extend({
   games: function(){
     ReactDOM.render(
       React.createElement(GamesComponent), document.getElementById('app')
+    );
+  },
+  message: function(){
+    ReactDOM.render(
+      React.createElement(MessagesComponent), document.getElementById('app')
     );
   }
 });

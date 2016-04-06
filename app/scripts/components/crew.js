@@ -11,6 +11,27 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
   },
   handleSendInvite: function(e){
     e.preventDefault();
+
+    var email = $('#email').val();
+    if (email == ""){
+      console.log('error')
+    } else {
+      var Info = Parse.Object.extend("Invites");
+      var invite_info = new Info();
+      invite_info.set({
+        'Recipient': email,
+        'Sender': Parse.User.current(),
+        'Message': "Please accept my invitation to join my crew!"
+      });
+      invite_info.save(null, {
+        success: function(info) {
+              console.log('New object created with objectId: ' + info.id);
+          },
+        error: function(info, error) {
+          console.log('Failed to create new object, with error code: ' + error.message);
+          }
+      });
+    }
   },
   render: function(){
     return (
