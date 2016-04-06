@@ -5767,20 +5767,63 @@ button.close {
   box-sizing: border-box; }
 
 #welcome-body {
-  padding: 0 190px; }
-  #welcome-body .signUp {
+  padding: 70px 190px 0 190px; }
+  #welcome-body .welcome-container {
+    padding: 0 50px; }
+    #welcome-body .welcome-container h2 {
+      padding: 0 auto; }
+
+.signUp {
+  display: block;
+  width: 100%; }
+
+.signIn {
+  display: block;
+  width: 100%; }
+
+.user-information {
+  margin-top: 120px; }
+  .user-information .create {
+    margin-bottom: 30px;
+    font-size: 20px; }
+
+.sign-in {
+  margin-top: 120px; }
+  .sign-in .create1 {
+    margin-bottom: 30px;
+    font-size: 20px; }
+
+.profile-page {
+  max-width: 600px;
+  margin-top: 180px;
+  border: 1px solid black; }
+  .profile-page h3 {
+    margin-top: 40px; }
+  .profile-page p {
+    margin-top: 30px;
+    margin-bottom: 80px; }
+  .profile-page button {
     display: block;
     width: 60%;
-    background-color: green;
-    margin-bottom: 10px; }
-  #welcome-body .signIn {
-    display: block;
-    width: 60%; }
+    margin-bottom: 30px; }
 
-@media (min-width: 768px) and (max-width: 991px) {
-  #welcome-body {
-    padding: 0 190px; } }
+.games {
+  max-width: 45%;
+  margin: 180px auto; }
+  .games .games-container {
+    margin: 0 auto; }
+    .games .games-container input {
+      margin-bottom: 50px; }
+    .games .games-container #current-location {
+      margin-bottom: 30px; }
+
 @media (min-width: 400px) and (max-width: 767px) {
   #welcome-body {
-    padding: 0 80px; } }
+    margin-top: 120px;
+    padding: 0 10px; }
+
+  .play h2 {
+    font-size: 24px;
+    margin: 0 auto; } }
+
 /*# sourceMappingURL=app.css.map */
