@@ -21,7 +21,7 @@ var ProfilePageComponent = React.createClass({
     var user = localStorage.getItem('username');
 
     return (
-      <div className="row profile-page center-align">
+      <div className="row profile-page">
         <div className="col-md-12">
           <h3>Hello, </h3>
           <p>{user}</p>

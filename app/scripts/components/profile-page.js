@@ -20,7 +20,7 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
     var user = localStorage.getItem('username');
 
     return (
-      React.createElement("div", {className: "row profile-page center-align"}, 
+      React.createElement("div", {className: "row profile-page"}, 
         React.createElement("div", {className: "col-md-12"}, 
           React.createElement("h3", null, "Hello, "), 
           React.createElement("p", null, user)
