@@ -21,14 +21,14 @@ var ProfilePageComponent = React.createClass({
     var user = localStorage.getItem('username');
 
     return (
-      <div className="row">
+      <div className="row profile-page center-align">
         <div className="col-md-12">
           <h3>Hello, </h3>
           <p>{user}</p>
         </div>
         <div className="col-md-12">
-          <button onClick={this.handlePublicGames} className="btn btn-default">Games</button>
-          <button onClick={this.handleCrewPage} className="btn btn-default">Crew</button>
+          <button onClick={this.handlePublicGames} className="btn btn-default center-align">Games</button>
+          <button onClick={this.handleCrewPage} className="btn btn-default center-align">Crew</button>
         </div>
 
       </div>
