@@ -5793,19 +5793,15 @@ button.close {
     margin-bottom: 30px;
     font-size: 20px; }
 
-.profile-page {
-  max-width: 600px;
-  margin-top: 180px;
-  border: 1px solid black; }
-  .profile-page h3 {
-    margin-top: 40px; }
-  .profile-page p {
-    margin-top: 30px;
-    margin-bottom: 80px; }
-  .profile-page button {
-    display: block;
-    width: 60%;
-    margin-bottom: 30px; }
+.profile-page h3 {
+  margin-top: 40px; }
+.profile-page p {
+  margin-top: 30px;
+  margin-bottom: 80px; }
+.profile-page button {
+  display: block;
+  width: 100%;
+  margin-bottom: 30px; }
 
 .games {
   max-width: 45%;
@@ -5816,6 +5812,13 @@ button.close {
       margin-bottom: 50px; }
     .games .games-container #current-location {
       margin-bottom: 30px; }
+
+.crew-container .add-crew {
+  margin-bottom: 50px; }
+.crew-container .crew-pics {
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  margin-bottom: 100px; }
 
 @media (min-width: 400px) and (max-width: 767px) {
   #welcome-body {
