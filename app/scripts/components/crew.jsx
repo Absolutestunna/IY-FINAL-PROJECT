@@ -53,7 +53,7 @@ var CrewComponent = React.createClass({
             <div className="row">
               <div className="input-field col s12">
                 <input id="email" type="email" className="validate" />
-                <label htmlFor="email" data-error="Please enter a valid email address" data-success="right">Email</label>
+                <label htmlFor="email" data-error="Please enter a valid email address" data-success="Correct">Email</label>
               </div>
               <div className="input-field col s12">
                 <button onClick={this.handleSendInvite} className="btn-large waves-effect waves-light">Send Invite</button>

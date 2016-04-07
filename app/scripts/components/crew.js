@@ -52,7 +52,7 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
             React.createElement("div", {className: "row"}, 
               React.createElement("div", {className: "input-field col s12"}, 
                 React.createElement("input", {id: "email", type: "email", className: "validate"}), 
-                React.createElement("label", {htmlFor: "email", "data-error": "Please enter a valid email address", "data-success": "right"}, "Email")
+                React.createElement("label", {htmlFor: "email", "data-error": "Please enter a valid email address", "data-success": "Correct"}, "Email")
               ), 
               React.createElement("div", {className: "input-field col s12"}, 
                 React.createElement("button", {onClick: this.handleSendInvite, className: "btn-large waves-effect waves-light"}, "Send Invite")

@@ -8,51 +8,106 @@ require('backbone-react-component');
 var MessagesComponent = React.createClass({
   getInitialState: function(){
     return{
-      senders: this.props.senderInfo
+      'names': [],
     }
   },
+
   handleAccept: function(e){
     e.preventDefault();
+
   },
-  handleReject: function(e){
+
+  handleReject: function(model, e){
     e.preventDefault();
+    var modelID = model.user_id;
+    var RejectInvite = Parse.Object.extend("Invites");
+    var rejectQuery = new Parse.Query(RejectInvite);
+    rejectQuery.get(modelID, {
+      success: function(result){
+        console.log('this is successful', result)
+        result.destroy({});
+      },
+      error: function(error){
+        console.log(error);
+      }
+    });
+    var filterNames = this.state.names.filter(function(item){
+      return (item.user_id !== modelID);
+    })
+    this.setState({
+      'names': filterNames
+    })
+    console.log("filterNames is:  ", filterNames);
+
+  },
+
+  componentDidMount: function(){
+    var user_email = Parse.User.current().getEmail();
+    var Invites = Parse.Object.extend("Invites");
+    var query = new Parse.Query(Invites);
+    query.equalTo("Recipient", user_email)
+    query.include("Sender");
+    var names = [];
+    var self = this;
+    query.find({
+      success: function(results) {
+        for (var i = 0; i < results.length; i++) {
+          var object = results[i];
+          var sender_info = object.get('Sender');
+
+          var children = ({
+            firstName: sender_info.get('first_name'),
+            lastName: sender_info.get('last_name'),
+            user_id: object.id
+          });
+          names.push(children)
+        }
+        self.setState({
+          'names': names
+        })
+      },
+        error: function(error) {
+          alert("Error: " + error.code + " " + error.message);
+        }
+      });
   },
   render: function(){
-    console.log(this.state.senders);
-    var save_id = "";
-    var self = this;
-    var eachMessage = this.state.senders.map(function(model, index){
-      console.log(model)
+      var save_id = "";
+      var self = this;
+      var eachMessage = this.state.names.map(function(model, index){
+        return (
+          <Message
+            sender={model}
+            key={model.user_id}
+            handleReject={self.handleReject}
+            handleAccept={self.handleAccept}
+            />
+        );
+      })
       return (
-        <Message
-          sender={model}
-          key={index}
-          handleReject={self.handleReject}
-          handleAccept={self.handleAccept}
-          />
-      );
-    })
-    return (
-      <div>
-        <ul className="container collection with-header">
-          <li className="collection-header"><h4>Your Messages</h4></li>
+        <div>
+          <ul className="container collection with-header">
+            <li className="collection-header"><h4>Your Messages</h4></li>
           {eachMessage}
-        </ul>
-      </div>
-    );
-  }
+          </ul>
+        </div>
+      );
+    }
 });
 
 var Message = React.createClass({
+
+
   render: function(){
+    var nameMod = this.props.sender;
     return (
       <li className="row collection-header">
-          <div className="col m10">Please accept {this.props.sender}&#39;s invitation to join their crew</div>
+          <div className="col m10">Please accept {nameMod.firstName + " " + nameMod.lastName}&#39;s invitation to join their crew</div>
           <div className="col m1 right-align">
             <button onClick={this.props.handleAccept} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">done</i></button>
           </div>
           <div className="col m1 right-align">
-            <button onClick={this.props.handleReject} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">thumb_down</i></button>
+            <button onClick={this.props.handleReject.bind(this, nameMod)} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">thumb_down</i></button>
           </div>
       </li>
 
