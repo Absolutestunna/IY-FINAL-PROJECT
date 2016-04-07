@@ -58,8 +58,10 @@ var Router = Backbone.Router.extend({
     );
   },
   message: function(){
+    var sender = JSON.parse(localStorage.getItem("senderInfo"));
+    console.log(sender);
     ReactDOM.render(
-      React.createElement(MessagesComponent), document.getElementById('app')
+      React.createElement(MessagesComponent, {senderInfo:sender}), document.getElementById('app')
     );
   }
 });
