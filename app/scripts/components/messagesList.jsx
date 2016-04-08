@@ -11,12 +11,33 @@ var MessagesComponent = React.createClass({
       'names': [],
     }
   },
-
-  handleAccept: function(e){
+  handleAccept: function(model, e){
     e.preventDefault();
+    var modelID = model.user_id;
+
+    console.log('modelID is: ', modelID);
+    var AcceptInvite = Parse.Object.extend("Invites");
+    var acceptQuery = new Parse.Query(AcceptInvite);
+    acceptQuery.get(modelID, {
+      success: function(result){
+        var sender = result.get("Sender");
+        var user = Parse.User.current();
+        var relation = user.relation("crew");
+        relation.add(sender);
+        user.save();
+      },
+      error: function(error){
+        console.log(error);
+      }
+    })
+    var filterNames = this.state.names.filter(function(item){
+      return (item.user_id !== modelID);
+    })
+    this.setState({
+      'names': filterNames
+    });
 
   },
-
   handleReject: function(model, e){
     e.preventDefault();
     var modelID = model.user_id;
@@ -36,8 +57,7 @@ var MessagesComponent = React.createClass({
     })
     this.setState({
       'names': filterNames
-    })
-    console.log("filterNames is:  ", filterNames);
+    });
 
   },
 
@@ -71,6 +91,8 @@ var MessagesComponent = React.createClass({
         }
       });
   },
+
+
   render: function(){
       var save_id = "";
       var self = this;
@@ -96,15 +118,13 @@ var MessagesComponent = React.createClass({
 });
 
 var Message = React.createClass({
-
-
   render: function(){
     var nameMod = this.props.sender;
     return (
       <li className="row collection-header">
           <div className="col m10">Please accept {nameMod.firstName + " " + nameMod.lastName}&#39;s invitation to join their crew</div>
           <div className="col m1 right-align">
-            <button onClick={this.props.handleAccept} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">done</i></button>
+            <button onClick={this.props.handleAccept.bind(this, nameMod)} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">done</i></button>
           </div>
           <div className="col m1 right-align">
             <button onClick={this.props.handleReject.bind(this, nameMod)} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">thumb_down</i></button>

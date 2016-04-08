@@ -10,12 +10,33 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
       'names': [],
     }
   },
-
-  handleAccept: function(e){
+  handleAccept: function(model, e){
     e.preventDefault();
+    var modelID = model.user_id;
+
+    console.log('modelID is: ', modelID);
+    var AcceptInvite = Parse.Object.extend("Invites");
+    var acceptQuery = new Parse.Query(AcceptInvite);
+    acceptQuery.get(modelID, {
+      success: function(result){
+        var sender = result.get("Sender");
+        var user = Parse.User.current();
+        var relation = user.relation("crew");
+        relation.add(sender);
+        user.save();
+      },
+      error: function(error){
+        console.log(error);
+      }
+    })
+    var filterNames = this.state.names.filter(function(item){
+      return (item.user_id !== modelID);
+    })
+    this.setState({
+      'names': filterNames
+    });
 
   },
-
   handleReject: function(model, e){
     e.preventDefault();
     var modelID = model.user_id;
@@ -35,8 +56,7 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
     })
     this.setState({
       'names': filterNames
-    })
-    console.log("filterNames is:  ", filterNames);
+    });
 
   },
 
@@ -70,6 +90,8 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
         }
       });
   },
+
+
   render: function(){
       var save_id = "";
       var self = this;
@@ -95,15 +117,13 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
 });
 
 var Message = React.createClass({displayName: "Message",
-
-
   render: function(){
     var nameMod = this.props.sender;
     return (
       React.createElement("li", {className: "row collection-header"}, 
           React.createElement("div", {className: "col m10"}, "Please accept ", nameMod.firstName + " " + nameMod.lastName, "'s invitation to join their crew"), 
           React.createElement("div", {className: "col m1 right-align"}, 
-            React.createElement("button", {onClick: this.props.handleAccept, className: "btn-floating btn-large waves-effect waves-light red"}, React.createElement("i", {className: "material-icons"}, "done"))
+            React.createElement("button", {onClick: this.props.handleAccept.bind(this, nameMod), className: "btn-floating btn-large waves-effect waves-light red"}, React.createElement("i", {className: "material-icons"}, "done"))
           ), 
           React.createElement("div", {className: "col m1 right-align"}, 
             React.createElement("button", {onClick: this.props.handleReject.bind(this, nameMod), className: "btn-floating btn-large waves-effect waves-light red"}, React.createElement("i", {className: "material-icons"}, "thumb_down"))

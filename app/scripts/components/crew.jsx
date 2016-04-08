@@ -10,6 +10,36 @@ var CrewComponent = React.createClass({
     e.preventDefault();
     $("#form-body").slideToggle(500);
   },
+  componentWillMount: function(){
+    var userID = Parse.User.current().id;
+    var userCrewQuery = new Parse.Query(Parse.User);
+    userCrewQuery.equalTo("objectId", userID);
+    userCrewQuery.include("crew");
+    userCrewQuery.find({
+      success: function(result){
+        console.log('this is successful', result)
+        for (var i = 0; i < result.length; i++) {
+          var userObj = result[i];
+          var relation = userObj.relation("crew");
+          relation.query().find({
+            success: function(crew){
+              var crewMember = crew.map(function(member){
+                <CrewMemberComponent key={member.id} member={member} />
+              })
+            },
+            error: function(error){
+              console.log(error);
+            }
+          });
+        }
+      },
+      error: function(error){
+        console.log(error);
+      }
+
+    });
+
+  },
   handleSendInvite: function(e){
     e.preventDefault();
 
@@ -45,7 +75,7 @@ var CrewComponent = React.createClass({
             <button onClick={this.handleSlider} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">add</i></button>
           </div>
           <div className="col m12 crew-pics">
-            <CrewMemberComponent />
+            {crewMember}
           </div>
 
 
@@ -72,9 +102,12 @@ var CrewMemberComponent = React.createClass({
     return (
       <div className="row">
         <div className="col s2">
-          <span className="flow-text">
+          <div className="flow-text">
             <i className="large material-icons">perm_identity</i>
-          </span>
+          </div>
+          <div>
+            {this.props.member.get("first_name") + " " + this.props.member.get("last_name")}
+          </div>
         </div>
         {/*<span className="col m3 col s3 col xs6">
           <i className="large material-icons">perm_identity</i>
