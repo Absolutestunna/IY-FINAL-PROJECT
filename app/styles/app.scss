@@ -109,6 +109,10 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
     border-top: 1px solid gray;
     border-bottom: 1px solid gray;
     margin-bottom: 100px;
+    .eachMember {
+      display: inline-block;
+      
+    }
   }
 }
 

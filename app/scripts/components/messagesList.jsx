@@ -25,6 +25,7 @@ var MessagesComponent = React.createClass({
         var relation = user.relation("crew");
         relation.add(sender);
         user.save();
+        result.destroy({});
       },
       error: function(error){
         console.log(error);

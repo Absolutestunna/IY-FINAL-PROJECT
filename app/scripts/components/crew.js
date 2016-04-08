@@ -5,6 +5,8 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var CrewComponent = React.createClass({displayName: "CrewComponent",
+  mixins: [Backbone.React.Component.mixin],
+
   getInitialState: function(){
     return {
       crewMembers: []
@@ -76,7 +78,10 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
     console.log('crewMembers are: ', this.state.crewMembers);
     var crewMember = this.state.crewMembers.map(function(member){
       console.log('member is: ', member);
-      React.createElement(CrewMemberComponent, {key: member.id, member: member})
+      return (React.createElement(CrewMemberComponent, {
+        key: member.id, 
+        member: member}
+        ));
     });
     return (
       React.createElement("div", null, 
@@ -111,16 +116,19 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
 });
 
 var CrewMemberComponent = React.createClass({displayName: "CrewMemberComponent",
+  mixins: [Backbone.React.Component.mixin],
+
   render: function(){
     console.log('props member is: ', this.props.member);
     return (
-      React.createElement("div", {className: "row"}, 
-        React.createElement("div", {className: "col s2"}, 
+      React.createElement("div", {className: "row eachMember"}, 
+        React.createElement("div", {className: "col m2"}, 
           React.createElement("div", {className: "flow-text"}, 
             React.createElement("i", {className: "large material-icons"}, "perm_identity")
           ), 
-          React.createElement("div", null, 
-            this.props.member.get("first_name") + " " + this.props.member.get("last_name")
+          React.createElement("div", {className: "center-align"}, 
+            React.createElement("div", null, this.props.member.get("first_name")), 
+            React.createElement("div", null, this.props.member.get("last_name"))
           )
         )
       )

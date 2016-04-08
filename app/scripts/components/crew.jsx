@@ -6,6 +6,8 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var CrewComponent = React.createClass({
+  mixins: [Backbone.React.Component.mixin],
+
   getInitialState: function(){
     return {
       crewMembers: []
@@ -77,7 +79,10 @@ var CrewComponent = React.createClass({
     console.log('crewMembers are: ', this.state.crewMembers);
     var crewMember = this.state.crewMembers.map(function(member){
       console.log('member is: ', member);
-      <CrewMemberComponent key={member.id} member={member} />
+      return (<CrewMemberComponent
+        key={member.id}
+        member={member}
+        />);
     });
     return (
       <div>
@@ -112,16 +117,19 @@ var CrewComponent = React.createClass({
 });
 
 var CrewMemberComponent = React.createClass({
+  mixins: [Backbone.React.Component.mixin],
+
   render: function(){
     console.log('props member is: ', this.props.member);
     return (
-      <div className="row">
-        <div className="col s2">
+      <div className="row eachMember">
+        <div className="col m2">
           <div className="flow-text">
             <i className="large material-icons">perm_identity</i>
           </div>
-          <div>
-            {this.props.member.get("first_name") + " " + this.props.member.get("last_name")}
+          <div className="center-align">
+            <div>{this.props.member.get("first_name")}</div>
+            <div>{this.props.member.get("last_name")}</div>
           </div>
         </div>
       </div>
