@@ -5,6 +5,11 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var CrewComponent = React.createClass({displayName: "CrewComponent",
+  getInitialState: function(){
+    return {
+      crewMembers: []
+    }
+  },
   handleSlider: function(e){
     e.preventDefault();
     $("#form-body").slideToggle(500);
@@ -14,6 +19,7 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
     var userCrewQuery = new Parse.Query(Parse.User);
     userCrewQuery.equalTo("objectId", userID);
     userCrewQuery.include("crew");
+    var self = this;
     userCrewQuery.find({
       success: function(result){
         console.log('this is successful', result)
@@ -22,8 +28,11 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
           var relation = userObj.relation("crew");
           relation.query().find({
             success: function(crew){
-              var crewMember = crew.map(function(member){
-                React.createElement(CrewMemberComponent, {key: member.id, member: member})
+              console.log('crew is: ', crew);
+              console.log('self is: ', self);
+
+              self.setState({
+                crewMembers: crew
               })
             },
             error: function(error){
@@ -64,6 +73,11 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
     }
   },
   render: function(){
+    console.log('crewMembers are: ', this.state.crewMembers);
+    var crewMember = this.state.crewMembers.map(function(member){
+      console.log('member is: ', member);
+      React.createElement(CrewMemberComponent, {key: member.id, member: member})
+    });
     return (
       React.createElement("div", null, 
         React.createElement("div", {className: "row crew-container"}, 
@@ -98,6 +112,7 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
 
 var CrewMemberComponent = React.createClass({displayName: "CrewMemberComponent",
   render: function(){
+    console.log('props member is: ', this.props.member);
     return (
       React.createElement("div", {className: "row"}, 
         React.createElement("div", {className: "col s2"}, 
@@ -108,9 +123,6 @@ var CrewMemberComponent = React.createClass({displayName: "CrewMemberComponent",
             this.props.member.get("first_name") + " " + this.props.member.get("last_name")
           )
         )
-        /*<span className="col m3 col s3 col xs6">
-          <i className="large material-icons">perm_identity</i>
-        </span>*/
       )
     );
   }

@@ -6,6 +6,11 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 var CrewComponent = React.createClass({
+  getInitialState: function(){
+    return {
+      crewMembers: []
+    }
+  },
   handleSlider: function(e){
     e.preventDefault();
     $("#form-body").slideToggle(500);
@@ -15,6 +20,7 @@ var CrewComponent = React.createClass({
     var userCrewQuery = new Parse.Query(Parse.User);
     userCrewQuery.equalTo("objectId", userID);
     userCrewQuery.include("crew");
+    var self = this;
     userCrewQuery.find({
       success: function(result){
         console.log('this is successful', result)
@@ -23,8 +29,11 @@ var CrewComponent = React.createClass({
           var relation = userObj.relation("crew");
           relation.query().find({
             success: function(crew){
-              var crewMember = crew.map(function(member){
-                <CrewMemberComponent key={member.id} member={member} />
+              console.log('crew is: ', crew);
+              console.log('self is: ', self);
+
+              self.setState({
+                crewMembers: crew
               })
             },
             error: function(error){
@@ -65,6 +74,11 @@ var CrewComponent = React.createClass({
     }
   },
   render: function(){
+    console.log('crewMembers are: ', this.state.crewMembers);
+    var crewMember = this.state.crewMembers.map(function(member){
+      console.log('member is: ', member);
+      <CrewMemberComponent key={member.id} member={member} />
+    });
     return (
       <div>
         <div className="row crew-container">
@@ -99,6 +113,7 @@ var CrewComponent = React.createClass({
 
 var CrewMemberComponent = React.createClass({
   render: function(){
+    console.log('props member is: ', this.props.member);
     return (
       <div className="row">
         <div className="col s2">
@@ -109,9 +124,6 @@ var CrewMemberComponent = React.createClass({
             {this.props.member.get("first_name") + " " + this.props.member.get("last_name")}
           </div>
         </div>
-        {/*<span className="col m3 col s3 col xs6">
-          <i className="large material-icons">perm_identity</i>
-        </span>*/}
       </div>
     );
   }
