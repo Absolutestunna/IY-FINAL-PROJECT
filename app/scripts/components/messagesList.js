@@ -8,6 +8,7 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
   getInitialState: function(){
     return{
       'names': [],
+      'message': 'No new message'
     }
   },
   handleAccept: function(model, e){

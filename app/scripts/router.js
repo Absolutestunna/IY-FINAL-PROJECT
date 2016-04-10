@@ -12,7 +12,7 @@ var ProfilePageComponent = require('./components/profile-page.jsx');
 var CrewComponent = require('./components/crew.jsx');
 var GamesComponent = require('./components/games.jsx');
 var MessagesComponent = require('./components/messagesList.jsx');
-
+var CreateMatchComponent = require('./components/createMatch.jsx');
 
 
 
@@ -25,7 +25,8 @@ var Router = Backbone.Router.extend({
     'profile': 'profile',
     'crew': 'crew',
     'games': 'games',
-    'message': 'message'
+    'message': 'message',
+    'createMatch': 'createMatch'
   },
   welcomePage: function(){
     ReactDOM.render(
@@ -60,6 +61,11 @@ var Router = Backbone.Router.extend({
   message: function(){
     ReactDOM.render(
       React.createElement(MessagesComponent), document.getElementById('app')
+    );
+  },
+  createMatch: function(){
+    ReactDOM.render(
+      React.createElement(CreateMatchComponent), document.getElementById('app')
     );
   }
 });

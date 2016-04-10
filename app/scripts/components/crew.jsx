@@ -17,6 +17,10 @@ var CrewComponent = React.createClass({
     e.preventDefault();
     $("#form-body").slideToggle(500);
   },
+  handleCreateMatch: function(e){
+    e.preventDefault();
+    Backbone.history.navigate('createMatch', {trigger: true});
+  },
   componentWillMount: function(){
     var userID = Parse.User.current().id;
     var userCrewQuery = new Parse.Query(Parse.User);
@@ -53,10 +57,9 @@ var CrewComponent = React.createClass({
   },
   handleSendInvite: function(e){
     e.preventDefault();
-
     var email = $('#email').val();
     if (email == ""){
-      console.log('error')
+      alert('error, append this message to the screen')
     } else {
       var Info = Parse.Object.extend("Invites");
       var invite_info = new Info();
@@ -85,33 +88,38 @@ var CrewComponent = React.createClass({
         />);
     });
     return (
-      <div>
         <div className="row crew-container">
           <div className="col m12">
-            <h4>MY CREW</h4>
-          </div>
-          <div className="col m12 right-align add-crew">
-            <button onClick={this.handleSlider} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">add</i></button>
+            <div className="row">
+              <div className="col m8">
+                <h4>MY CREW</h4>
+              </div>
+              <div className="col m4 right-align add-crew">
+                <button onClick={this.handleSlider} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">add</i></button>
+              </div>
+            </div>
           </div>
           <div className="col m12 crew-pics">
             {crewMember}
           </div>
+          <div className="col m12 center-align">
+            <button onClick={this.handleCreateMatch} className="btn-large waves-effect waves-light">Create Match</button>
+          </div>
 
 
-          <form id="form-body" className="col s12">
+          <form onSubmit={this.handleSendInvite} id="form-body" className="col s12">
             <div className="row">
               <div className="input-field col s12">
                 <input id="email" type="email" className="validate" />
                 <label htmlFor="email" data-error="Please enter a valid email address" data-success="Correct">Email</label>
               </div>
               <div className="input-field col s12">
-                <button onClick={this.handleSendInvite} className="btn-large waves-effect waves-light">Send Invite</button>
+                <button type="submit" className="btn-large waves-effect waves-light">Send Invite</button>
               </div>
             </div>
           </form>
 
       </div>
-    </div>
     );
   }
 });

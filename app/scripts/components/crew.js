@@ -16,6 +16,10 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
     e.preventDefault();
     $("#form-body").slideToggle(500);
   },
+  handleCreateMatch: function(e){
+    e.preventDefault();
+    Backbone.history.navigate('createMatch', {trigger: true});
+  },
   componentWillMount: function(){
     var userID = Parse.User.current().id;
     var userCrewQuery = new Parse.Query(Parse.User);
@@ -52,10 +56,9 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
   },
   handleSendInvite: function(e){
     e.preventDefault();
-
     var email = $('#email').val();
     if (email == ""){
-      console.log('error')
+      alert('error, append this message to the screen')
     } else {
       var Info = Parse.Object.extend("Invites");
       var invite_info = new Info();
@@ -84,33 +87,38 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
         ));
     });
     return (
-      React.createElement("div", null, 
         React.createElement("div", {className: "row crew-container"}, 
           React.createElement("div", {className: "col m12"}, 
-            React.createElement("h4", null, "MY CREW")
-          ), 
-          React.createElement("div", {className: "col m12 right-align add-crew"}, 
-            React.createElement("button", {onClick: this.handleSlider, className: "btn-floating btn-large waves-effect waves-light red"}, React.createElement("i", {className: "material-icons"}, "add"))
+            React.createElement("div", {className: "row"}, 
+              React.createElement("div", {className: "col m8"}, 
+                React.createElement("h4", null, "MY CREW")
+              ), 
+              React.createElement("div", {className: "col m4 right-align add-crew"}, 
+                React.createElement("button", {onClick: this.handleSlider, className: "btn-floating btn-large waves-effect waves-light red"}, React.createElement("i", {className: "material-icons"}, "add"))
+              )
+            )
           ), 
           React.createElement("div", {className: "col m12 crew-pics"}, 
             crewMember
           ), 
+          React.createElement("div", {className: "col m12 center-align"}, 
+            React.createElement("button", {onClick: this.handleCreateMatch, className: "btn-large waves-effect waves-light"}, "Create Match")
+          ), 
 
 
-          React.createElement("form", {id: "form-body", className: "col s12"}, 
+          React.createElement("form", {onSubmit: this.handleSendInvite, id: "form-body", className: "col s12"}, 
             React.createElement("div", {className: "row"}, 
               React.createElement("div", {className: "input-field col s12"}, 
                 React.createElement("input", {id: "email", type: "email", className: "validate"}), 
                 React.createElement("label", {htmlFor: "email", "data-error": "Please enter a valid email address", "data-success": "Correct"}, "Email")
               ), 
               React.createElement("div", {className: "input-field col s12"}, 
-                React.createElement("button", {onClick: this.handleSendInvite, className: "btn-large waves-effect waves-light"}, "Send Invite")
+                React.createElement("button", {type: "submit", className: "btn-large waves-effect waves-light"}, "Send Invite")
               )
             )
           )
 
       )
-    )
     );
   }
 });

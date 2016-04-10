@@ -31,6 +31,7 @@
     , "react-bootstrap": "^0.28.3"
     , "backbone-react-component": "^0.10.0"
     , "react-addons-create-fragment": "^0.14.8"
+  
   },
   "scripts": {
     "html": "cp app/*.html dist/",

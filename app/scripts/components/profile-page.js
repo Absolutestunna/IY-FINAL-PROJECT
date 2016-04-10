@@ -31,7 +31,8 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
   },
   render: function(){
     var user = Parse.User.current().getUsername();
-    console.log(user)
+    console.log(Parse.User.emailVerified);
+
     return (
       React.createElement("div", {className: "row profile-page"}, 
         React.createElement("div", {className: "col m12 right-align"}, 

@@ -9,13 +9,13 @@ var MessagesComponent = React.createClass({
   getInitialState: function(){
     return{
       'names': [],
+      'message': 'No new message'
     }
   },
   handleAccept: function(model, e){
     e.preventDefault();
     var modelID = model.user_id;
 
-    console.log('modelID is: ', modelID);
     var AcceptInvite = Parse.Object.extend("Invites");
     var acceptQuery = new Parse.Query(AcceptInvite);
     acceptQuery.get(modelID, {
