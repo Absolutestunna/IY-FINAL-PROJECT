@@ -5766,6 +5766,16 @@ button.close {
 *::after {
   box-sizing: border-box; }
 
+body {
+  margin: 0;
+  padding: 0; }
+
+#map {
+  position: absolute;
+  top: 350px;
+  bottom: 50px;
+  width: 70%; }
+
 #welcome-body {
   padding: 70px 190px 0 190px; }
   #welcome-body .welcome-container {
@@ -5804,21 +5814,23 @@ button.close {
   margin-bottom: 30px; }
 
 .games {
-  max-width: 45%;
-  margin: 180px auto; }
-  .games .games-container {
-    margin: 0 auto; }
-    .games .games-container input {
-      margin-bottom: 50px; }
-    .games .games-container #current-location {
-      margin-bottom: 30px; }
+  margin-top: 100px; }
+  .games .games-container input {
+    margin-bottom: 50px; }
+  .games .games-container #current-location {
+    margin-bottom: 30px; }
 
 .crew-container .add-crew {
   margin-bottom: 50px; }
 .crew-container .crew-pics {
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
-  margin-bottom: 100px; }
+  margin-bottom: 20px; }
+  .crew-container .crew-pics .eachMember {
+    display: inline-block; }
+
+.match-container {
+  margin-top: 100px; }
 
 @media (min-width: 400px) and (max-width: 767px) {
   #welcome-body {
@@ -5828,4 +5840,5 @@ button.close {
   .play h2 {
     font-size: 24px;
     margin: 0 auto; } }
+
 /*# sourceMappingURL=app.css.map */
