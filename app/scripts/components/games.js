@@ -4,35 +4,48 @@ var $ = require('jquery');
 var Parse = require('parse');
 require('backbone-react-component');
 
-// (function(){
-//   $.ajax({
-//     url: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyA_vnEI70cBJP62G80TP-xeoXThk46LcCI',
+// L.mapbox.featureLayer({
+//     // this feature is in the GeoJSON format: see geojson.org
+//     // for the full specification
+//     type: 'Feature',
+//     geometry: {
+//         type: 'Point',
+//         // coordinates here are in longitude, latitude order because
+//         // x, y is the standard for GeoJSON and many formats
+//         coordinates: [
+//           -77.03221142292,
+//           38.913371603574
+//         ]
+//     },
+//     properties: {
+//         title: 'Peregrine Espresso',
+//         description: '1718 14th St NW, Washington, DC',
+//         // one can customize markers by adding simplestyle properties
+//         // https://www.mapbox.com/guides/an-open-platform/#simplestyle
+//         'marker-size': 'large',
+//         'marker-color': '#BE9A6B',
+//         'marker-symbol': 'cafe'
+//     }
+// }).addTo(map);
+
+
 //
-//
-//   }).done(function(){
-//     alert('success');
+// renderMap: function(place){
+//   console.log(place);
+//   var location = place.features[0].center;
+//   mapboxgl.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+//   var map = new mapboxgl.Map({
+//     container: 'map',
+//     style: 'mapbox://styles/mapbox/streets-v8',
+//     center: location,
+//     zoom: 10
 //   });
-// });
+//
+//
+//
+// },
 
 
-// handleCurrentLocation: function(e){
-//   e.preventDefault();
-//   if (navigator.geolocation){
-//     navigator.geolocation.getCurrentPosition(this.showPosition);
-//   }
-// },
-// showPosition: function(position){
-//   var latitude = position.coords.latitude
-//   var longitude = position.coords.longitude
-//   this.showMap(latitude, longitude);
-// },
-// showMap: function(lat, lng){
-//   var map = new google.maps.Map(document.getElementById('map'), {
-//      center: {lat: lat, lng: lng},
-//      zoom: 8
-//    });
-// },
-//     map.addControl(new mapboxgl.Geocoder());
 
 
 var GamesComponent = React.createClass({displayName: "GamesComponent",
@@ -42,33 +55,77 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     }
   },
   componentDidMount: function(){
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v8',
-      center: [-79.4512, 43.6568],
-      zoom: 7
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+    var map = L.mapbox.map('map', 'mapbox.streets')
+
+
+    {/*Query to get the public matches stored in parse
+      */}
+      var puMatchQuery = new Parse.Query("pumatch");
+      var self = this;
+        puMatchQuery.find({
+          success: function(results) {
+            var locations = results.map(function(location){
+              return location.get('location');
+            });
+            console.log('locations are: ',locations);
+            self.handleConvertAddress(locations)
+          },
+          error: function(error) {
+            console.log(error);
+            // error is an instance of Parse.Error.
+          }
+        });
+  },
+  handleConvertAddress: function(locations){
+    var conversions = [];
+    locations.map(function(location){
+      var urlBase = 'https://api.mapbox.com/'
+      var body = 'geocoding/v5/mapbox.places/';
+      var q = location;
+      var accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+      var url = urlBase+body+q+'.json?access_token='+accessToken;
+      var self = this;
+      $.get(url, function( data ) {
+        conversions.push(data.features[0].center);
+      });
     });
-    var currentUser = Parse.User.current();
-    var PublicMatches = Parse.Object.extend("pumatch");
-    var publicMatches = new Parse.Query(PublicMatches);
-    publicMatches.equalTo("creator", currentUser)
-    publicMatches.find({
-      success: function(result){
-        console.log('successful', result);
-      },
-      error: function(error){
-        console.log(error);
-      }
-    })
+
 
   },
   handleCreateMatch: function(e){
     e.preventDefault();
     Backbone.history.navigate("createMatch", {trigger: true})
   },
+  renderMap: function(place){
+    console.log('place is: ',place);
+
+    var location = place.features[0].center;
+
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+    L.mapbox.map('map').remove();
+
+  },
   handleSetLocation: function(e){
     e.preventDefault();
+    var urlBase = 'https://api.mapbox.com/'
+    var body = 'geocoding/v5/mapbox.places/';
+    var q = $('#address').val();
+    var accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+    var url = urlBase+body+q+'.json?access_token='+accessToken;
+    var self = this;
+    $.get(url, function( data ) {
+      console.log('data is: ', data);
+      self.renderMap(data);
+    });
+
+
+  },
+  handleCurrentLocation: function(e){
+    e.preventDefault();
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+    var map = L.mapbox.map()
+      .locate()
   },
   render: function(){
     return (
@@ -78,7 +135,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
           React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col m6"}, 
               React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "col m9 s12"}, React.createElement("input", {id: "zipcode", type: "number", placeholder: "Please enter your zipcode", className: "validate "})), 
+                React.createElement("div", {className: "col m9 s12"}, React.createElement("input", {id: "address", type: "text", placeholder: "Please enter your address", className: "validate "})), 
                 React.createElement("div", {className: "col m3 s12"}, 
                   React.createElement("button", {onClick: this.handleSetLocation, className: "btn btn-default z-depth-2 center-align"}, "Search Games")
                 )
