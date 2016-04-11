@@ -6,51 +6,72 @@ var Parse = require('parse');
 var moment = require('moment');
 require('backbone-react-component');
 
-
-//
-// var express = require('express');
-// var app = express();
-// app.get('/', function (req, res) {
-//   res.send('Hello World');
-// })
-//
-// app.listen(3000);
-// // var port = process.env.PORT || 8080;
-// // var client = require('twilio')('AC5acb2bf152bfec7f4eb2130780cb3254', '87805b743b3ba49ea077bbbcc38f62c1');
-
 var CreateMatchComponent = React.createClass({
   getInitialState: function(){
     return {
-      location: "",
-      time: "",
-      creator: null
+      geoLocation: null
     }
   },
-
 
   handleCreatePublicMatch: function(e){
     e.preventDefault();
     var currentUser = Parse.User.current();
     var PuMatch = Parse.Object.extend("pumatch");
+    var geoPoint;
+    var urlBase = 'https://api.mapbox.com/'
+    var body = 'geocoding/v5/mapbox.places/';
+    var q = $('#location').val();
+    var accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+    var url = urlBase+body+q+'.json?access_token='+accessToken;
+    var self = this;
+    $.get(url, function( data ) {
+
+      {/*geojson data to be passed to render the map*/}
+      console.log('data is: ', data);
+      self.setState({
+        geoLocation: data.features[0].center
+      });
+      console.log('stateLocation', self.state.geoLocation);
+
+    });
+
     var puMatch = new PuMatch();
     puMatch.set({
-      location: $("#location").val(),
       time: $("#time").val(),
       creator: currentUser
     });
     puMatch.save(null, {
       success: function(info) {
             console.log('New object created with objectId: ' + info.id);
+            self.addLocation(info.id)
         },
       error: function(info, error) {
         console.log('Failed to create new object, with error code: ' + error.message);
         }
     });
 
+
+
   },
+addLocation: function(id){
+  var matchQuery = new Parse.Query("pumatch");
+  var self = this;
+    matchQuery.get(id, {
+      success: function(result) {
+        console.log('result is: ', result);
+        var point = new Parse.GeoPoint(self.state.geoLocation);
+        console.log('point is: ', point);
+        result.set("geoPoint", point);
+        result.save();
 
+      },
+      error: function(error) {
+        console.log('objectId error is: ', error);
+        // error is an instance of Parse.Error.
+      }
+    });
+},
   render: function(){
-
     return (
       <div className="row match-container">
         <h4 className="col m12 center-align createMatch">CREATE MATCH</h4>

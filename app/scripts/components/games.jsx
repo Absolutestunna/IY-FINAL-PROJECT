@@ -58,53 +58,58 @@ var GamesComponent = React.createClass({
   componentDidMount: function(){
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map', 'mapbox.streets')
-
+    this.map = map;
+    this.map.fitWorld()
 
     {/*Query to get the public matches stored in parse
       */}
       var puMatchQuery = new Parse.Query("pumatch");
       var self = this;
+      var locations;
         puMatchQuery.find({
           success: function(results) {
-            var locations = results.map(function(location){
-              return location.get('location');
+            locations = results.map(function(location){
+                return location.get('geoPoint');
             });
-            console.log('locations are: ',locations);
-            self.handleConvertAddress(locations)
+            console.log('locations final are: ', locations);
+
+            locations.map(function(locate){
+              var latitude = locate._latitude;
+              var longitude = locate._longitude
+              console.log(longitude, latitude);
+              L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+              L.marker([longitude, latitude], {
+                 icon: L.mapbox.marker.icon({
+                   'marker-color': '#f86767'
+                 }),
+              }).addTo(self.map);
+
+            })
           },
           error: function(error) {
             console.log(error);
             // error is an instance of Parse.Error.
           }
         });
-  },
-  handleConvertAddress: function(locations){
-    var conversions = [];
-    locations.map(function(location){
-      var urlBase = 'https://api.mapbox.com/'
-      var body = 'geocoding/v5/mapbox.places/';
-      var q = location;
-      var accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-      var url = urlBase+body+q+'.json?access_token='+accessToken;
-      var self = this;
-      $.get(url, function( data ) {
-        conversions.push(data.features[0].center);
-      });
-    });
-
 
   },
+
   handleCreateMatch: function(e){
     e.preventDefault();
     Backbone.history.navigate("createMatch", {trigger: true})
   },
-  renderMap: function(place){
-    console.log('place is: ',place);
+  renderMap: function(place){  {/*function used to rerender the map based on address typed*/}
+    var location = place.features[0].center; {/*specifically get the geolocation of the address*/}
+    console.log('location is: ', location);
 
-    var location = place.features[0].center;
-
+    location = [location[1], location[0]];
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    L.mapbox.map('map').remove();
+    this.map.setView(location, 4)
+    L.marker(location, {
+       icon: L.mapbox.marker.icon({
+         'marker-color': '#ccc'
+       }),
+   }).addTo(this.map);
 
   },
   handleSetLocation: function(e){
@@ -116,7 +121,7 @@ var GamesComponent = React.createClass({
     var url = urlBase+body+q+'.json?access_token='+accessToken;
     var self = this;
     $.get(url, function( data ) {
-      console.log('data is: ', data);
+      console.log('data is: ', data); {/*geojson data to be passed to render the map*/}
       self.renderMap(data);
     });
 
@@ -125,8 +130,8 @@ var GamesComponent = React.createClass({
   handleCurrentLocation: function(e){
     e.preventDefault();
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    var map = L.mapbox.map()
-      .locate()
+    this.map.locate({setView: true, maxZoom: 6});
+
   },
   render: function(){
     return (
