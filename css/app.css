@@ -5772,7 +5772,7 @@ body {
 
 #map {
   position: absolute;
-  top: 350px;
+  top: 229px;
   bottom: 50px;
   width: 70%; }
 
@@ -5813,12 +5813,10 @@ body {
   width: 100%;
   margin-bottom: 30px; }
 
-.games {
-  margin-top: 100px; }
-  .games .games-container input {
-    margin-bottom: 50px; }
-  .games .games-container #current-location {
-    margin-bottom: 30px; }
+.games .games-container input {
+  margin-bottom: 50px; }
+.games .games-container #current-location {
+  margin-bottom: 30px; }
 
 .crew-container .add-crew {
   margin-bottom: 50px; }
