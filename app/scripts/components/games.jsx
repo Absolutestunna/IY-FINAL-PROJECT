@@ -17,7 +17,7 @@ var GamesComponent = React.createClass({
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map', 'mapbox.streets')
     this.map = map;
-    this.map.fitWorld();
+    this.map.setView([34.8512217,-82.4048317], 4);
 
     {/*Query to get the public matches stored in parse
       */}
@@ -60,7 +60,7 @@ var GamesComponent = React.createClass({
     var newLocation = [location[1], location[0]];
     this.location = newLocation;
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    this.map.setView(newLocation, 4)
+    this.map.setView(newLocation, 8)
     L.marker(location, {
        icon: L.mapbox.marker.icon({
          'marker-color': '#ccc'
@@ -113,7 +113,7 @@ var GamesComponent = React.createClass({
   handleCurrentLocation: function(e){
     e.preventDefault();
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    this.map.locate({setView: true, maxZoom: 6});
+    this.map.locate({setView: true, maxZoom: 8});
 
   },
   render: function(){
@@ -139,14 +139,15 @@ var GamesComponent = React.createClass({
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col m12">
-              <button onClick={this.handleCreateMatch} className="waves-effect waves-light btn center-align">Create Match</button>
 
+          <div className="row">
+            <div id="map" className="col m12">
             </div>
           </div>
           <div className="row">
-            <div id="map" className="col m12">
+            <div className="col m12 center-align create-match">
+              <button onClick={this.handleCreateMatch} className="waves-effect waves-light btn center-align">Create Match</button>
+
             </div>
           </div>
         </div>

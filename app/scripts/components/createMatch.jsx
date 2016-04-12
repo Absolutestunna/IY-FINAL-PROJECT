@@ -6,6 +6,8 @@ var Parse = require('parse');
 var moment = require('moment');
 require('backbone-react-component');
 
+
+
 var CreateMatchComponent = React.createClass({
   getInitialState: function(){
     return {
@@ -27,22 +29,17 @@ var CreateMatchComponent = React.createClass({
     $.get(url, function( data ) {
 
       {/*geojson data to be passed to render the map*/}
-      console.log('data is: ', data);
       self.setState({
         geoLocation: data.features[0].center
       });
 
     });
-
+    console.log('stateLocation is: ', this.state.geoLocation);
     var puMatch = new PuMatch();
-
-    console.log('state stuff are: ', this.state);
-    var parkName = $("#park_name").val();
-    var playTime = $("#time").val()
     puMatch.set({
-      name: parkName,
-      time: playTime,
-      creator: currentUser
+      name: $("#park_name").val(),
+      time: $("#time").val(),
+      creator: currentUser,
     });
     puMatch.save(null, {
       success: function(info) {
@@ -54,7 +51,6 @@ var CreateMatchComponent = React.createClass({
         }
     });
 
-    Backbone.history.navigate('games', {trigger: true})
 
   },
 addLocation: function(id){
@@ -62,8 +58,8 @@ addLocation: function(id){
   var self = this;
     matchQuery.get(id, {
       success: function(result) {
-        console.log('result is: ', result);
         var point = new Parse.GeoPoint(self.state.geoLocation);
+
         console.log('point is: ', point);
         result.set("geoPoint", point);
         result.save();
@@ -71,9 +67,9 @@ addLocation: function(id){
       },
       error: function(error) {
         console.log('objectId error is: ', error);
-        // error is an instance of Parse.Error.
       }
     });
+    Backbone.history.navigate('games', {trigger: true})
 },
   render: function(){
     return (

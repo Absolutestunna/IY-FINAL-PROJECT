@@ -16,7 +16,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map', 'mapbox.streets')
     this.map = map;
-    this.map.fitWorld();
+    this.map.setView([34.8512217,-82.4048317], 4);
 
     {/*Query to get the public matches stored in parse
       */}
@@ -59,7 +59,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     var newLocation = [location[1], location[0]];
     this.location = newLocation;
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    this.map.setView(newLocation, 4)
+    this.map.setView(newLocation, 8)
     L.marker(location, {
        icon: L.mapbox.marker.icon({
          'marker-color': '#ccc'
@@ -112,7 +112,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
   handleCurrentLocation: function(e){
     e.preventDefault();
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    this.map.locate({setView: true, maxZoom: 6});
+    this.map.locate({setView: true, maxZoom: 8});
 
   },
   render: function(){
@@ -138,14 +138,15 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
               )
             )
           ), 
+
+          React.createElement("div", {className: "row"}, 
+            React.createElement("div", {id: "map", className: "col m12"}
+            )
+          ), 
           React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col m12"}, 
               React.createElement("button", {onClick: this.handleCreateMatch, className: "waves-effect waves-light btn center-align"}, "Create Match")
 
-            )
-          ), 
-          React.createElement("div", {className: "row"}, 
-            React.createElement("div", {id: "map", className: "col m12"}
             )
           )
         )
