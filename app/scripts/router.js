@@ -15,7 +15,9 @@ var MessagesComponent = require('./components/messagesList.jsx');
 var CreateMatchComponent = require('./components/createMatch.jsx');
 var DistanceGamesComponent = require('./components/distanceGames.jsx');
 
-
+//collections
+var PublicMatchesCollection = require('./collections/publicGamesCollection');
+var publicMatches = new PublicMatchesCollection();
 
 
 // Router
@@ -58,7 +60,7 @@ var Router = Backbone.Router.extend({
   },
   games: function(){
     ReactDOM.render(
-      React.createElement(GamesComponent), document.getElementById('app')
+      React.createElement(GamesComponent, {publicMatches: publicMatches}), document.getElementById('app')
     );
   },
   message: function(){

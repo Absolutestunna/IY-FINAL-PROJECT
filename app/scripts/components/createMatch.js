@@ -30,13 +30,17 @@ var CreateMatchComponent = React.createClass({displayName: "CreateMatchComponent
       self.setState({
         geoLocation: data.features[0].center
       });
-      console.log('stateLocation', self.state.geoLocation);
 
     });
 
     var puMatch = new PuMatch();
+
+    console.log('state stuff are: ', this.state);
+    var parkName = $("#park_name").val();
+    var playTime = $("#time").val()
     puMatch.set({
-      time: $("#time").val(),
+      name: parkName,
+      time: playTime,
       creator: currentUser
     });
     puMatch.save(null, {
@@ -48,6 +52,8 @@ var CreateMatchComponent = React.createClass({displayName: "CreateMatchComponent
         console.log('Failed to create new object, with error code: ' + error.message);
         }
     });
+
+    Backbone.history.navigate('games', {trigger: true})
 
   },
 addLocation: function(id){
@@ -76,6 +82,10 @@ addLocation: function(id){
           React.createElement("form", {id: "form-body", className: " form-group col s12"}, 
             React.createElement("div", {className: "row"}, 
 
+              React.createElement("div", {className: "input-field col s12 "}, 
+                React.createElement("input", {id: "park_name", type: "text", className: "validate"}), 
+                React.createElement("label", {htmlFor: "park"}, "Park Name")
+              ), 
 
               React.createElement("div", {className: "input-field col s12 "}, 
                 React.createElement("input", {id: "location", type: "text", className: "validate"}), 

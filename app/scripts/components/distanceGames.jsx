@@ -13,23 +13,8 @@ var DistanceGamesListComponent = React.createClass({
     }
   },
   componentDidMount: function(){
-    var query = new Parse.Query("pumatch");
-    query.find({
-    success: function(object) {
-      var location = localStorage.getItem('location')
-      var newLocation = JSON.parse(location);
-      console.log(typeof(newLocation));
 
-        // object is an instance of Parse.Object.
-        object.map(function(address){
-          console.log(address.get('geoPoint').milesTo(newLocation));
-        })
-    },
-    error: function(object, error) {
-        // error is an instance of Parse.Error.
-        console.log(error);
-    }
-});
+
 
 
   },

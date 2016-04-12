@@ -5,6 +5,7 @@ var Parse = require('parse');
 require('backbone-react-component');
 
 
+
 var GamesComponent = React.createClass({displayName: "GamesComponent",
   getInitialState: function(){
     return {
@@ -51,13 +52,14 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     e.preventDefault();
     Backbone.history.navigate("createMatch", {trigger: true})
   },
+
   renderMap: function(place){  {/*function used to rerender the map based on address typed*/}
     var location = place.features[0].center; {/*specifically get the geolocation of the address*/}
-
-    location = [location[1], location[0]];
-    localStorage.setItem('location', JSON.stringify(location));
+    this.originalLocation = location;
+    var newLocation = [location[1], location[0]];
+    this.location = newLocation;
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    this.map.setView(location, 4)
+    this.map.setView(newLocation, 4)
     L.marker(location, {
        icon: L.mapbox.marker.icon({
          'marker-color': '#ccc'
@@ -69,8 +71,24 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
    }, 3000);
    this.timer = timer
 
-
-
+  },
+  handleDistanceMatchQuery: function(place){
+    var queryLocation = place.features[0].center;
+    var distanceMatchQuery = new Parse.Query("pumatch");
+    var self = this;
+      distanceMatchQuery.find({
+        success: function(results) {
+            var final = results.filter(function(location){
+            var queryLocationNew = new Parse.GeoPoint(queryLocation);
+            return (queryLocationNew.milesTo(location.get('geoPoint')) < 20);
+          });
+          console.log(final);
+        },
+        error: function(error) {
+          console.log(error);
+          // error is an instance of Parse.Error.
+        }
+      });
   },
   componentWillUnmount: function(){
     clearInterval(this.timer);
@@ -84,9 +102,10 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     var accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var url = urlBase+body+q+'.json?access_token='+accessToken;
     var self = this;
-    $.get(url, function( data ) {
-      console.log('data is: ', data); {/*geojson data to be passed to render the map*/}
+    $.get(url, function( data ) {  {/*geojson data to be passed to render the map*/}
+
       self.renderMap(data);
+      self.handleDistanceMatchQuery(data);
     });
 
   },

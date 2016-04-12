@@ -31,13 +31,17 @@ var CreateMatchComponent = React.createClass({
       self.setState({
         geoLocation: data.features[0].center
       });
-      console.log('stateLocation', self.state.geoLocation);
 
     });
 
     var puMatch = new PuMatch();
+
+    console.log('state stuff are: ', this.state);
+    var parkName = $("#park_name").val();
+    var playTime = $("#time").val()
     puMatch.set({
-      time: $("#time").val(),
+      name: parkName,
+      time: playTime,
       creator: currentUser
     });
     puMatch.save(null, {
@@ -49,6 +53,8 @@ var CreateMatchComponent = React.createClass({
         console.log('Failed to create new object, with error code: ' + error.message);
         }
     });
+
+    Backbone.history.navigate('games', {trigger: true})
 
   },
 addLocation: function(id){
@@ -77,6 +83,10 @@ addLocation: function(id){
           <form id="form-body" className=" form-group col s12">
             <div className="row">
 
+              <div className="input-field col s12 ">
+                <input id="park_name" type="text" className="validate" />
+                <label htmlFor="park">Park Name</label>
+              </div>
 
               <div className="input-field col s12 ">
                 <input id="location" type="text" className="validate" />
