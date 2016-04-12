@@ -5,92 +5,46 @@ var $ = require('jquery');
 var Parse = require('parse');
 require('backbone-react-component');
 
-// L.mapbox.featureLayer({
-//     // this feature is in the GeoJSON format: see geojson.org
-//     // for the full specification
-//     type: 'Feature',
-//     geometry: {
-//         type: 'Point',
-//         // coordinates here are in longitude, latitude order because
-//         // x, y is the standard for GeoJSON and many formats
-//         coordinates: [
-//           -77.03221142292,
-//           38.913371603574
-//         ]
-//     },
-//     properties: {
-//         title: 'Peregrine Espresso',
-//         description: '1718 14th St NW, Washington, DC',
-//         // one can customize markers by adding simplestyle properties
-//         // https://www.mapbox.com/guides/an-open-platform/#simplestyle
-//         'marker-size': 'large',
-//         'marker-color': '#BE9A6B',
-//         'marker-symbol': 'cafe'
-//     }
-// }).addTo(map);
-
-
-//
-// renderMap: function(place){
-//   console.log(place);
-//   var location = place.features[0].center;
-//   mapboxgl.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-//   var map = new mapboxgl.Map({
-//     container: 'map',
-//     style: 'mapbox://styles/mapbox/streets-v8',
-//     center: location,
-//     zoom: 10
-//   });
-//
-//
-//
-// },
-
-
-
 
 var GamesComponent = React.createClass({
   getInitialState: function(){
     return {
-      center: []
+      location: null
     }
   },
   componentDidMount: function(){
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map', 'mapbox.streets')
     this.map = map;
-    this.map.fitWorld()
+    this.map.fitWorld();
 
     {/*Query to get the public matches stored in parse
       */}
-      var puMatchQuery = new Parse.Query("pumatch");
-      var self = this;
-      var locations;
-        puMatchQuery.find({
-          success: function(results) {
-            locations = results.map(function(location){
-                return location.get('geoPoint');
-            });
-            console.log('locations final are: ', locations);
+    var puMatchQuery = new Parse.Query("pumatch");
+    var self = this;
+    var locations;
+      puMatchQuery.find({
+        success: function(results) {
+          locations = results.map(function(location){
+              return location.get('geoPoint');
+          });
+          locations.map(function(locate){
+            var latitude = locate._latitude;
+            var longitude = locate._longitude
+            L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+            L.marker([longitude, latitude], {
+               icon: L.mapbox.marker.icon({
+                 'marker-color': '#f86767'
+               }),
+            }).addTo(self.map);
 
-            locations.map(function(locate){
-              var latitude = locate._latitude;
-              var longitude = locate._longitude
-              console.log(longitude, latitude);
-              L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-              L.marker([longitude, latitude], {
-                 icon: L.mapbox.marker.icon({
-                   'marker-color': '#f86767'
-                 }),
-              }).addTo(self.map);
-
-            })
-          },
-          error: function(error) {
-            console.log(error);
-            // error is an instance of Parse.Error.
-          }
-        });
+          })
+        },
+        error: function(error) {
+          console.log(error);
+          // error is an instance of Parse.Error.
+        }
+      });
 
   },
 
@@ -100,9 +54,9 @@ var GamesComponent = React.createClass({
   },
   renderMap: function(place){  {/*function used to rerender the map based on address typed*/}
     var location = place.features[0].center; {/*specifically get the geolocation of the address*/}
-    console.log('location is: ', location);
 
     location = [location[1], location[0]];
+    localStorage.setItem('location', JSON.stringify(location));
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     this.map.setView(location, 4)
     L.marker(location, {
@@ -110,6 +64,17 @@ var GamesComponent = React.createClass({
          'marker-color': '#ccc'
        }),
    }).addTo(this.map);
+   var timer = setInterval(function(){
+     alert("just wait");
+     Backbone.history.navigate('gamesDistance', {trigger: true});
+   }, 3000);
+   this.timer = timer
+
+
+
+  },
+  componentWillUnmount: function(){
+    clearInterval(this.timer);
 
   },
   handleSetLocation: function(e){
@@ -124,7 +89,6 @@ var GamesComponent = React.createClass({
       console.log('data is: ', data); {/*geojson data to be passed to render the map*/}
       self.renderMap(data);
     });
-
 
   },
   handleCurrentLocation: function(e){
@@ -141,7 +105,7 @@ var GamesComponent = React.createClass({
           <div className="row">
             <div className="col m6">
               <div className="row">
-                <div className="col m9 s12"><input id="address" type="text" placeholder="Please enter your address" className="validate " /></div>
+                <div className="col m9 s12"><input id="address" type="text" placeholder="Search for address" className="validate " /></div>
                 <div className="col m3 s12">
                   <button onClick={this.handleSetLocation} className="btn btn-default z-depth-2 center-align">Search Games</button>
                 </div>

@@ -49,8 +49,6 @@ var CreateMatchComponent = React.createClass({displayName: "CreateMatchComponent
         }
     });
 
-
-
   },
 addLocation: function(id){
   var matchQuery = new Parse.Query("pumatch");

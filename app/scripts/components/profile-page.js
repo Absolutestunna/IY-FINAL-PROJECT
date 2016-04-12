@@ -5,8 +5,6 @@ var Parse = require('parse');
 require('backbone-react-component');
 var createFragment = require('react-addons-create-fragment');
 
-var MessagesListComponent = require('./messagesList.jsx');
-
 
 var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent",
   mixins: [Backbone.React.Component.mixin],
