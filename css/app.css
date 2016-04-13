@@ -5772,9 +5772,12 @@ body {
 
 #map {
   position: absolute;
-  top: 229px;
-  bottom: 50px;
+  top: 140px;
+  bottom: 80px;
   width: 70%; }
+
+.create-match {
+  margin-top: 480px; }
 
 #welcome-body {
   padding: 70px 190px 0 190px; }
