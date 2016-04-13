@@ -5,6 +5,27 @@ var $ = require('jquery');
 var Parse = require('parse');
 require('backbone-react-component');
 
+// var timer = setInterval(function(){
+//   alert("just wait");
+//   Backbone.history.navigate('gamesDistance', {trigger: true});
+// }, 6000);
+// this.timer = timer
+
+// componentWillUnmount: function(){
+//   clearInterval(this.timer);
+//
+// },
+
+//
+//   console.log(queryLocationNew.milesTo(location.get('geoPoint')));
+//   if (queryLocationNew.milesTo(location.get('geoPoint')) < 50){
+//
+//     this.props.publicMatches.create('obj', queryLocationNew.milesTo(location.get('geoPoint')));
+//     console.log('props matches are: ', this.props.publicMatches);
+//     return queryLocationNew.milesTo(location.get('geoPoint'))
+//   }
+// });
+// console.log('final is: ', final);
 
 
 var GamesComponent = React.createClass({
@@ -66,35 +87,28 @@ var GamesComponent = React.createClass({
          'marker-color': '#ccc'
        }),
    }).addTo(this.map);
-   var timer = setInterval(function(){
-     alert("just wait");
-     Backbone.history.navigate('gamesDistance', {trigger: true});
-   }, 3000);
-   this.timer = timer
+
 
   },
   handleDistanceMatchQuery: function(place){
+    var self = this;
+
     var queryLocation = place.features[0].center;
     var distanceMatchQuery = new Parse.Query("pumatch");
-    var self = this;
-      distanceMatchQuery.find({
-        success: function(results) {
-            var final = results.filter(function(location){
-            var queryLocationNew = new Parse.GeoPoint(queryLocation);
-            return (queryLocationNew.milesTo(location.get('geoPoint')) < 20);
-          });
-          console.log(final);
-        },
-        error: function(error) {
-          console.log(error);
-          // error is an instance of Parse.Error.
-        }
-      });
+    var queryLocationNew = new Parse.GeoPoint(queryLocation);
+    distanceMatchQuery.withinMiles("geoPoint", queryLocationNew, 5).find({
+      success: function(results) {
+            var app = self.props.app;
+            app.publicMatches.reset(results);
+            app.navigate('gamesDistance', {trigger: true});
+      },
+      error: function(error) {
+        console.log(error);
+        // error is an instance of Parse.Error.
+      }
+    });
   },
-  componentWillUnmount: function(){
-    clearInterval(this.timer);
 
-  },
   handleSetLocation: function(e){
     e.preventDefault();
     var urlBase = 'https://api.mapbox.com/'
@@ -117,12 +131,13 @@ var GamesComponent = React.createClass({
 
   },
   render: function(){
+
     return (
         <div className="row games">
 
           <div className="col m12 center-align"><h4>GAMES</h4></div>
           <div className="row">
-            <div className="col m6">
+            <div className="col m9">
               <div className="row">
                 <div className="col m9 s12"><input id="address" type="text" placeholder="Search for address" className="validate " /></div>
                 <div className="col m3 s12">
@@ -131,11 +146,11 @@ var GamesComponent = React.createClass({
               </div>
             </div>
 
-            <div className="col m6">
+            <div className="col m3">
               <div className="row">
                 <div className="col m12 right-align">
-                  <button onClick={this.handleCurrentLocation}  id="current-location" type="text" className="validate btn btn-default z-depth-2"><span>Use your current location</span><span></span><i className="medium material-icons">my_location</i></button>
-                </div>
+                  <button onClick={this.handleCurrentLocation} id="current-location" className="btn-floating btn-large waves-effect waves-light red z-depth-2"><i className="medium material-icons">my_location</i></button>
+              </div>
               </div>
             </div>
           </div>

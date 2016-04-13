@@ -4,6 +4,27 @@ var $ = require('jquery');
 var Parse = require('parse');
 require('backbone-react-component');
 
+// var timer = setInterval(function(){
+//   alert("just wait");
+//   Backbone.history.navigate('gamesDistance', {trigger: true});
+// }, 6000);
+// this.timer = timer
+
+// componentWillUnmount: function(){
+//   clearInterval(this.timer);
+//
+// },
+
+//
+//   console.log(queryLocationNew.milesTo(location.get('geoPoint')));
+//   if (queryLocationNew.milesTo(location.get('geoPoint')) < 50){
+//
+//     this.props.publicMatches.create('obj', queryLocationNew.milesTo(location.get('geoPoint')));
+//     console.log('props matches are: ', this.props.publicMatches);
+//     return queryLocationNew.milesTo(location.get('geoPoint'))
+//   }
+// });
+// console.log('final is: ', final);
 
 
 var GamesComponent = React.createClass({displayName: "GamesComponent",
@@ -65,35 +86,28 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
          'marker-color': '#ccc'
        }),
    }).addTo(this.map);
-   var timer = setInterval(function(){
-     alert("just wait");
-     Backbone.history.navigate('gamesDistance', {trigger: true});
-   }, 3000);
-   this.timer = timer
+
 
   },
   handleDistanceMatchQuery: function(place){
+    var self = this;
+
     var queryLocation = place.features[0].center;
     var distanceMatchQuery = new Parse.Query("pumatch");
-    var self = this;
-      distanceMatchQuery.find({
-        success: function(results) {
-            var final = results.filter(function(location){
-            var queryLocationNew = new Parse.GeoPoint(queryLocation);
-            return (queryLocationNew.milesTo(location.get('geoPoint')) < 20);
-          });
-          console.log(final);
-        },
-        error: function(error) {
-          console.log(error);
-          // error is an instance of Parse.Error.
-        }
-      });
+    var queryLocationNew = new Parse.GeoPoint(queryLocation);
+    distanceMatchQuery.withinMiles("geoPoint", queryLocationNew, 5).find({
+      success: function(results) {
+            var app = self.props.app;
+            app.publicMatches.reset(results);
+            app.navigate('gamesDistance', {trigger: true});
+      },
+      error: function(error) {
+        console.log(error);
+        // error is an instance of Parse.Error.
+      }
+    });
   },
-  componentWillUnmount: function(){
-    clearInterval(this.timer);
 
-  },
   handleSetLocation: function(e){
     e.preventDefault();
     var urlBase = 'https://api.mapbox.com/'
@@ -116,12 +130,13 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
 
   },
   render: function(){
+
     return (
         React.createElement("div", {className: "row games"}, 
 
           React.createElement("div", {className: "col m12 center-align"}, React.createElement("h4", null, "GAMES")), 
           React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col m6"}, 
+            React.createElement("div", {className: "col m9"}, 
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "col m9 s12"}, React.createElement("input", {id: "address", type: "text", placeholder: "Search for address", className: "validate "})), 
                 React.createElement("div", {className: "col m3 s12"}, 
@@ -130,11 +145,11 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
               )
             ), 
 
-            React.createElement("div", {className: "col m6"}, 
+            React.createElement("div", {className: "col m3"}, 
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "col m12 right-align"}, 
-                  React.createElement("button", {onClick: this.handleCurrentLocation, id: "current-location", type: "text", className: "validate btn btn-default z-depth-2"}, React.createElement("span", null, "Use your current location"), React.createElement("span", null), React.createElement("i", {className: "medium material-icons"}, "my_location"))
-                )
+                  React.createElement("button", {onClick: this.handleCurrentLocation, id: "current-location", className: "btn-floating btn-large waves-effect waves-light red z-depth-2"}, React.createElement("i", {className: "medium material-icons"}, "my_location"))
+              )
               )
             )
           ), 
@@ -144,7 +159,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
             )
           ), 
           React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col m12"}, 
+            React.createElement("div", {className: "col m12 center-align create-match"}, 
               React.createElement("button", {onClick: this.handleCreateMatch, className: "waves-effect waves-light btn center-align"}, "Create Match")
 
             )

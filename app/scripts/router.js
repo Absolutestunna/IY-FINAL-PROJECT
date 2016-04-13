@@ -17,7 +17,6 @@ var DistanceGamesComponent = require('./components/distanceGames.jsx');
 
 //collections
 var PublicMatchesCollection = require('./collections/publicGamesCollection');
-var publicMatches = new PublicMatchesCollection();
 
 
 // Router
@@ -32,6 +31,9 @@ var Router = Backbone.Router.extend({
     'message': 'message',
     'createMatch': 'createMatch',
     'gamesDistance': 'gamesDistance'
+  },
+  initialize: function(){
+    this.publicMatches = new PublicMatchesCollection();
   },
   welcomePage: function(){
     ReactDOM.render(
@@ -60,7 +62,7 @@ var Router = Backbone.Router.extend({
   },
   games: function(){
     ReactDOM.render(
-      React.createElement(GamesComponent, {publicMatches: publicMatches}), document.getElementById('app')
+      React.createElement(GamesComponent, {app: this}), document.getElementById('app')
     );
   },
   message: function(){
@@ -75,7 +77,7 @@ var Router = Backbone.Router.extend({
   },
   gamesDistance: function(){
     ReactDOM.render(
-      React.createElement(DistanceGamesComponent), document.getElementById('app')
+      React.createElement(DistanceGamesComponent, {app: this}), document.getElementById('app')
     );
   }
 });

@@ -8,29 +8,40 @@ require('backbone-react-component');
 var DistanceGamesListComponent = React.createClass({displayName: "DistanceGamesListComponent",
   getInitialState: function(){
     return {
-      locations: []
+      matchDetails: this.props.app.publicMatches
     }
-  },
-  componentDidMount: function(){
-
-
-
-
   },
 
   render: function(){
+      var app = this.props.app.publicMatches;
+      var game = this.state.matchDetails.map(function(data){
+        console.log('data', data);
+        return (React.createElement(Game, {
+          data: data, 
+          key: data.id}
+          ));
+      });
     return (
-      React.createElement("div", null)
+      React.createElement("ul", {className: "row"}, 
+        game
+      )
     );
   }
 });
 
-var Games = React.createClass({displayName: "Games",
+var Game = React.createClass({displayName: "Game",
   render: function(){
+    console.log('model is', this.props.data.get('name'));
     return(
-      React.createElement("div", null)
+      React.createElement("li", {className: "col m12"}, 
+        React.createElement("div", {className: "row"}, 
+          React.createElement("div", {className: "col m12"}, 
+            React.createElement("h4", null, this.props.model.get('name'))
+          )
+        )
+      )
     );
   }
-})
+});
 
 module.exports = DistanceGamesListComponent;

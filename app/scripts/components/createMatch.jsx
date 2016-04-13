@@ -63,13 +63,14 @@ addLocation: function(id){
         console.log('point is: ', point);
         result.set("geoPoint", point);
         result.save();
-
       },
       error: function(error) {
         console.log('objectId error is: ', error);
       }
+    }).then(function(){
+      Backbone.history.navigate('games', {trigger: true})
+
     });
-    Backbone.history.navigate('games', {trigger: true})
 },
   render: function(){
     return (
