@@ -5772,9 +5772,15 @@ body {
 
 #map {
   position: absolute;
-  top: 140px;
+  top: 190px;
   bottom: 80px;
   width: 70%; }
+
+#map1 {
+  position: absolute;
+  top: 250px;
+  bottom: 300px;
+  width: 52%; }
 
 .create-match {
   margin-top: 480px; }
