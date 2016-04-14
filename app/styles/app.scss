@@ -19,19 +19,34 @@ body {
 
 #map {
   position:absolute;
-  top: 140px;
+  top: 190px;
   bottom:80px;
-  width:70%;
+  width: 70%;
   // canvas {
   //   width: 300px;
   //   height: 300px;
   //   }
  }
+ #map1 {
+   position:absolute;
+   top:250px;
+   bottom:300px;
+   width:52%;
+ }
+ // .gameDetails {
+ //   border: 1px solid red;
+ //   position: absolute;
+ //   left: 900px;
+ //   width: 24%;
+ //   top: 142px;
+ // }
 
 .create-match {
   margin-top: 480px;
 
 }
+
+
 
 
 #welcome-body {

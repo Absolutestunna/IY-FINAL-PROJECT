@@ -38,6 +38,8 @@ var CreateMatchComponent = React.createClass({displayName: "CreateMatchComponent
     puMatch.set({
       name: $("#park_name").val(),
       time: $("#time").val(),
+      address: $('#location').val(),
+      details: $('#details').val(),
       creator: currentUser,
     });
     puMatch.save(null, {
@@ -91,6 +93,11 @@ addLocation: function(id){
 
               React.createElement("div", {className: "input-field col s12"}, 
                 React.createElement("input", {id: "time", type: "time", className: " form-control validate"})
+              ), 
+              React.createElement("div", {className: "input-field col s12 "}, 
+                React.createElement("i", {className: "material-icons prefix"}, "mode_edit"), 
+                React.createElement("textarea", {id: "details", className: "materialize-textarea"}), 
+                React.createElement("label", {hmtlFor: "details"}, "Extra details")
               )
 
             )

@@ -35,8 +35,7 @@ var CrewComponent = React.createClass({
           var relation = userObj.relation("crew");
           relation.query().find({
             success: function(crew){
-              console.log('crew is: ', crew);
-              console.log('self is: ', self);
+      
 
               self.setState({
                 crewMembers: crew

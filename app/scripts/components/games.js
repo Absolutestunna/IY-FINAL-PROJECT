@@ -4,28 +4,8 @@ var $ = require('jquery');
 var Parse = require('parse');
 require('backbone-react-component');
 
-// var timer = setInterval(function(){
-//   alert("just wait");
-//   Backbone.history.navigate('gamesDistance', {trigger: true});
-// }, 6000);
-// this.timer = timer
 
-// componentWillUnmount: function(){
-//   clearInterval(this.timer);
-//
-// },
-
-//
-//   console.log(queryLocationNew.milesTo(location.get('geoPoint')));
-//   if (queryLocationNew.milesTo(location.get('geoPoint')) < 50){
-//
-//     this.props.publicMatches.create('obj', queryLocationNew.milesTo(location.get('geoPoint')));
-//     console.log('props matches are: ', this.props.publicMatches);
-//     return queryLocationNew.milesTo(location.get('geoPoint'))
-//   }
-// });
-// console.log('final is: ', final);
-
+var DistanceGamesComponent = require('./distanceGames.jsx');
 
 var GamesComponent = React.createClass({displayName: "GamesComponent",
   getInitialState: function(){
@@ -98,7 +78,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     distanceMatchQuery.withinMiles("geoPoint", queryLocationNew, 5).find({
       success: function(results) {
             var app = self.props.app;
-            app.publicMatches.reset(results);
+            app.publicMatches = results;
             app.navigate('gamesDistance', {trigger: true});
       },
       error: function(error) {
@@ -116,8 +96,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     var accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var url = urlBase+body+q+'.json?access_token='+accessToken;
     var self = this;
-    $.get(url, function( data ) {  {/*geojson data to be passed to render the map*/}
-
+    $.get(url, function(data) {  {/*geojson data to be passed to render the map*/}
       self.renderMap(data);
       self.handleDistanceMatchQuery(data);
     });
@@ -154,10 +133,13 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
             )
           ), 
 
-          React.createElement("div", {className: "row"}, 
-            React.createElement("div", {id: "map", className: "col m12"}
-            )
+          React.createElement("div", {className: "map"}, 
+            React.createElement("div", {id: "map"}), 
+            React.createElement("div", {className: "gameDetails"})
           ), 
+
+
+
           React.createElement("div", {className: "row"}, 
             React.createElement("div", {className: "col m12 center-align create-match"}, 
               React.createElement("button", {onClick: this.handleCreateMatch, className: "waves-effect waves-light btn center-align"}, "Create Match")

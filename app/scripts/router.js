@@ -33,49 +33,58 @@ var Router = Backbone.Router.extend({
     'gamesDistance': 'gamesDistance'
   },
   initialize: function(){
-    this.publicMatches = new PublicMatchesCollection();
+    this.publicMatches = [];
   },
   welcomePage: function(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
       React.createElement(WelcomePageComponent), document.getElementById('app')
     );
   },
   signUp: function(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
       React.createElement(SignUpComponent), document.getElementById('app')
     );
   },
   signIn: function(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
       React.createElement(SignInComponent), document.getElementById('app')
     );
   },
   profile: function(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
       React.createElement(ProfilePageComponent), document.getElementById('app')
     );
   },
   crew: function(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
       React.createElement(CrewComponent), document.getElementById('app')
     );
   },
   games: function(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
       React.createElement(GamesComponent, {app: this}), document.getElementById('app')
     );
   },
   message: function(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
       React.createElement(MessagesComponent), document.getElementById('app')
     );
   },
   createMatch: function(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
       React.createElement(CreateMatchComponent), document.getElementById('app')
     );
   },
   gamesDistance: function(){
+    ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
       React.createElement(DistanceGamesComponent, {app: this}), document.getElementById('app')
     );

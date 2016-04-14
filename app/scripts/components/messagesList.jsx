@@ -122,7 +122,7 @@ var Message = React.createClass({
   render: function(){
     var nameMod = this.props.sender;
     return (
-      <li className="row collection-header">
+      <li className="collection-header">
           <div className="col m10">Please accept {nameMod.firstName + " " + nameMod.lastName}&#39;s invitation to join their crew</div>
           <div className="col m1 right-align">
             <button onClick={this.props.handleAccept.bind(this, nameMod)} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">done</i></button>

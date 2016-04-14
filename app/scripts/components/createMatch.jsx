@@ -39,6 +39,8 @@ var CreateMatchComponent = React.createClass({
     puMatch.set({
       name: $("#park_name").val(),
       time: $("#time").val(),
+      address: $('#location').val(),
+      details: $('#details').val(),
       creator: currentUser,
     });
     puMatch.save(null, {
@@ -92,6 +94,11 @@ addLocation: function(id){
 
               <div className="input-field col s12">
                 <input id="time" type="time" className=" form-control validate" />
+              </div>
+              <div className="input-field col s12 ">
+                <i className="material-icons prefix">mode_edit</i>
+                <textarea id="details" className="materialize-textarea"></textarea>
+                <label hmtlFor="details">Extra details</label>
               </div>
 
             </div>

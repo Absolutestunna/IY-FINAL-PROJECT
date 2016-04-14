@@ -15,7 +15,6 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
     e.preventDefault();
     var modelID = model.user_id;
 
-    console.log('modelID is: ', modelID);
     var AcceptInvite = Parse.Object.extend("Invites");
     var acceptQuery = new Parse.Query(AcceptInvite);
     acceptQuery.get(modelID, {
@@ -122,7 +121,7 @@ var Message = React.createClass({displayName: "Message",
   render: function(){
     var nameMod = this.props.sender;
     return (
-      React.createElement("li", {className: "row collection-header"}, 
+      React.createElement("li", {className: "collection-header"}, 
           React.createElement("div", {className: "col m10"}, "Please accept ", nameMod.firstName + " " + nameMod.lastName, "'s invitation to join their crew"), 
           React.createElement("div", {className: "col m1 right-align"}, 
             React.createElement("button", {onClick: this.props.handleAccept.bind(this, nameMod), className: "btn-floating btn-large waves-effect waves-light red"}, React.createElement("i", {className: "material-icons"}, "done"))
