@@ -96,23 +96,35 @@ var DistanceGamesListComponent = React.createClass({
 });
 
 var GamesDetailComponent = React.createClass({
+  getInitialState: function(){
+    return {
+      lat: null,
+      log: null
+    }
+  },
   handleAddressConversion: function(select){
     var selectID = select[0].id
     var puMatchQuery = new Parse.Query("pumatch");
     var self = this;
     puMatchQuery.get(selectID, {
       success: function(result){
-        var lat = result.get('geoPoint')._latitude;
-        var log = result.get('geoPoint')._longitude;
-        console.log(log, lat);
+        self.setState({
+          lat: result.get('geoPoint')._latitude,
+          log: result.get('geoPoint')._longitude
+        });
+        console.log(self.state.lat, self.state.log);
+
         L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
         var map = L.mapbox.map('map1', 'mapbox.streets')
-          
-          L.marker([log, lat], {
+          .setView([self.state.log, self.state.lat], 16);
+
+        L.marker([self.state.log, self.state.lat], {
            icon: L.mapbox.marker.icon({
              'marker-color': '#f86767'
            }),
-        }).addTo(this.map);
+        }).addTo(map);
+
+
       },
       error: function(error){
         console.log(error);

@@ -75,7 +75,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     var queryLocation = place.features[0].center;
     var distanceMatchQuery = new Parse.Query("pumatch");
     var queryLocationNew = new Parse.GeoPoint(queryLocation);
-    distanceMatchQuery.withinMiles("geoPoint", queryLocationNew, 5).find({
+    distanceMatchQuery.withinMiles("geoPoint", queryLocationNew, 15).find({
       success: function(results) {
             var app = self.props.app;
             app.publicMatches = results;
@@ -106,7 +106,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     e.preventDefault();
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     this.map.locate({setView: true, maxZoom: 8});
-
+    
   },
   render: function(){
 
