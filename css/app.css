@@ -5770,27 +5770,31 @@ body {
   margin: 0;
   padding: 0; }
 
+#app {
+  padding-left: 120px;
+  padding-right: 120px;
+  padding-top: 120px; }
+
+#welcome-body .welcome-container {
+  padding: 0 50px; }
+  #welcome-body .welcome-container h2 {
+    padding: 0 auto; }
+
 #map {
   position: absolute;
-  top: 190px;
+  top: 300px;
   bottom: 80px;
-  width: 70%; }
+  left: 280px;
+  width: 50%; }
 
 #map1 {
   position: absolute;
   top: 250px;
-  bottom: 300px;
+  bottom: 80px;
   width: 52%; }
 
 .create-match {
   margin-top: 480px; }
-
-#welcome-body {
-  padding: 70px 190px 0 190px; }
-  #welcome-body .welcome-container {
-    padding: 0 50px; }
-    #welcome-body .welcome-container h2 {
-      padding: 0 auto; }
 
 .signUp {
   display: block;
@@ -5800,11 +5804,9 @@ body {
   display: block;
   width: 100%; }
 
-.user-information {
-  margin-top: 120px; }
-  .user-information .create {
-    margin-bottom: 30px;
-    font-size: 20px; }
+.user-information .create {
+  margin-bottom: 30px;
+  font-size: 20px; }
 
 .sign-in {
   margin-top: 120px; }
