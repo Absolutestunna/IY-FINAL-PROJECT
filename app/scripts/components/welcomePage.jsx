@@ -16,7 +16,6 @@ var WelcomePageComponent = React.createClass({
   render: function(){
     return (
 
-      <div>
         <div className="row" id="welcome-body">
           <div className="col m12 col s12 welcome-container">
             <div className="row play">
@@ -36,7 +35,6 @@ var WelcomePageComponent = React.createClass({
             </div>
           </div>
         </div>
-      </div>
     );
   }
 });

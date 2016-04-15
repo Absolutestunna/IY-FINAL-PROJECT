@@ -7,34 +7,21 @@ require('backbone-react-component');
 var GameDetailController = React.createClass({displayName: "GameDetailController",
   getInitialState: function(){
     return {
-      model: [],
-      publicGameCrew: []
+      publicGameCrew: [],
+      lat: 0,
+      log: 0,
+      name: "",
+      time: "",
+      details: "",
+      address: "",
+      geoPoint: []
     }
   },
-  handleJoinPublicGame: function(model){
-
-    // var gameID = model[0].id;
-    // console.log('gameID is: ', gameID);
-    // var JoinPublicCrew = Parse.Object.extend("pumatch");
-    // var acceptQuery = new Parse.Query(JoinPublicCrew);
-    // acceptQuery.get(gameID, {
-    //   success: function(result){
-    //     console.log('result is: ', result);
-    //
-    //     var organizer = result.get("creator");
-    //     var user = Parse.User.current();
-    //     var relation = user.relation("publicGameCrew");
-    //     relation.add(organizer);
-    //     user.save();
-    //     // result.destroy({});
-    //   },
-    //   error: function(error){
-    //     console.log(error);
-    //   }
-    // })
-
-
-  },
+  // handleJoinPublicGame: function(model){
+  //   var relation = model[0].relation("publicGameCrew");
+  //   relation.add(Parse.User.current());
+  //   model[0].save();
+  // },
   handleDetailGame: function(model){
     var DetailQuery = Parse.Object.extend("pumatch")
     var detailQuery = new Parse.Query(DetailQuery);
@@ -43,27 +30,42 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
     var self = this;
     detailQuery.find({
       success: function(result){
-        console.log('result is: ', result);
-        self.setState({model: result})
-
+        console.log('your result is: ', result);
+        self.setState({
+          name: result[0].get('name'),
+          time: result[0].get('time'),
+          details: result[0].get('details'),
+          address: result[0].get('address'),
+          geoPoint: result[0].get('geoPoint'),
+          lat: result[0].get('geoPoint')._latitude,
+          log: result[0].get('geoPoint')._longitude
+        })
       },
       error: function(error){
         console.log(error);
       }
     })
   },
+
   render: function(){
     var app = this.props.app;
     return(
       React.createElement("div", {className: "row"}, 
         React.createElement(DistanceGamesListComponent, {
           app: app, 
-          handleDetailGame: this.handleDetailGame}), 
+          handleDetailGame: this.handleDetailGame}
+        ), 
         React.createElement(GamesDetailComponent, {
-          gameSelected: this.state.model, 
-          handleJoinPublicGame: this.handleJoinPublicGame}
-        )
+          game: this.state.game, 
+          name: this.state.name, 
+          time: this.state.time, 
+          details: this.state.details, 
+          address: this.state.address, 
+          lat: this.state.lat, 
+          log: this.state.log, 
+          geoPoint: this.state.geoPoint}
 
+        )
       )
     );
   }
@@ -72,15 +74,25 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
 var DistanceGamesListComponent = React.createClass({displayName: "DistanceGamesListComponent",
   render: function(){
     var app = this.props.app;
+    var publicMatches = app.publicMatches;
     var self = this;
-      var games = app.publicMatches.map(function(game){
+
+      var games = publicMatches.map(function(game){
+        // console.log('game is: ', typeof(game.get("geoPoint")));
+        // game = game.get("details") : '' ? game.get("address") : '' ? game.get("name") : '' ? game.get("geoPoint") : "" ? game.get("time") : "";
+
+        // var imageUrl = product.get("images").length > 0 ? product.get("images")[0].url() : '';
+
+
         return (React.createElement(Game, {
-          handleDetailGame: self.props.handleDetailGame, 
           model: game, 
-          key: game.id}
+          key: game.id, 
+          handleDetailGame: self.props.handleDetailGame}
+
           )
         );
       });
+
     return (
         React.createElement("div", {className: "col m5"}, 
           React.createElement("ul", {className: "collection with-header"}, 
@@ -93,94 +105,46 @@ var DistanceGamesListComponent = React.createClass({displayName: "DistanceGamesL
     );
   }
 });
-
 var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent",
-  getInitialState: function(){
-    return {
-      lat: null,
-      log: null
-    }
-  },
-  handleAddressConversion: function(select){
-    var selectID = select[0].id
-    var puMatchQuery = new Parse.Query("pumatch");
-    var self = this;
-    puMatchQuery.get(selectID, {
-      success: function(result){
-        self.setState({
-          lat: result.get('geoPoint')._latitude,
-          log: result.get('geoPoint')._longitude
-        });
-        console.log(self.state.lat, self.state.log);
-
-        L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-        var map = L.mapbox.map('map1', 'mapbox.streets')
-          .setView([self.state.log, self.state.lat], 16);
-
-        L.marker([self.state.log, self.state.lat], {
-           icon: L.mapbox.marker.icon({
-             'marker-color': '#f86767'
-           }),
-        }).addTo(map);
-
-
-      },
-      error: function(error){
-        console.log(error);
-      }
-    })
-    // var self = this;
-    // console.log(this.props.);
-
-    // var location;
-    //
-    //   puMatchQuery.find({
-    //     success: function(results) {
-    //       locations = results.map(function(location){
-    //           return location.get('geoPoint');
-    //       });
-    //       locations.map(function(locate){
-    //         var latitude = locate._latitude;
-    //         var longitude = locate._longitude
-    //         L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    //         L.marker([longitude, latitude], {
-    //            icon: L.mapbox.marker.icon({
-    //              'marker-color': '#f86767'
-    //            }),
-    //         }).addTo(self.map);
-    //
-    //       })
+  componentDidMount: function(){
+    L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+    var map = L.mapbox.map('map1', 'mapbox.streets')
+    this.map = map;
+    this.map.setView([34.8512217,-82.4048317], 4);
   },
   render: function(){
-    var name = "";
-    var time= "";
-    var details;
-    var address;
-    var gameSelected = this.props.gameSelected;
-    if (gameSelected.length > 0){
-      name = gameSelected[0].get('name');
-      time = gameSelected[0].get('time');
-      details = gameSelected[0].get('details');
-      address = gameSelected[0].get('address');
-      this.handleAddressConversion(gameSelected);
+    // var geoPoint = this.props.geoPoint
+    // console.log('log is: ', geoPoint);
+    // if (!geoPoint){
+    //   this.map.setView([this.props.log, this.props.lat], 4);
+    //   L.marker([this.props.log, this.props.lat], {
+    //      icon: L.mapbox.marker.icon({
+    //        'marker-color': '#f86767'
+    //      }),
+    //   }).addTo(this.map);
 
-    }
-
-    return(
+    // }
+    return (
       React.createElement("div", {className: "col m7"}, 
-        React.createElement("h5", null, name), 
-        React.createElement("h5", null, time), 
-        React.createElement("p", null, details), 
-        React.createElement("p", null, address), 
+        React.createElement("div", null, this.props.name), 
+        React.createElement("div", null, this.props.time), 
+        React.createElement("div", null, this.props.address), 
+        React.createElement("div", null, this.props.details), 
 
-        React.createElement("button", {onClick: this.props.handleJoinPublicGame.bind(this, gameSelected), className: "btn waves-effect waves-light red"}, "Join Game"), 
         React.createElement("div", {id: "map1"})
       )
-    );
+    )
   }
+
+
 });
 
+
 var Game = React.createClass({displayName: "Game",
+  handleGameDetail: function(){
+    this.props.handleDetailGame(this.props.model);
+
+  },
   render: function(){
     var model = this.props.model
     return(
@@ -189,12 +153,14 @@ var Game = React.createClass({displayName: "Game",
           React.createElement("h2", null, model.get('name'))
         ), 
         React.createElement("div", {className: "col m1 left-align"}, 
-          React.createElement("button", {onClick: this.props.handleDetailGame.bind(this, model), 
+          React.createElement("button", {onClick: this.handleGameDetail, 
             className: "btn waves-effect waves-light red"}, React.createElement("i", {className: "material-icons center"}, "send"))
         )
       )
     );
   }
 });
+
+
 
 module.exports = GameDetailController;

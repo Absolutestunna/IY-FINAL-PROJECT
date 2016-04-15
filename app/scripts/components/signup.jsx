@@ -13,9 +13,9 @@ $(function(){
 
 var SignUpComponent = React.createClass({
   mixins: [Backbone.React.Component.mixin],
+  //signup
   handleSignUp: function(e){
     e.preventDefault();
-    console.log("signup")
     var userInfo = new Parse.User();
     userInfo.set({
       'first_name': $('#first_name').val(),
@@ -35,6 +35,12 @@ var SignUpComponent = React.createClass({
         console.log(user, error);
       }
     });
+
+  //upload images
+
+
+
+
   },
   render: function(){
     return (
@@ -43,47 +49,50 @@ var SignUpComponent = React.createClass({
         <div className="col m12 logo">logo</div>
         <div className="col m12 create">CREATE A NEW ACCOUNT FOR LET'S PLAY</div>
 
-          <form className="col s12">
-            <div className="row first-last">
-              <div className="input-field col m6 col s12">
-                <input id="first_name" type="text" className="validate" />
-                <label htmlFor="first_name">First Name</label>
-              </div>
-              <div className="input-field col m6 col s12">
-                <input id="last_name" type="text" className="validate" />
-                <label htmlFor="last_name">Last Name</label>
+
+          <form data-parsley-validate="" className="col s12">
+            <div className="row">
+
+              <div className="col m12">
+                <div className="row first-last">
+                  <div className="input-field col m12">
+                    <input data-parsley-minlength="4" id="first_name" type="text" className="validate" required="" />
+                    <label required="" htmlFor="first_name">First Name *</label>
+                  </div>
+                  <div className="input-field col m12">
+                    <input id="last_name" type="text" className="validate" />
+                    <label htmlFor="last_name">Last Name *</label>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="row">
-              <div className="input-field col s12">
-                <input id="username" type="text" className="validate" />
-                <label htmlFor="username">Username</label>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="input-field col s12">
-                <input id="password" type="password" className="validate" />
-                <label htmlFor="password">Password</label>
-              </div>
-            </div>
 
 
 
             <div className="row">
               <div className="input-field col s12">
-                <input id="email" type="email" className="validate" />
-                <label htmlFor="email">Email</label>
+                <input required="" id="username" type="text" className="validate" />
+                <label htmlFor="username">Username *</label>
               </div>
             </div>
 
             <div className="row">
               <div className="input-field col s12">
-                <input id="zipcode" type="text" className="validate" />
-                <label htmlFor="zipcode">Zipcode</label>
+                <input id="password" type="password" className="validate" data-parsley-minlength="6" required="" />
+                <label htmlFor="password">Password *</label>
               </div>
             </div>
+
+
+
+            <div className="row">
+              <div className="input-field col s12">
+                <input id="email" type="email" className="validate" data-parsley-trigger="change" required=""/>
+                <label htmlFor="email">Email *</label>
+              </div>
+            </div>
+
 
 
             <div className="row">

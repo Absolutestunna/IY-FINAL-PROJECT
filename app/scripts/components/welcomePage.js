@@ -15,7 +15,6 @@ var WelcomePageComponent = React.createClass({displayName: "WelcomePageComponent
   render: function(){
     return (
 
-      React.createElement("div", null, 
         React.createElement("div", {className: "row", id: "welcome-body"}, 
           React.createElement("div", {className: "col m12 col s12 welcome-container"}, 
             React.createElement("div", {className: "row play"}, 
@@ -35,7 +34,6 @@ var WelcomePageComponent = React.createClass({displayName: "WelcomePageComponent
             )
           )
         )
-      )
     );
   }
 });

@@ -35,7 +35,6 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
           relation.query().find({
             success: function(crew){
       
-
               self.setState({
                 crewMembers: crew
               })

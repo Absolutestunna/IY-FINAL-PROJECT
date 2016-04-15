@@ -1,6 +1,7 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
 
+
 var PublicMatch = Backbone.Model.extend({
 
 });
