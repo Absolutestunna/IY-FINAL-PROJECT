@@ -1,9 +1,11 @@
 var Backbone = require('backbone');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
+var Parse = require('parse');
 require('backbone-react-component');
 
 var WelcomePageComponent = React.createClass({displayName: "WelcomePageComponent",
+
   handleSignUp: function(e){
     e.preventDefault();
     Backbone.history.navigate('signUp', {trigger: true});
@@ -13,13 +15,14 @@ var WelcomePageComponent = React.createClass({displayName: "WelcomePageComponent
     Backbone.history.navigate('signIn', {trigger: true});
   },
   render: function(){
+
     return (
 
         React.createElement("div", {className: "row", id: "welcome-body"}, 
           React.createElement("div", {className: "col m12 col s12 welcome-container"}, 
             React.createElement("div", {className: "row play"}, 
               React.createElement("div", {className: "col m12 col m12 col s12"}, 
-                React.createElement("h2", null, "Welcome to Let's Play")
+                React.createElement("p", {className: "description"}, "Welcome to KickkIT where indecisive friends can play a friendly game of soccer.")
               )
             ), 
             React.createElement("div", {className: "row"}, 

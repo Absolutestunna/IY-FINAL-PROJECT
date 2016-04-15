@@ -114,17 +114,17 @@ var GamesDetailComponent = React.createClass({
     this.map.setView([34.8512217,-82.4048317], 4);
   },
   render: function(){
-    // var geoPoint = this.props.geoPoint
-    // console.log('log is: ', geoPoint);
-    // if (!geoPoint){
-    //   this.map.setView([this.props.log, this.props.lat], 4);
-    //   L.marker([this.props.log, this.props.lat], {
-    //      icon: L.mapbox.marker.icon({
-    //        'marker-color': '#f86767'
-    //      }),
-    //   }).addTo(this.map);
+    var geoPoint = this.props.geoPoint
+    console.log('log is: ', geoPoint);
+    if (!geoPoint){
+      this.map.setView([this.props.log, this.props.lat], 4);
+      L.marker([this.props.log, this.props.lat], {
+         icon: L.mapbox.marker.icon({
+           'marker-color': '#f86767'
+         }),
+      }).addTo(this.map);
 
-    // }
+    }
     return (
       <div className="col m7">
         <div>{this.props.name}</div>

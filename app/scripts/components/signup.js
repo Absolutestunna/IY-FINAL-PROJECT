@@ -21,8 +21,7 @@ var SignUpComponent = React.createClass({displayName: "SignUpComponent",
       'last_name': $('#last_name').val(),
       'username': $('#username').val(),
       'email': $('#email').val(),
-      'password': $('#password').val(),
-      'zipcode': parseInt($('#zipcode').val())
+      'password': $('#password').val()
     });
     userInfo.signUp(null, {
       success: function(results){

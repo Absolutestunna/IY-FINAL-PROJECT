@@ -12,16 +12,58 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 *::after {
   box-sizing: border-box;
 }
-body {
-  margin:0;
-  padding:0;
+// body {
+//   background-repeat: no-repeat;
+//   background-attachment: fixed;
+//   background-position: 40% 80%;
+// }
+
+body{
+    background-image: url('https://farpostfooty.files.wordpress.com/2016/02/goal-photo.jpeg?w=1200');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 40% 100%;
+    position: relative;
+    padding-top: 120px;
+    // top: 0;
+    // left:0;
+    // bottom:0;
+    // right: 0;
+    // background-color: rgba(0, 0, 0, .75);
+
 }
+// body::after {
+//   content: " ";
+//   background-color: black;
+//   opacity: 0.5;
+//   position: absolute;
+//
+// }
+
+.overlay-content-box{
+
+    width: 100%;
+    height:768px;
+    position: absolute;;
+    left: 0;
+    top: 0;
+    overflow-y: scroll;
+    background-color: black;
+    opacity: 0.5;
+    z-index: -1;
+
+}
+
+
 
 /////////////////////////////////app container///////////////////////////////
 #app {
   padding-left: 120px;
   padding-right: 120px;
   padding-top: 120px;
+  margin: 0;
+  width: 100%;
 }
 
 ///////////////////////////////Welcome-Page/////////////////////////////////
@@ -30,8 +72,9 @@ body {
 
   .welcome-container {
     padding: 0 50px;
-    h2 {
+    .description {
       padding: 0 auto;
+      color: white;
     }
     button {
       // margin-left: 127px;
