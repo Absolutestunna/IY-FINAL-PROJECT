@@ -45,7 +45,7 @@ var SignUpComponent = React.createClass({displayName: "SignUpComponent",
 
       React.createElement("div", {className: "row user-information"}, 
         React.createElement("div", {className: "col m12 logo left-align"}, 
-          React.createElement("img", {id: "signup-log", src: "././images/logo.png"})
+          React.createElement("img", {id: "signup-logo", src: "././images/logo.png"})
         ), 
         React.createElement("div", {className: "col m12 create"}, "CREATE A NEW ACCOUNT FOR KICKKIT"), 
 
@@ -89,9 +89,9 @@ var SignUpComponent = React.createClass({displayName: "SignUpComponent",
               )
             ), 
 
-            React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "input-field col s12"}, 
-                React.createElement("button", {onClick: this.handleSignUp, className: "waves-effect waves-light btn submit light-green accent-3"}, "SUBMIT")
+            React.createElement("div", {className: "row submit"}, 
+              React.createElement("div", {className: "input-field col s12 center-align"}, 
+                React.createElement("button", {onClick: this.handleSignUp, className: "waves-effect waves-light btn submit light-green accent-3"}, "SIGN UP")
               )
             ), 
 

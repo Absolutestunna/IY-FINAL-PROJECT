@@ -28,8 +28,10 @@ var SignInComponent = React.createClass({displayName: "SignInComponent",
   render: function(){
     return (
       React.createElement("div", {className: "row sign-in"}, 
-        React.createElement("div", {className: "col m12 logo1"}, "logo"), 
-        React.createElement("div", {className: "col m12 create1"}, "LOG IN TO KICK"), 
+        React.createElement("div", {className: "col m12 logo1 left-align"}, 
+          React.createElement("img", {id: "signin-logo", src: "././images/logo.png"})
+        ), 
+        React.createElement("div", {className: "col m12 create1"}, "LOG IN TO KICKKIT"), 
           React.createElement("div", {className: "input-field col-md-12"}, 
             React.createElement("input", {id: "username1", type: "text", className: "validate"}), 
             React.createElement("label", {htmlFor: "email"}, "Username")
@@ -40,9 +42,9 @@ var SignInComponent = React.createClass({displayName: "SignInComponent",
             React.createElement("label", {htmlFor: "password"}, "Password")
           ), 
 
-        React.createElement("div", {className: "row"}, 
-          React.createElement("div", {className: "input-field col-md-12"}, 
-            React.createElement("button", {onClick: this.handleSignIn, id: "login-submit", className: "btn btn-default waves-effect waves-light validate", type: "submit"}, "SUBMIT")
+        React.createElement("div", {className: "row signInButton"}, 
+          React.createElement("div", {className: "input-field col-md-12 center-align"}, 
+            React.createElement("button", {onClick: this.handleSignIn, id: "login-submit", className: "btn btn-default waves-effect waves-light light-green accent-3 validate", type: "submit"}, "SIGN IN")
           )
         ), 
 

@@ -46,7 +46,7 @@ var SignUpComponent = React.createClass({
 
       <div className="row user-information">
         <div className="col m12 logo left-align">
-          <img id="signup-log" src="././images/logo.png"/>
+          <img id="signup-logo" src="././images/logo.png"/>
         </div>
         <div className="col m12 create">CREATE A NEW ACCOUNT FOR KICKKIT</div>
 
@@ -90,9 +90,9 @@ var SignUpComponent = React.createClass({
               </div>
             </div>
 
-            <div className="row">
-              <div className="input-field col s12">
-                <button onClick={this.handleSignUp} className="waves-effect waves-light btn submit light-green accent-3">SUBMIT</button>
+            <div className="row submit">
+              <div className="input-field col s12 center-align">
+                <button onClick={this.handleSignUp} className="waves-effect waves-light btn submit light-green accent-3">SIGN UP</button>
               </div>
             </div>
 

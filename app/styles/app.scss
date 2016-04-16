@@ -105,11 +105,12 @@ body {
 }
 
 
-///////////////////////////////SIGN-UP PAGE//////////////////////////////////////
+///////////////////////////////SIGN-UP PAGE/////////////////////////////////////
+
 .user-information {
   .logo {
     margin-bottom: 10px;
-    #signup-log {
+    #signup-logo {
       height: 100px;
       width: 200px;
       filter: grayscale(1);
@@ -131,6 +132,9 @@ body {
     .first-last {
       margin-bottom: 0;
     }
+    button {
+      width: 40%;
+    }
   }
   .error {
     color: white;
@@ -138,9 +142,38 @@ body {
 }
 
 
-///////////////////////////////      ///////////////////////////////
+///////////////////////////////SIGN-IN PAGE/////////////////////////////////////
+
+.sign-in {
+  margin-top: 20px;
+  .logo1 {
+    margin-bottom: 10px;
+    #signin-logo {
+      height: 100px;
+      width: 200px;
+      filter: grayscale(1);
+      -webkit-filter: grayscale(1);
+      -moz-filter: grayscale(1);
+      -o-filter: grayscale(1);
+      -ms-filter: grayscale(1);
+    }
+  }
+  .create1 {
+    font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 10px;
+    color: white;
+  }
+  .signInButton {
+    button {
+      margin-top: 40px;
+      width: 40%;
+    }
+  }
+}
 
 
+////////////////////////////////////                    ////////////////////////
 
 #map {
   position:absolute;
@@ -172,15 +205,6 @@ body {
 
 }
 
-
-
-.sign-in {
-  margin-top: 120px;
-  .create1 {
-    margin-bottom: 30px;
-    font-size: 20px;
-  }
-}
 .profile-page {
   // max-width: 600px;
   // margin-top: 180px;
