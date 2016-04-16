@@ -45,7 +45,7 @@ var SignInComponent = React.createClass({
 
         <div className="row signInButton">
           <div className="input-field col-md-12 center-align">
-            <button onClick={this.handleSignIn} id="login-submit" className="btn btn-default waves-effect waves-light light-green accent-3 validate" type="submit">SIGN IN</button>
+            <button onClick={this.handleSignIn} id="login-submit" className="btn btn-default waves-effect waves-light light-green accent-3 m validate" type="submit">SIGN IN</button>
           </div>
         </div>
 

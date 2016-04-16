@@ -111,20 +111,40 @@ var GamesDetailComponent = React.createClass({
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map1', 'mapbox.streets')
     this.map = map;
-    this.map.setView([34.8512217,-82.4048317], 4);
-  },
-  render: function(){
+
     var geoPoint = this.props.geoPoint
-    console.log('log is: ', geoPoint);
-    if (!geoPoint){
-      this.map.setView([this.props.log, this.props.lat], 4);
-      L.marker([this.props.log, this.props.lat], {
+    console.log(geoPoint);
+      this.map.setView([this.props.lat, this.props.log], 4);
+      L.marker([this.props.lat, this.props.log], {
          icon: L.mapbox.marker.icon({
            'marker-color': '#f86767'
          }),
       }).addTo(this.map);
 
-    }
+    // console.log('log is: ', geoPoint);
+    // if (geoPoint){
+    //   this.map.setView([this.props.log, this.props.lat], 4);
+    //   L.marker([this.props.log, this.props.lat], {
+    //      icon: L.mapbox.marker.icon({
+    //        'marker-color': '#f86767'
+    //      }),
+    //   }).addTo(this.map);
+    // }
+  },
+  componentWillReceiveProps: function(nextProps){
+    console.log(nextProps.geoPoint._latitude);
+    var lat = nextProps.geoPoint._latitude;
+    var log = nextProps.geoPoint._longitude;
+    this.map.setView([log, lat], 4);
+    L.marker([log, lat], {
+       icon: L.mapbox.marker.icon({
+         'marker-color': '#f86767'
+       }),
+    }).addTo(this.map);
+  },
+  render: function(){
+    console.log('geoPoint', this.props.geoPoint);
+
     return (
       <div className="col m7">
         <div>{this.props.name}</div>
