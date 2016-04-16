@@ -136,8 +136,6 @@ var GamesDetailComponent = React.createClass({
       </div>
     )
   }
-
-
 });
 
 

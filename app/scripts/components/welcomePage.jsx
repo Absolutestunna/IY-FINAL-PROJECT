@@ -18,22 +18,28 @@ var WelcomePageComponent = React.createClass({
   render: function(){
 
     return (
-
         <div className="row" id="welcome-body">
           <div className="col m12 col s12 welcome-container">
+
             <div className="row play">
               <div className="col m12 col m12 col s12">
-                <p className='description'>Welcome to KickkIT where indecisive friends can play a friendly game of soccer.</p>
+                <div className='description first-set center-align'>WELCOME TO KICKKIT.</div>
+                <div className='description second-set center-align'>Let's get a friendly game of soccer.</div>
               </div>
             </div>
-            <div className="row">
-              <div className="col m12 col m12 col s12">
-                <button onClick={this.handleSignUp} className="btn waves-effect waves-light signUp">JOIN IN</button>
+            <div id="signUp" className="row signup">
+              <div className="col m12 col s12">
+                <button onClick={this.handleSignUp} className="btn waves-effect waves-light light-green accent-3 signUp">JOIN NOW</button>
               </div>
            </div>
-              <div className="row">
-                <div className="col m12 col m12 col s12">
-                  <button onClick={this.handleSignIn} className="btn waves-effect waves-light signIn">SIGN IN</button>
+              <div id="signIn" className="row">
+                <div className="col m12 col s12">
+                  <button onClick={this.handleSignIn} className="btn waves-effect waves-light grey lighten-1 signIn">SIGN IN</button>
+              </div>
+            </div>
+            <div className="row logo-container">
+              <div className="col m12 center-align">
+                <img id='logo' src='././images/logo.png' alt="logo" />
               </div>
             </div>
           </div>

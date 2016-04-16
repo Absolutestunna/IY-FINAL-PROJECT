@@ -17,22 +17,28 @@ var WelcomePageComponent = React.createClass({displayName: "WelcomePageComponent
   render: function(){
 
     return (
-
         React.createElement("div", {className: "row", id: "welcome-body"}, 
           React.createElement("div", {className: "col m12 col s12 welcome-container"}, 
+
             React.createElement("div", {className: "row play"}, 
               React.createElement("div", {className: "col m12 col m12 col s12"}, 
-                React.createElement("p", {className: "description"}, "Welcome to KickkIT where indecisive friends can play a friendly game of soccer.")
+                React.createElement("div", {className: "description first-set center-align"}, "WELCOME TO KICKKIT."), 
+                React.createElement("div", {className: "description second-set center-align"}, "Let's get a friendly game of soccer.")
               )
             ), 
-            React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col m12 col m12 col s12"}, 
-                React.createElement("button", {onClick: this.handleSignUp, className: "btn waves-effect waves-light signUp"}, "JOIN IN")
+            React.createElement("div", {id: "signUp", className: "row signup"}, 
+              React.createElement("div", {className: "col m12 col s12"}, 
+                React.createElement("button", {onClick: this.handleSignUp, className: "btn waves-effect waves-light light-green accent-3 signUp"}, "JOIN NOW")
               )
            ), 
-              React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "col m12 col m12 col s12"}, 
-                  React.createElement("button", {onClick: this.handleSignIn, className: "btn waves-effect waves-light signIn"}, "SIGN IN")
+              React.createElement("div", {id: "signIn", className: "row"}, 
+                React.createElement("div", {className: "col m12 col s12"}, 
+                  React.createElement("button", {onClick: this.handleSignIn, className: "btn waves-effect waves-light grey lighten-1 signIn"}, "SIGN IN")
+              )
+            ), 
+            React.createElement("div", {className: "row logo-container"}, 
+              React.createElement("div", {className: "col m12 center-align"}, 
+                React.createElement("img", {id: "logo", src: "././images/logo.png", alt: "logo"})
               )
             )
           )

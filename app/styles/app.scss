@@ -50,7 +50,7 @@ body{
     top: 0;
     overflow-y: scroll;
     background-color: black;
-    opacity: 0.5;
+    opacity: 0.7;
     z-index: -1;
 
 }
@@ -72,19 +72,58 @@ body{
 
   .welcome-container {
     padding: 0 50px;
+    .play {
+      margin-top: 10px;
+      .first-set {
+        font-size: 80px;
+        font-family: 'Oswald', sans-serif;
+      }
+    }
+    #signUp {
+      color: #80DF3F;
+      .signUp {
+        display: block;
+        width: 100%;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        font-weight: bold;
+        font-size: 16px;
+      }
+    }
+    #signIn {
+      .signIn {
+        display: block;
+        width: 100%;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        font-weight: bold;
+        font-size: 16px;
+
+      }
+    }
     .description {
       padding: 0 auto;
       color: white;
     }
-    button {
-      // margin-left: 127px;
+    .logo-container {
+      margin-top: 80px;
+      	filter: grayscale(1);
+      	-webkit-filter: grayscale(1);
+      	-moz-filter: grayscale(1);
+      	-o-filter: grayscale(1);
+      	-ms-filter: grayscale(1);
+        color: black;
+      #logo {
+        width: 350px;
+        height: 150px;
+      }
     }
   }
 
 }
 
 
-
+///////////////////////////////
 
 #map {
   position:absolute;
@@ -116,15 +155,6 @@ body{
 
 }
 
-.signUp {
-  display: block;
-  width: 100%;
-}
-
-.signIn {
-  display: block;
-  width: 100%;
-}
 
 .user-information {
   // margin-top: 120px;

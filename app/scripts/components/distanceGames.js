@@ -135,8 +135,6 @@ var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent
       )
     )
   }
-
-
 });
 
 
