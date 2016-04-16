@@ -45,20 +45,20 @@ var SignUpComponent = React.createClass({
     return (
 
       <div className="row user-information">
-        <div className="col m12 logo">logo</div>
-        <div className="col m12 create">CREATE A NEW ACCOUNT FOR LET'S PLAY</div>
-
+        <div className="col m12 logo left-align">
+          <img id="signup-log" src="././images/logo.png"/>
+        </div>
+        <div className="col m12 create">CREATE A NEW ACCOUNT FOR KICKKIT</div>
 
           <form data-parsley-validate="" className="col s12">
             <div className="row">
-
               <div className="col m12">
                 <div className="row first-last">
-                  <div className="input-field col m12">
+                  <div className="input-field col m6">
                     <input data-parsley-minlength="4" id="first_name" type="text" className="validate" required="" />
                     <label required="" htmlFor="first_name">First Name *</label>
                   </div>
-                  <div className="input-field col m12">
+                  <div className="input-field col m6">
                     <input id="last_name" type="text" className="validate" />
                     <label htmlFor="last_name">Last Name *</label>
                   </div>
@@ -83,8 +83,6 @@ var SignUpComponent = React.createClass({
               </div>
             </div>
 
-
-
             <div className="row">
               <div className="input-field col s12">
                 <input id="email" type="email" className="validate" data-parsley-trigger="change" required=""/>
@@ -92,11 +90,9 @@ var SignUpComponent = React.createClass({
               </div>
             </div>
 
-
-
             <div className="row">
               <div className="input-field col s12">
-                <button onClick={this.handleSignUp} className="waves-effect waves-light btn submit">SUBMIT</button>
+                <button onClick={this.handleSignUp} className="waves-effect waves-light btn submit light-green accent-3">SUBMIT</button>
               </div>
             </div>
 
