@@ -5767,18 +5767,119 @@ button.close {
   box-sizing: border-box; }
 
 body {
-  margin: 0;
-  padding: 0; }
+  background-image: url("https://farpostfooty.files.wordpress.com/2016/02/goal-photo.jpeg?w=1200");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 40% 100%;
+  position: relative;
+  padding-top: 120px; }
+
+.overlay-content-box {
+  width: 100%;
+  height: 768px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow-y: scroll;
+  background-color: black;
+  opacity: 0.7;
+  z-index: -1; }
 
 #app {
   padding-left: 120px;
   padding-right: 120px;
-  padding-top: 120px; }
+  padding-top: 50px;
+  margin: 0;
+  width: 100%; }
 
-#welcome-body .welcome-container {
-  padding: 0 50px; }
-  #welcome-body .welcome-container h2 {
-    padding: 0 auto; }
+#welcome-body {
+  -webkit-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1; }
+  #welcome-body .welcome-container {
+    padding: 0 50px; }
+    #welcome-body .welcome-container .play {
+      margin-top: 10px; }
+      #welcome-body .welcome-container .play .first-set {
+        font-size: 80px;
+        font-family: 'Oswald', sans-serif; }
+    #welcome-body .welcome-container #signUp {
+      color: #80DF3F; }
+      #welcome-body .welcome-container #signUp .signUp {
+        display: block;
+        width: 100%;
+        color: black;
+        font-family: 'Oswald', sans-serif;
+        font-weight: bold;
+        font-size: 16px; }
+    #welcome-body .welcome-container #signIn .signIn {
+      display: block;
+      width: 100%;
+      color: black;
+      font-family: 'Oswald', sans-serif;
+      font-weight: bold;
+      font-size: 16px; }
+    #welcome-body .welcome-container .description {
+      padding: 0 auto;
+      color: white; }
+    #welcome-body .welcome-container .logo-container {
+      margin-top: 80px;
+      filter: grayscale(1);
+      -webkit-filter: grayscale(1);
+      -moz-filter: grayscale(1);
+      -o-filter: grayscale(1);
+      -ms-filter: grayscale(1); }
+      #welcome-body .welcome-container .logo-container #logo {
+        width: 350px;
+        height: 150px; }
+
+.user-information .logo {
+  margin-bottom: 10px; }
+  .user-information .logo #signup-logo {
+    height: 100px;
+    width: 200px;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    -ms-filter: grayscale(1); }
+.user-information .create {
+  font-size: 20px;
+  font-family: 'Oswald', sans-serif;
+  margin-bottom: 10px;
+  color: white; }
+.user-information form .first-last {
+  margin-bottom: 0; }
+.user-information form button {
+  width: 40%; }
+.user-information .error {
+  color: white; }
+
+.sign-in {
+  margin-top: 20px; }
+  .sign-in .logo1 {
+    margin-bottom: 10px; }
+    .sign-in .logo1 #signin-logo {
+      height: 100px;
+      width: 200px;
+      filter: grayscale(1);
+      -webkit-filter: grayscale(1);
+      -moz-filter: grayscale(1);
+      -o-filter: grayscale(1);
+      -ms-filter: grayscale(1); }
+  .sign-in .create1 {
+    font-size: 20px;
+    font-family: 'Oswald', sans-serif;
+    margin-bottom: 10px;
+    color: white; }
+  .sign-in .signInButton button {
+    margin-top: 40px;
+    width: 40%; }
+
+.profile-page #profilePic {
+  width: 60%;
+  height: 250px;
+  border-radius: 50%; }
 
 #map {
   position: absolute;
@@ -5795,24 +5896,6 @@ body {
 
 .create-match {
   margin-top: 480px; }
-
-.signUp {
-  display: block;
-  width: 100%; }
-
-.signIn {
-  display: block;
-  width: 100%; }
-
-.user-information .create {
-  margin-bottom: 30px;
-  font-size: 20px; }
-
-.sign-in {
-  margin-top: 120px; }
-  .sign-in .create1 {
-    margin-bottom: 30px;
-    font-size: 20px; }
 
 .profile-page h3 {
   margin-top: 40px; }
