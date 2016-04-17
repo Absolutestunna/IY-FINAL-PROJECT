@@ -30,7 +30,8 @@
     "reactify": "^1.1.1",
     "react-bootstrap": "^0.28.3",
     "backbone-react-component": "^0.10.0",
-    "react-addons-create-fragment": "^0.14.8"
+    "react-addons-create-fragment": "^0.14.8",
+    "google-libphonenumber": "^1.0.17"
   },
   "scripts": {
     "html": "cp app/*.html dist/",
@@ -73,6 +74,7 @@
     ]
   },
   "dependencies": {
+    "google-libphonenumber": "^1.0.17",
     "parsleyjs": "^2.3.10"
   }
 }

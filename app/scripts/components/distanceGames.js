@@ -120,15 +120,6 @@ var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent
          }),
       }).addTo(this.map);
 
-    // console.log('log is: ', geoPoint);
-    // if (geoPoint){
-    //   this.map.setView([this.props.log, this.props.lat], 4);
-    //   L.marker([this.props.log, this.props.lat], {
-    //      icon: L.mapbox.marker.icon({
-    //        'marker-color': '#f86767'
-    //      }),
-    //   }).addTo(this.map);
-    // }
   },
   componentWillReceiveProps: function(nextProps){
     console.log(nextProps.geoPoint._latitude);

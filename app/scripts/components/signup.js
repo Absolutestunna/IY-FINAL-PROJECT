@@ -66,8 +66,6 @@ var SignUpComponent = React.createClass({displayName: "SignUpComponent",
             ), 
 
 
-
-
             React.createElement("div", {className: "row"}, 
               React.createElement("div", {className: "input-field col s12"}, 
                 React.createElement("input", {required: "", id: "username", type: "text", className: "validate"}), 

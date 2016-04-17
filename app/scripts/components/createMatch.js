@@ -73,6 +73,9 @@ addLocation: function(id){
 
     });
 },
+handleInviteCrew: function(e){
+  e.preventDefault();
+},
   render: function(){
     return (
       React.createElement("div", {className: "row match-container"}, 
@@ -109,7 +112,7 @@ addLocation: function(id){
 
           ), 
           React.createElement("div", {className: "col m6 center-align"}, 
-            React.createElement("button", {type: "submit", className: "btn-large waves-effect waves-light"}, "Invite Crew")
+            React.createElement("button", {onClick: this.handleInviteCrew, type: "submit", className: "btn-large waves-effect waves-light"}, "Invite Crew")
 
           )
 
