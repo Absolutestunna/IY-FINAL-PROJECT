@@ -76,12 +76,8 @@ var DistanceGamesListComponent = React.createClass({displayName: "DistanceGamesL
     var app = this.props.app;
     var publicMatches = app.publicMatches;
     var self = this;
-
+    console.log('publicMatches', publicMatches);
       var games = publicMatches.map(function(game){
-        // console.log('game is: ', typeof(game.get("geoPoint")));
-        // game = game.get("details") : '' ? game.get("address") : '' ? game.get("name") : '' ? game.get("geoPoint") : "" ? game.get("time") : "";
-
-        // var imageUrl = product.get("images").length > 0 ? product.get("images")[0].url() : '';
 
 
         return (React.createElement(Game, {

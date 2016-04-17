@@ -5,12 +5,12 @@ var $ = require('jquery');
 var Parse = require('parse');
 require('backbone-react-component');
 var createFragment = require('react-addons-create-fragment');
-var phoneUtil = require('google-libphonenumber').PhoneUtil;
-        // , PNF = require('google-libphonenumber').PhoneNumberFormat
-        // , PNT = require('google-libphonenumber').PhoneNumberType;
+
+var phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance()
+        , PNF = require('google-libphonenumber').PhoneNumberFormat
+        , PNT = require('google-libphonenumber').PhoneNumberType;
 
 console.log(phoneUtil);
-
 
 var ProfilePageComponent = React.createClass({
   mixins: [Backbone.React.Component.mixin],
@@ -83,12 +83,15 @@ var ProfilePageComponent = React.createClass({
   handlePhoneNumberCapture: function(e){
     console.log(e.target.value);
     var telCapture = e.target.value;
-    var tel = phoneUtil.parse(telCapture, 'US');
-    console.log(tel);
+    var phoneNumber = phoneUtil.parse(telCapture, 'US');
+    var tel = phoneUtil.format(phoneNumber, PNF.INTERNATIONAL);
+    this.setState({tel: tel});
+    console.log('tel is: ',tel);
   },
   handleUpdatePhoneNumber: function(){
     var user = Parse.User.current();
-    user.set('phone', this.state.tel);
+    console.log(this.state.tel);
+    user.set('Phone', this.state.tel);
     user.save();
   },
   render: function(){
@@ -121,7 +124,7 @@ var ProfilePageComponent = React.createClass({
             <i className="material-icons prefix">phone</i>
             <input onChange={this.handlePhoneNumberCapture} id="icon_telephone" type="tel" className="validate" />
             <label htmlFor="icon_telephone">Telephone</label>
-            <input type="submit" className="btn"/>
+            <input onClick={this.handleUpdatePhoneNumber} type="submit" className="btn"/>
           </div>
 
 

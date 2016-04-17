@@ -97,7 +97,7 @@ var GamesComponent = React.createClass({
     var accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var url = urlBase+body+q+'.json?access_token='+accessToken;
     var self = this;
-    $.get(url, function(data) {  {/*geojson data to be passed to render the map*/}
+    $.get(url, function(data) {  //geojson data to be passed to render the map
       self.renderMap(data);
       self.handleDistanceMatchQuery(data);
     });
@@ -105,9 +105,44 @@ var GamesComponent = React.createClass({
   },
   handleCurrentLocation: function(e){
     e.preventDefault();
-    L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    this.map.locate({setView: true, maxZoom: 8});
-    
+    var geolocation = navigator.geolocation;
+
+    // L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
+    // this.map.locate({setView: true, maxZoom: 8});
+    var self = this;
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+
+    function showPosition(position) {
+      var lat = position.coords.latitude;
+      var log = position.coords.longitude;
+
+      var queryLocation = [log, lat];
+      console.log('queryLocation', queryLocation);
+      var distanceMatchQuery = new Parse.Query("pumatch");
+      var queryLocationNew = new Parse.GeoPoint(queryLocation);
+      distanceMatchQuery.withinMiles("geoPoint", queryLocationNew, 15).find({
+        success: function(results) {
+              var app = self.props.app;
+              console.log('results', results);
+              app.publicMatches = results;
+              app.navigate('gamesDistance', {trigger: true});
+        },
+        error: function(error) {
+          console.log(error);
+          // error is an instance of Parse.Error.
+        }
+      });
+
+
+
+
+
+    }
+
   },
   render: function(){
 
@@ -118,7 +153,11 @@ var GamesComponent = React.createClass({
           <div className="row">
             <div className="col m9">
               <div className="row">
-                <div className="col m9 s12"><input id="address" type="text" placeholder="Search for address" className="validate " /></div>
+                <div className="input-field col m9 s12">
+                  <input id="address" type="text" className="validate " />
+                  <label htmlFor="address">Search for address</label>
+
+                </div>
                 <div className="col m3 s12">
                   <button onClick={this.handleSetLocation} className="btn btn-default z-depth-2 center-align">Search Games</button>
                 </div>

@@ -4,12 +4,12 @@ var $ = require('jquery');
 var Parse = require('parse');
 require('backbone-react-component');
 var createFragment = require('react-addons-create-fragment');
-var phoneUtil = require('google-libphonenumber').PhoneUtil;
-        // , PNF = require('google-libphonenumber').PhoneNumberFormat
-        // , PNT = require('google-libphonenumber').PhoneNumberType;
+
+var phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance()
+        , PNF = require('google-libphonenumber').PhoneNumberFormat
+        , PNT = require('google-libphonenumber').PhoneNumberType;
 
 console.log(phoneUtil);
-
 
 var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent",
   mixins: [Backbone.React.Component.mixin],
@@ -82,12 +82,15 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
   handlePhoneNumberCapture: function(e){
     console.log(e.target.value);
     var telCapture = e.target.value;
-    var tel = phoneUtil.parse(telCapture, 'US');
-    console.log(tel);
+    var phoneNumber = phoneUtil.parse(telCapture, 'US');
+    var tel = phoneUtil.format(phoneNumber, PNF.INTERNATIONAL);
+    this.setState({tel: tel});
+    console.log('tel is: ',tel);
   },
   handleUpdatePhoneNumber: function(){
     var user = Parse.User.current();
-    user.set('phone', this.state.tel);
+    console.log(this.state.tel);
+    user.set('Phone', this.state.tel);
     user.save();
   },
   render: function(){
@@ -120,7 +123,7 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
             React.createElement("i", {className: "material-icons prefix"}, "phone"), 
             React.createElement("input", {onChange: this.handlePhoneNumberCapture, id: "icon_telephone", type: "tel", className: "validate"}), 
             React.createElement("label", {htmlFor: "icon_telephone"}, "Telephone"), 
-            React.createElement("input", {type: "submit", className: "btn"})
+            React.createElement("input", {onClick: this.handleUpdatePhoneNumber, type: "submit", className: "btn"})
           )
 
 
