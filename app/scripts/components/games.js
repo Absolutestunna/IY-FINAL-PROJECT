@@ -136,10 +136,6 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
         }
       });
 
-
-
-
-
     }
 
   },

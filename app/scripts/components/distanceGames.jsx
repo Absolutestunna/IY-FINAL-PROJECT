@@ -77,7 +77,6 @@ var DistanceGamesListComponent = React.createClass({
     var app = this.props.app;
     var publicMatches = app.publicMatches;
     var self = this;
-    console.log('publicMatches', publicMatches);
       var games = publicMatches.map(function(game){
 
 
@@ -109,17 +108,10 @@ var GamesDetailComponent = React.createClass({
     this.map = map;
 
     var geoPoint = this.props.geoPoint
-    console.log(geoPoint);
-      this.map.setView([this.props.lat, this.props.log], 4);
-      L.marker([this.props.lat, this.props.log], {
-         icon: L.mapbox.marker.icon({
-           'marker-color': '#f86767'
-         }),
-      }).addTo(this.map);
+    this.map.setView([98.4842, 39.0119], 2);
 
   },
   componentWillReceiveProps: function(nextProps){
-    console.log(nextProps.geoPoint._latitude);
     var lat = nextProps.geoPoint._latitude;
     var log = nextProps.geoPoint._longitude;
     this.map.setView([log, lat], 4);
@@ -130,8 +122,6 @@ var GamesDetailComponent = React.createClass({
     }).addTo(this.map);
   },
   render: function(){
-    console.log('geoPoint', this.props.geoPoint);
-
     return (
       <div className="col m7">
         <div>{this.props.name}</div>

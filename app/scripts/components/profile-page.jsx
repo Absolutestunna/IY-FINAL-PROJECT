@@ -22,17 +22,14 @@ var ProfilePageComponent = React.createClass({
     }
   },
   componentDidMount: function(){
+    $(".editSlider").hide();
     var profile_pic = Parse.User.current().get('profilePics').toJSON().url;
-    this.setState({profilePic: profile_pic});
-    // var userID = Parse.User.current().id
-    // var userPicQuery = new Parse.Query(Parse.User);
-    // // userPicQuery.equalTo("objectId", );  // find all the women
-    // userPicQuery.find({
-    //   success: function(result) {
-    //     // Do stuff
-    //     console.log(result);
-    //   }
-    // });
+    var tel = Parse.User.current().get('Phone');
+    this.setState({
+      profilePic: profile_pic,
+      tel: tel
+    });
+
   },
   handlePublicGames: function(e){
     e.preventDefault();
@@ -56,6 +53,7 @@ var ProfilePageComponent = React.createClass({
   },
   handleUploadProfilePic: function(e){
     var file = e.target.files[0];
+    this.setState({'profilePics': file});
     console.log('file', file);
     var name = file.name;
     var parseFile = new Parse.File(name, file);
@@ -75,10 +73,6 @@ var ProfilePageComponent = React.createClass({
       console.log(error);
     });
 
-    //
-    // var profile_pic = Parse.User.current().get('profilePics').toJSON().url;
-    // this.pic = profile_pic;
-    // this.setState({profilePic: profile_pic});
   },
   handlePhoneNumberCapture: function(e){
     console.log(e.target.value);
@@ -94,19 +88,38 @@ var ProfilePageComponent = React.createClass({
     user.set('Phone', this.state.tel);
     user.save();
   },
+  handleSlider: function(e){
+    e.preventDefault();
+    $(".editSlider").slideToggle(500);
+  },
+
+  handleShow: function(){
+    $('.edit-button').show();
+
+  },
   render: function(){
     var user = Parse.User.current().getUsername();
+    var telNum = Parse.User.current().get('Phone');
 
      return (
       <div className="row profile-page">
         <div className='col m12 right-align'>
-            <i onClick={this.handleLogout} className="medium material-icons ">perm_identity</i>
+            <a className="sign-out"><i onClick={this.handleLogout} className="medium material-icons ">clear</i></a>
         </div>
 
 
-        <div className="col m6 center-align">
-        <img id="profilePic" src={this.state.profilePic} alt="profile-pic"/>
-          <form action="#" id="fileupload" encType="multipart/form-data" method="post">
+        <div className="col m12 center-align">
+          <div className="profile-info">
+            <div onClick={this.handleShow} className="profilePic">
+              <img id="profilePic" src={this.state.profilePic} alt="profile-pic"/>
+            </div>
+          <a onClick={this.handleSlider} className="edit-button btn-floating btn-tiny waves-effect waves-light grey darken-1"><i className="material-icons">mode_edit</i></a>
+
+            <h3 id="user">{user}</h3>
+            <h5 id="tel">{this.state.tel}</h5>
+          </div>
+
+          <form action="#" className="editSlider"id="fileupload" encType="multipart/form-data" method="post">
            <div className="file-field input-field">
              <div className="btn">
                <span>File</span>
@@ -116,29 +129,39 @@ var ProfilePageComponent = React.createClass({
                <input className="file-path validate" type="text" />
              </div>
            </div>
+
+           <div className="input-field col m12 s6 left-align">
+             <div className="row">
+               <div className="col m10">
+                 <i className="material-icons prefix">phone</i>
+                 <input onChange={this.handlePhoneNumberCapture} id="icon_telephone" type="tel" className="validate" />
+                 <label htmlFor="icon_telephone">Telephone</label>
+               </div>
+               <div className="col m2">
+                 <input onClick={this.handleUpdatePhoneNumber} type="submit" className="btn"/>
+               </div>
+             </div>
+
+           </div>
+
           </form>
-          <p>{user}</p>
 
-
-          <div className="input-field col s6 left-align">
-            <i className="material-icons prefix">phone</i>
-            <input onChange={this.handlePhoneNumberCapture} id="icon_telephone" type="tel" className="validate" />
-            <label htmlFor="icon_telephone">Telephone</label>
-            <input onClick={this.handleUpdatePhoneNumber} type="submit" className="btn"/>
+          <div className="gcm col m12">
+            <button onClick={this.handlePublicGames} className="btn btn-default center-align grey darken-1">
+              <i className="fa fa-futbol-o" aria-hidden="true"></i>
+                Games
+              </button>
+            <button onClick={this.handleCrewPage} className="btn btn-default center-align grey darken-1">
+              <i className="fa fa-users" aria-hidden="true"></i>
+                Crew
+              </button>
+            <button onClick={this.handleGetMessage} className="btn btn-default center-align grey darken-1">
+              <i className="medium material-icons">message</i>Invitations
+            </button>
           </div>
-
-
-
-
         </div>
 
-        <div className="col m6">
-          <button onClick={this.handlePublicGames} className="btn btn-default center-align">Games</button>
-          <button onClick={this.handleCrewPage} className="btn btn-default center-align">Crew</button>
-          <button onClick={this.handleGetMessage} className="btn btn-default center-align">
-            <i className="medium material-icons">message</i>
-          </button>
-        </div>
+
 
       </div>
     );

@@ -34,7 +34,7 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
           var relation = userObj.relation("crew");
           relation.query().find({
             success: function(crew){
-      
+
               self.setState({
                 crewMembers: crew
               })
@@ -125,16 +125,18 @@ var CrewMemberComponent = React.createClass({displayName: "CrewMemberComponent",
   mixins: [Backbone.React.Component.mixin],
 
   render: function(){
-    console.log('props member is: ', this.props.member);
+    var crewMember = this.props.member;
     return (
       React.createElement("div", {className: "row eachMember"}, 
         React.createElement("div", {className: "col m2"}, 
-          React.createElement("div", {className: "flow-text"}, 
-            React.createElement("i", {className: "large material-icons"}, "perm_identity")
-          ), 
-          React.createElement("div", {className: "center-align"}, 
-            React.createElement("div", null, this.props.member.get("first_name")), 
-            React.createElement("div", null, this.props.member.get("last_name"))
+          React.createElement("div", {className: "card"}, 
+            React.createElement("div", {className: "card-header"}, 
+              React.createElement("img", {src: crewMember.get('profilePics')._url})
+            ), 
+            React.createElement("div", {className: "card-content"}, 
+              React.createElement("div", null, crewMember.get("first_name")), 
+              React.createElement("div", null, crewMember.get("last_name"))
+            )
           )
         )
       )

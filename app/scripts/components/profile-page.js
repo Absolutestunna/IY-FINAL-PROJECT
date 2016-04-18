@@ -21,17 +21,14 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
     }
   },
   componentDidMount: function(){
+    $(".editSlider").hide();
     var profile_pic = Parse.User.current().get('profilePics').toJSON().url;
-    this.setState({profilePic: profile_pic});
-    // var userID = Parse.User.current().id
-    // var userPicQuery = new Parse.Query(Parse.User);
-    // // userPicQuery.equalTo("objectId", );  // find all the women
-    // userPicQuery.find({
-    //   success: function(result) {
-    //     // Do stuff
-    //     console.log(result);
-    //   }
-    // });
+    var tel = Parse.User.current().get('Phone');
+    this.setState({
+      profilePic: profile_pic,
+      tel: tel
+    });
+
   },
   handlePublicGames: function(e){
     e.preventDefault();
@@ -55,6 +52,7 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
   },
   handleUploadProfilePic: function(e){
     var file = e.target.files[0];
+    this.setState({'profilePics': file});
     console.log('file', file);
     var name = file.name;
     var parseFile = new Parse.File(name, file);
@@ -74,10 +72,6 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
       console.log(error);
     });
 
-    //
-    // var profile_pic = Parse.User.current().get('profilePics').toJSON().url;
-    // this.pic = profile_pic;
-    // this.setState({profilePic: profile_pic});
   },
   handlePhoneNumberCapture: function(e){
     console.log(e.target.value);
@@ -93,19 +87,38 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
     user.set('Phone', this.state.tel);
     user.save();
   },
+  handleSlider: function(e){
+    e.preventDefault();
+    $(".editSlider").slideToggle(500);
+  },
+
+  handleShow: function(){
+    $('.edit-button').show();
+
+  },
   render: function(){
     var user = Parse.User.current().getUsername();
+    var telNum = Parse.User.current().get('Phone');
 
      return (
       React.createElement("div", {className: "row profile-page"}, 
         React.createElement("div", {className: "col m12 right-align"}, 
-            React.createElement("i", {onClick: this.handleLogout, className: "medium material-icons "}, "perm_identity")
+            React.createElement("a", {className: "sign-out"}, React.createElement("i", {onClick: this.handleLogout, className: "medium material-icons "}, "clear"))
         ), 
 
 
-        React.createElement("div", {className: "col m6 center-align"}, 
-        React.createElement("img", {id: "profilePic", src: this.state.profilePic, alt: "profile-pic"}), 
-          React.createElement("form", {action: "#", id: "fileupload", encType: "multipart/form-data", method: "post"}, 
+        React.createElement("div", {className: "col m12 center-align"}, 
+          React.createElement("div", {className: "profile-info"}, 
+            React.createElement("div", {onClick: this.handleShow, className: "profilePic"}, 
+              React.createElement("img", {id: "profilePic", src: this.state.profilePic, alt: "profile-pic"})
+            ), 
+          React.createElement("a", {onClick: this.handleSlider, className: "edit-button btn-floating btn-tiny waves-effect waves-light grey darken-1"}, React.createElement("i", {className: "material-icons"}, "mode_edit")), 
+
+            React.createElement("h3", {id: "user"}, user), 
+            React.createElement("h5", {id: "tel"}, this.state.tel)
+          ), 
+
+          React.createElement("form", {action: "#", className: "editSlider", id: "fileupload", encType: "multipart/form-data", method: "post"}, 
            React.createElement("div", {className: "file-field input-field"}, 
              React.createElement("div", {className: "btn"}, 
                React.createElement("span", null, "File"), 
@@ -114,30 +127,40 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
              React.createElement("div", {className: "file-path-wrapper"}, 
                React.createElement("input", {className: "file-path validate", type: "text"})
              )
+           ), 
+
+           React.createElement("div", {className: "input-field col m12 s6 left-align"}, 
+             React.createElement("div", {className: "row"}, 
+               React.createElement("div", {className: "col m10"}, 
+                 React.createElement("i", {className: "material-icons prefix"}, "phone"), 
+                 React.createElement("input", {onChange: this.handlePhoneNumberCapture, id: "icon_telephone", type: "tel", className: "validate"}), 
+                 React.createElement("label", {htmlFor: "icon_telephone"}, "Telephone")
+               ), 
+               React.createElement("div", {className: "col m2"}, 
+                 React.createElement("input", {onClick: this.handleUpdatePhoneNumber, type: "submit", className: "btn"})
+               )
+             )
+
            )
+
           ), 
-          React.createElement("p", null, user), 
 
-
-          React.createElement("div", {className: "input-field col s6 left-align"}, 
-            React.createElement("i", {className: "material-icons prefix"}, "phone"), 
-            React.createElement("input", {onChange: this.handlePhoneNumberCapture, id: "icon_telephone", type: "tel", className: "validate"}), 
-            React.createElement("label", {htmlFor: "icon_telephone"}, "Telephone"), 
-            React.createElement("input", {onClick: this.handleUpdatePhoneNumber, type: "submit", className: "btn"})
-          )
-
-
-
-
-        ), 
-
-        React.createElement("div", {className: "col m6"}, 
-          React.createElement("button", {onClick: this.handlePublicGames, className: "btn btn-default center-align"}, "Games"), 
-          React.createElement("button", {onClick: this.handleCrewPage, className: "btn btn-default center-align"}, "Crew"), 
-          React.createElement("button", {onClick: this.handleGetMessage, className: "btn btn-default center-align"}, 
-            React.createElement("i", {className: "medium material-icons"}, "message")
+          React.createElement("div", {className: "gcm col m12"}, 
+            React.createElement("button", {onClick: this.handlePublicGames, className: "btn btn-default center-align grey darken-1"}, 
+              React.createElement("i", {className: "fa fa-futbol-o", "aria-hidden": "true"}), 
+                "Games"
+              ), 
+            React.createElement("button", {onClick: this.handleCrewPage, className: "btn btn-default center-align grey darken-1"}, 
+              React.createElement("i", {className: "fa fa-users", "aria-hidden": "true"}), 
+                "Crew"
+              ), 
+            React.createElement("button", {onClick: this.handleGetMessage, className: "btn btn-default center-align grey darken-1"}, 
+              React.createElement("i", {className: "medium material-icons"}, "message"), "Invitations"
+            )
           )
         )
+
+
 
       )
     );

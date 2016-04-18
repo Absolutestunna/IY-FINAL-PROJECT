@@ -137,10 +137,6 @@ var GamesComponent = React.createClass({
         }
       });
 
-
-
-
-
     }
 
   },
@@ -177,8 +173,6 @@ var GamesComponent = React.createClass({
             <div id="map"></div>
             <div className="gameDetails"></div>
           </div>
-
-
 
           <div className="row">
             <div className="col m12 center-align create-match">
