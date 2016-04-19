@@ -128,7 +128,6 @@ var GamesComponent = React.createClass({
       var log = position.coords.longitude;
 
       var queryLocation = [log, lat];
-      console.log('queryLocation', queryLocation);
       var distanceMatchQuery = new Parse.Query("pumatch");
       var queryLocationNew = new Parse.GeoPoint(queryLocation);
       distanceMatchQuery.withinMiles("geoPoint", queryLocationNew, 15).find({
@@ -158,12 +157,8 @@ var GamesComponent = React.createClass({
 
           <div className="col m12">
             <div className="row game-nav">
-              <div className="col m8 left-align game-name">
+              <div className="col m11 left-align game-name">
                 <h4>GAMES</h4>
-              </div>
-              <div className="col m3 right-align search">
-                <span>Search</span>
-                <i onClick={this.handleSearchSlider} className="fa fa-search fa-3x" aria-hidden="true"></i>
               </div>
 
               <div className="col m1 right-align">

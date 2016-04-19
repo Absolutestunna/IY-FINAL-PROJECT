@@ -127,7 +127,6 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
       var log = position.coords.longitude;
 
       var queryLocation = [log, lat];
-      console.log('queryLocation', queryLocation);
       var distanceMatchQuery = new Parse.Query("pumatch");
       var queryLocationNew = new Parse.GeoPoint(queryLocation);
       distanceMatchQuery.withinMiles("geoPoint", queryLocationNew, 15).find({
@@ -157,12 +156,8 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
 
           React.createElement("div", {className: "col m12"}, 
             React.createElement("div", {className: "row game-nav"}, 
-              React.createElement("div", {className: "col m8 left-align game-name"}, 
+              React.createElement("div", {className: "col m11 left-align game-name"}, 
                 React.createElement("h4", null, "GAMES")
-              ), 
-              React.createElement("div", {className: "col m3 right-align search"}, 
-                React.createElement("span", null, "Search"), 
-                React.createElement("i", {onClick: this.handleSearchSlider, className: "fa fa-search fa-3x", "aria-hidden": "true"})
               ), 
 
               React.createElement("div", {className: "col m1 right-align"}, 

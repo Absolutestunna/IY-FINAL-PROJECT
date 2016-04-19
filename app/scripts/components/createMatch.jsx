@@ -18,10 +18,25 @@ var CreateMatchComponent = React.createClass({
       name: "",
       time: null,
       location: "",
-      details: ""
+      details: "",
+      crewNumbers: []
     }
   },
-
+  componentWillMount: function(){
+    var queryNumbers = new Parse.Query(Parse.User);
+    var self = this;
+    queryNumbers.find({
+      success: function(results){
+       var crewNumbers = results.map(function(number){
+          return number.get('Phone');
+        });
+        self.setState({crewNumbers: crewNumbers});
+      },
+      error: function(error){
+        console.log(error);
+      }
+    })
+  },
   handleCreatePublicMatch: function(e){
     e.preventDefault();
     var currentUser = Parse.User.current();
@@ -83,35 +98,27 @@ addLocation: function(id){
 },
 handleInviteCrew: function(e){
   var state = this.state
+  var validNumbers = this.state.crewNumbers.filter(function(number){
+    return number !== undefined;
+  });
+  console.log(validNumbers);
   var data = {
     name: state.name,
     time: state.time,
     location: state.location,
-    details: state.details
+    details: state.details,
+    user: Parse.User.current().get('username'),
+    validNumbers: validNumbers
+
   }
   console.log(data);
   var invite = new InviteModel();
     invite.set('data', data);
-    invite.save(null, {foo: 'bar'})
-      .then(function(data){
-        var model = data.model,
-       response = data.response,
-       options = data.options;
-       console.log('Model with ID', model.id, 'saved');
-
-      })
-      .catch(function(data){
-        if (_.isError(data)) {
-             console.error(data)
-         } else {
-             console.log('Failed to save contact:', data.response.statusText);
-         }
-      });
-    console.log(invite);
-
+    invite.save();
 
 },
   render: function(){
+
     return (
       <div className="row match-container">
         <h4 className="col m12 center-align createMatch">CREATE YOUR MATCH</h4>
