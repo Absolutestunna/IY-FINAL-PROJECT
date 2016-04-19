@@ -5775,6 +5775,14 @@ body {
   position: relative;
   padding-top: 120px; }
 
+textarea:focus:not {
+  border-bottom: 1px solid orange;
+  box-shadow: 0 1px 0 0 orange; }
+
+input:focus {
+  border-bottom: 1px solid orange;
+  box-shadow: 0 1px 0 0 orange; }
+
 #app {
   padding-left: 17%;
   padding-right: 17%;
@@ -5819,12 +5827,7 @@ body {
       padding: 0 auto;
       color: white; }
     #welcome-body .welcome-container .logo-container {
-      margin-top: 125px;
-      filter: grayscale(1);
-      -webkit-filter: grayscale(1);
-      -moz-filter: grayscale(1);
-      -o-filter: grayscale(1);
-      -ms-filter: grayscale(1); }
+      margin-top: 125px; }
       #welcome-body .welcome-container .logo-container #logo {
         width: 350px;
         height: 150px; }
@@ -5833,12 +5836,7 @@ body {
   margin-bottom: 10px; }
   .user-information .logo #signup-logo {
     height: 100px;
-    width: 200px;
-    filter: grayscale(1);
-    -webkit-filter: grayscale(1);
-    -moz-filter: grayscale(1);
-    -o-filter: grayscale(1);
-    -ms-filter: grayscale(1); }
+    width: 200px; }
 .user-information .create {
   font-size: 20px;
   font-family: 'Oswald', sans-serif;
@@ -5894,6 +5892,9 @@ body {
   position: absolute;
   left: 620px;
   top: 380px; }
+.profile-page .edit-button i:hover {
+  background-color: #76ff03;
+  color: black; }
 .profile-page .gcm {
   margin-top: 20px; }
   .profile-page .gcm button {
@@ -5938,6 +5939,51 @@ body {
   color: black;
   font-family: 'Oswald', sans-serif; }
 
+.crew-container .crew-title {
+  margin-bottom: 40px; }
+  .crew-container .crew-title h4 {
+    color: white;
+    font-family: 'Oswald', sans-serif; }
+.crew-container .add-crew a {
+  margin-top: 5px;
+  margin-bottom: 17px;
+  padding-top: 50px;
+  height: 162px;
+  background-color: #211F1F;
+  width: 89%;
+  border-radius: 4%; }
+  .crew-container .add-crew a i {
+    color: black;
+    font-size: 6rem; }
+.crew-container .add-crew p {
+  color: white;
+  font-family: 'Oswald', sans-serif;
+  font-size: 14px; }
+.crew-container .crew-pics {
+  padding-top: 22px;
+  margin-bottom: 20px; }
+  .crew-container .crew-pics .eachMember {
+    display: inline-block; }
+    .crew-container .crew-pics .eachMember .card {
+      background-color: black; }
+    .crew-container .crew-pics .eachMember .card-header img {
+      height: 160px;
+      border-radius: 10%; }
+    .crew-container .crew-pics .eachMember .crew-info {
+      top: 359px;
+      color: white;
+      font-family: 'Oswald', sans-serif; }
+.crew-container .createMatch {
+  margin-top: 50px; }
+  .crew-container .createMatch button {
+    color: black;
+    font-family: 'Oswald', sans-serif; }
+.crew-container #form-body {
+  margin-top: 50px; }
+  .crew-container #form-body button {
+    font-family: 'Oswald', sans-serif;
+    color: black; }
+
 .map #map {
   position: absolute;
   top: 235px;
@@ -5964,15 +6010,6 @@ body {
   display: block;
   width: 100%;
   margin-bottom: 30px; }
-
-.crew-container .add-crew {
-  margin-bottom: 50px; }
-.crew-container .crew-pics {
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
-  margin-bottom: 20px; }
-  .crew-container .crew-pics .eachMember {
-    display: inline-block; }
 
 @media (min-width: 400px) and (max-width: 767px) {
   #welcome-body {
