@@ -104,7 +104,9 @@ var ProfilePageComponent = React.createClass({
      return (
       <div className="row profile-page">
         <div className='col m12 right-align'>
-            <a className="sign-out"><i onClick={this.handleLogout} className="medium material-icons ">clear</i></a>
+            <a className="sign-out">
+              <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
+            </a>
         </div>
 
 
@@ -147,16 +149,17 @@ var ProfilePageComponent = React.createClass({
           </form>
 
           <div className="gcm col m12">
-            <button onClick={this.handlePublicGames} className="btn btn-default center-align grey darken-1">
+            <button onClick={this.handlePublicGames} className="btn btn-default center-align">
               <i className="fa fa-futbol-o" aria-hidden="true"></i>
                 Games
               </button>
-            <button onClick={this.handleCrewPage} className="btn btn-default center-align grey darken-1">
+            <button onClick={this.handleCrewPage} className="btn btn-default center-align">
               <i className="fa fa-users" aria-hidden="true"></i>
                 Crew
               </button>
-            <button onClick={this.handleGetMessage} className="btn btn-default center-align grey darken-1">
-              <i className="medium material-icons">message</i>Invitations
+            <button onClick={this.handleGetMessage} className="btn btn-default center-align">
+              <i className="medium material-icons">message</i>
+                Invitations
             </button>
           </div>
         </div>

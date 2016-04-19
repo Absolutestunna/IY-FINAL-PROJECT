@@ -86,7 +86,7 @@ body {
       color: white;
     }
     .logo-container {
-      margin-top: 80px;
+      margin-top: 125px;
       	filter: grayscale(1);
       	-webkit-filter: grayscale(1);
       	-moz-filter: grayscale(1);
@@ -147,7 +147,7 @@ body {
     margin-bottom: 10px;
     #signin-logo {
       height: 100px;
-      width: 200px;
+      width: 230px;
       filter: grayscale(1);
       -webkit-filter: grayscale(1);
       -moz-filter: grayscale(1);
@@ -201,37 +201,101 @@ body {
   .edit-button {
     // margin-top: -70px;
     position: absolute;
-    left: 612px;
-    top: 400px
+    left: 620px;
+    top: 380px;
   }
   .gcm {
     margin-top: 20px;
     button {
       margin-bottom: 40px;
+      background-color: #757575;
+    }
+    button:hover {
+      background-color: #76ff03;
     }
   }
 
-
-
-
-
 }
 
+/////////////////////////////////////GAMES//////////////////////////////////////
+.games {
+  .game-nav {
+    margin-bottom: 30px;
+    font-family: 'Oswald', sans-serif;
+    color: #EFECEC;
 
+  }
+  .game-name {
+    h4 {
+      margin: 2px 0 0 0;
+    }
+  }
+  .search {
+    span {
+      margin: 2px 6px 0 0;
+      font-size: 33px;
+    }
+  }
+  .search-button {
+    button {
+      color: black;
+      font-family: 'Oswald', sans-serif;
 
-//////////////////////////////////////////////////////////////////////
+    }
+  }
+  .create-match {
+    position: absolute;
+    top: 140px;
+    left: 560px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    color: black;
+  }
+  .games-container {
+    input {
+      margin-bottom: 50px;
+    }
+  }
+  #current-location {
+    margin-top: -10px;
+    i {
+      color: black;
+    }
+  }
+}
+///////////////////////////////////CREATE MATCH/////////////////////////////////
+.match-container {
+  // margin-top: 100px;
+  .createMatch {
+    color: white;
+    font-family: 'Oswald', sans-serif;
+  }
+  .public-match {
+    color: black;
+    font-family: 'Oswald', sans-serif;
 
+  }
+  .crew-match {
+    color: black;
+    font-family: 'Oswald', sans-serif;
 
-#map {
-  position:absolute;
-  top: 300px;
-  bottom:80px;
-  left: 280px;
-  width: 50%;
-  // canvas {
-  //   width: 300px;
-  //   height: 300px;
-  //   }
+  }
+}
+
+///////////////////////////////////          ///////////////////////////////////
+.map {
+  #map {
+    position:absolute;
+    top: 235px;
+    bottom:80px;
+    left: 206px;
+    width: 67%;
+    height: 400px;
+    // canvas {
+    //   width: 300px;
+    //   height: 300px;
+    //   }
+   }
  }
  #map1 {
    position:absolute;
@@ -279,16 +343,7 @@ body {
   // padding: 170px 290px 0 290px;
 
 }
-.games {
-  .games-container {
-    input {
-      margin-bottom: 50px;
-    }
-    #current-location {
-      margin-bottom: 30px;
-    }
-  }
-}
+
 
 .crew-container {
   .add-crew {
@@ -304,9 +359,7 @@ body {
     }
   }
 }
-.match-container {
-  margin-top: 100px;
-}
+
 
 @media (min-width: 768px) and (max-width: 991px){
   #welcome-body {

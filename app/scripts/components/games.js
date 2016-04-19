@@ -14,6 +14,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     }
   },
   componentDidMount: function(){
+
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map', 'mapbox.streets')
     this.map = map;
@@ -102,7 +103,13 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     });
 
   },
-  handleCurrentLocation: function(e){
+  handleLogout: function(e){
+    console.log('logout');
+    e.preventDefault();
+    Parse.User.logOut();
+    Backbone.history.navigate('', {trigger: true})
+  },
+    handleCurrentLocation: function(e){
     e.preventDefault();
     var geolocation = navigator.geolocation;
 
@@ -139,32 +146,47 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     }
 
   },
+  handleSearchSlider: function(e){
+    e.preventDefault();
+    $(".editSlider").slideToggle(700);
+  },
   render: function(){
 
     return (
         React.createElement("div", {className: "row games"}, 
 
-          React.createElement("div", {className: "col m12 center-align"}, React.createElement("h4", null, "GAMES")), 
-          React.createElement("div", {className: "row"}, 
+          React.createElement("div", {className: "col m12"}, 
+            React.createElement("div", {className: "row game-nav"}, 
+              React.createElement("div", {className: "col m8 left-align game-name"}, 
+                React.createElement("h4", null, "GAMES")
+              ), 
+              React.createElement("div", {className: "col m3 right-align search"}, 
+                React.createElement("span", null, "Search"), 
+                React.createElement("i", {onClick: this.handleSearchSlider, className: "fa fa-search fa-3x", "aria-hidden": "true"})
+              ), 
+
+              React.createElement("div", {className: "col m1 right-align"}, 
+                React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
+              )
+            )
+          ), 
+
+
+          React.createElement("div", {className: "row editSlider"}, 
             React.createElement("div", {className: "col m9"}, 
               React.createElement("div", {className: "row"}, 
                 React.createElement("div", {className: "input-field col m9 s12"}, 
                   React.createElement("input", {id: "address", type: "text", className: "validate "}), 
                   React.createElement("label", {htmlFor: "address"}, "Search for address")
-
                 ), 
-                React.createElement("div", {className: "col m3 s12"}, 
-                  React.createElement("button", {onClick: this.handleSetLocation, className: "btn btn-default z-depth-2 center-align"}, "Search Games")
+                React.createElement("div", {className: "col m3 s12 search-button"}, 
+                  React.createElement("button", {onClick: this.handleSetLocation, className: "btn btn-default center-align light-green accent-3"}, "Search Games")
                 )
               )
             ), 
 
-            React.createElement("div", {className: "col m3"}, 
-              React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "col m12 right-align"}, 
-                  React.createElement("button", {onClick: this.handleCurrentLocation, id: "current-location", className: "btn-floating btn-large waves-effect waves-light red z-depth-2"}, React.createElement("i", {className: "medium material-icons"}, "my_location"))
-              )
-              )
+            React.createElement("div", {className: "col m3 right-align", id: "current-location"}, 
+                React.createElement("a", {onClick: this.handleCurrentLocation, className: "btn-tiny light-green accent-3 btn-floating btn-large waves-effect waves-light red z-depth-2"}, React.createElement("i", {className: "medium material-icons"}, "room"))
             )
           ), 
 
@@ -173,14 +195,8 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
             React.createElement("div", {className: "gameDetails"})
           ), 
 
+          React.createElement("button", {onClick: this.handleCreateMatch, className: "create-match waves-effect waves-light btn center-align light-green accent-3"}, "Create Match")
 
-
-          React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col m12 center-align create-match"}, 
-              React.createElement("button", {onClick: this.handleCreateMatch, className: "waves-effect waves-light btn center-align"}, "Create Match")
-
-            )
-          )
         )
 
     );

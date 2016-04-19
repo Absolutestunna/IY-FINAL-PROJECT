@@ -4,14 +4,21 @@ var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Parse = require('parse');
 var moment = require('moment');
+var LinkedStateMixin = require('react/lib/LinkedStateMixin');
 require('backbone-react-component');
 
 
+var InviteModel = require("./../collections/InviteModel");
 
 var CreateMatchComponent = React.createClass({
+  mixins: [Backbone.React.Component.mixin, LinkedStateMixin],
   getInitialState: function(){
     return {
-      geoLocation: null
+      geoLocation: null,
+      name: "",
+      time: null,
+      location: "",
+      details: ""
     }
   },
 
@@ -75,32 +82,59 @@ addLocation: function(id){
     });
 },
 handleInviteCrew: function(e){
-  e.preventDefault();
+  var state = this.state
+  var data = {
+    name: state.name,
+    time: state.time,
+    location: state.location,
+    details: state.details
+  }
+  console.log(data);
+  var invite = new InviteModel();
+    invite.set('data', data);
+    invite.save(null, {foo: 'bar'})
+      .then(function(data){
+        var model = data.model,
+       response = data.response,
+       options = data.options;
+       console.log('Model with ID', model.id, 'saved');
+
+      })
+      .catch(function(data){
+        if (_.isError(data)) {
+             console.error(data)
+         } else {
+             console.log('Failed to save contact:', data.response.statusText);
+         }
+      });
+    console.log(invite);
+
+
 },
   render: function(){
     return (
       <div className="row match-container">
-        <h4 className="col m12 center-align createMatch">CREATE MATCH</h4>
+        <h4 className="col m12 center-align createMatch">CREATE YOUR MATCH</h4>
         <div className="col m12">
           <form id="form-body" className=" form-group col s12">
             <div className="row">
 
               <div className="input-field col s12 ">
-                <input id="park_name" type="text" className="validate" />
+                <input valueLink={this.linkState('name')} id="park_name" type="text" className="validate" />
                 <label htmlFor="park">Park Name</label>
               </div>
 
               <div className="input-field col s12 ">
-                <input id="location" type="text" className="validate" />
+                <input valueLink={this.linkState('location')} id="location" type="text" className="validate" />
                 <label htmlFor="location">Location</label>
               </div>
 
               <div className="input-field col s12">
-                <input id="time" type="time" className=" form-control validate" />
+                <input valueLink={this.linkState('time')} id="time" type="time" className=" form-control validate" />
               </div>
               <div className="input-field col s12 ">
                 <i className="material-icons prefix">mode_edit</i>
-                <textarea id="details" className="materialize-textarea"></textarea>
+                <textarea valueLink={this.linkState('details')} id="details" className="materialize-textarea"></textarea>
                 <label hmtlFor="details">Extra details</label>
               </div>
 
@@ -109,11 +143,11 @@ handleInviteCrew: function(e){
         </div>
         <div className="row">
           <div className="col m6 center-align">
-            <button onClick={this.handleCreatePublicMatch} type="submit" className="btn-large waves-effect waves-light ">Create public Match</button>
+            <button onClick={this.handleCreatePublicMatch} type="submit" className="public-match btn-large waves-effect waves-light light-green accent-3">PUBLIC MATCH</button>
 
           </div>
           <div className="col m6 center-align">
-            <button onClick={this.handleInviteCrew} type="submit" className="btn-large waves-effect waves-light">Invite Crew</button>
+            <button onClick={this.handleInviteCrew} type="submit" className="crew-match btn-large waves-effect waves-light light-green accent-3">PRIVATE MATCH</button>
 
           </div>
 

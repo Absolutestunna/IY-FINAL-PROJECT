@@ -15,6 +15,7 @@ var GamesComponent = React.createClass({
     }
   },
   componentDidMount: function(){
+
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map', 'mapbox.streets')
     this.map = map;
@@ -103,7 +104,13 @@ var GamesComponent = React.createClass({
     });
 
   },
-  handleCurrentLocation: function(e){
+  handleLogout: function(e){
+    console.log('logout');
+    e.preventDefault();
+    Parse.User.logOut();
+    Backbone.history.navigate('', {trigger: true})
+  },
+    handleCurrentLocation: function(e){
     e.preventDefault();
     var geolocation = navigator.geolocation;
 
@@ -140,32 +147,47 @@ var GamesComponent = React.createClass({
     }
 
   },
+  handleSearchSlider: function(e){
+    e.preventDefault();
+    $(".editSlider").slideToggle(700);
+  },
   render: function(){
 
     return (
         <div className="row games">
 
-          <div className="col m12 center-align"><h4>GAMES</h4></div>
-          <div className="row">
+          <div className="col m12">
+            <div className="row game-nav">
+              <div className="col m8 left-align game-name">
+                <h4>GAMES</h4>
+              </div>
+              <div className="col m3 right-align search">
+                <span>Search</span>
+                <i onClick={this.handleSearchSlider} className="fa fa-search fa-3x" aria-hidden="true"></i>
+              </div>
+
+              <div className="col m1 right-align">
+                <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+
+
+          <div className="row editSlider">
             <div className="col m9">
               <div className="row">
                 <div className="input-field col m9 s12">
                   <input id="address" type="text" className="validate " />
                   <label htmlFor="address">Search for address</label>
-
                 </div>
-                <div className="col m3 s12">
-                  <button onClick={this.handleSetLocation} className="btn btn-default z-depth-2 center-align">Search Games</button>
+                <div className="col m3 s12 search-button">
+                  <button onClick={this.handleSetLocation} className="btn btn-default center-align light-green accent-3">Search Games</button>
                 </div>
               </div>
             </div>
 
-            <div className="col m3">
-              <div className="row">
-                <div className="col m12 right-align">
-                  <button onClick={this.handleCurrentLocation} id="current-location" className="btn-floating btn-large waves-effect waves-light red z-depth-2"><i className="medium material-icons">my_location</i></button>
-              </div>
-              </div>
+            <div className="col m3 right-align" id="current-location">
+                <a onClick={this.handleCurrentLocation} className="btn-tiny light-green accent-3 btn-floating btn-large waves-effect waves-light red z-depth-2"><i className="medium material-icons">room</i></a>
             </div>
           </div>
 
@@ -174,12 +196,8 @@ var GamesComponent = React.createClass({
             <div className="gameDetails"></div>
           </div>
 
-          <div className="row">
-            <div className="col m12 center-align create-match">
-              <button onClick={this.handleCreateMatch} className="waves-effect waves-light btn center-align">Create Match</button>
+          <button onClick={this.handleCreateMatch} className="create-match waves-effect waves-light btn center-align light-green accent-3">Create Match</button>
 
-            </div>
-          </div>
         </div>
 
     );

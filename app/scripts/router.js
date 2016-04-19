@@ -15,9 +15,9 @@ var MessagesComponent = require('./components/messagesList.jsx');
 var CreateMatchComponent = require('./components/createMatch.jsx');
 var DistanceGamesComponent = require('./components/distanceGames.jsx');
 
-//collections
+//models and collections
 var PublicMatchesCollection = require('./collections/publicGamesCollection');
-
+var GameInviteModel = require('./collections/InviteModel');
 
 // Router
 var Router = Backbone.Router.extend({
@@ -80,7 +80,7 @@ var Router = Backbone.Router.extend({
   createMatch: function(){
     ReactDOM.unmountComponentAtNode(document.getElementById('app'));
     ReactDOM.render(
-      React.createElement(CreateMatchComponent), document.getElementById('app')
+      React.createElement(CreateMatchComponent, {GameInviteModel: GameInviteModel}), document.getElementById('app')
     );
   },
   gamesDistance: function(){

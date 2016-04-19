@@ -103,7 +103,9 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
      return (
       React.createElement("div", {className: "row profile-page"}, 
         React.createElement("div", {className: "col m12 right-align"}, 
-            React.createElement("a", {className: "sign-out"}, React.createElement("i", {onClick: this.handleLogout, className: "medium material-icons "}, "clear"))
+            React.createElement("a", {className: "sign-out"}, 
+              React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
+            )
         ), 
 
 
@@ -146,16 +148,17 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
           ), 
 
           React.createElement("div", {className: "gcm col m12"}, 
-            React.createElement("button", {onClick: this.handlePublicGames, className: "btn btn-default center-align grey darken-1"}, 
+            React.createElement("button", {onClick: this.handlePublicGames, className: "btn btn-default center-align"}, 
               React.createElement("i", {className: "fa fa-futbol-o", "aria-hidden": "true"}), 
                 "Games"
               ), 
-            React.createElement("button", {onClick: this.handleCrewPage, className: "btn btn-default center-align grey darken-1"}, 
+            React.createElement("button", {onClick: this.handleCrewPage, className: "btn btn-default center-align"}, 
               React.createElement("i", {className: "fa fa-users", "aria-hidden": "true"}), 
                 "Crew"
               ), 
-            React.createElement("button", {onClick: this.handleGetMessage, className: "btn btn-default center-align grey darken-1"}, 
-              React.createElement("i", {className: "medium material-icons"}, "message"), "Invitations"
+            React.createElement("button", {onClick: this.handleGetMessage, className: "btn btn-default center-align"}, 
+              React.createElement("i", {className: "medium material-icons"}, "message"), 
+                "Invitations"
             )
           )
         )

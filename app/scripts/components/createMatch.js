@@ -3,14 +3,21 @@ var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Parse = require('parse');
 var moment = require('moment');
+var LinkedStateMixin = require('react/lib/LinkedStateMixin');
 require('backbone-react-component');
 
 
+var InviteModel = require("./../collections/InviteModel");
 
 var CreateMatchComponent = React.createClass({displayName: "CreateMatchComponent",
+  mixins: [Backbone.React.Component.mixin, LinkedStateMixin],
   getInitialState: function(){
     return {
-      geoLocation: null
+      geoLocation: null,
+      name: "",
+      time: null,
+      location: "",
+      details: ""
     }
   },
 
@@ -74,32 +81,59 @@ addLocation: function(id){
     });
 },
 handleInviteCrew: function(e){
-  e.preventDefault();
+  var state = this.state
+  var data = {
+    name: state.name,
+    time: state.time,
+    location: state.location,
+    details: state.details
+  }
+  console.log(data);
+  var invite = new InviteModel();
+    invite.set('data', data);
+    invite.save(null, {foo: 'bar'})
+      .then(function(data){
+        var model = data.model,
+       response = data.response,
+       options = data.options;
+       console.log('Model with ID', model.id, 'saved');
+
+      })
+      .catch(function(data){
+        if (_.isError(data)) {
+             console.error(data)
+         } else {
+             console.log('Failed to save contact:', data.response.statusText);
+         }
+      });
+    console.log(invite);
+
+
 },
   render: function(){
     return (
       React.createElement("div", {className: "row match-container"}, 
-        React.createElement("h4", {className: "col m12 center-align createMatch"}, "CREATE MATCH"), 
+        React.createElement("h4", {className: "col m12 center-align createMatch"}, "CREATE YOUR MATCH"), 
         React.createElement("div", {className: "col m12"}, 
           React.createElement("form", {id: "form-body", className: " form-group col s12"}, 
             React.createElement("div", {className: "row"}, 
 
               React.createElement("div", {className: "input-field col s12 "}, 
-                React.createElement("input", {id: "park_name", type: "text", className: "validate"}), 
+                React.createElement("input", {valueLink: this.linkState('name'), id: "park_name", type: "text", className: "validate"}), 
                 React.createElement("label", {htmlFor: "park"}, "Park Name")
               ), 
 
               React.createElement("div", {className: "input-field col s12 "}, 
-                React.createElement("input", {id: "location", type: "text", className: "validate"}), 
+                React.createElement("input", {valueLink: this.linkState('location'), id: "location", type: "text", className: "validate"}), 
                 React.createElement("label", {htmlFor: "location"}, "Location")
               ), 
 
               React.createElement("div", {className: "input-field col s12"}, 
-                React.createElement("input", {id: "time", type: "time", className: " form-control validate"})
+                React.createElement("input", {valueLink: this.linkState('time'), id: "time", type: "time", className: " form-control validate"})
               ), 
               React.createElement("div", {className: "input-field col s12 "}, 
                 React.createElement("i", {className: "material-icons prefix"}, "mode_edit"), 
-                React.createElement("textarea", {id: "details", className: "materialize-textarea"}), 
+                React.createElement("textarea", {valueLink: this.linkState('details'), id: "details", className: "materialize-textarea"}), 
                 React.createElement("label", {hmtlFor: "details"}, "Extra details")
               )
 
@@ -108,11 +142,11 @@ handleInviteCrew: function(e){
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col m6 center-align"}, 
-            React.createElement("button", {onClick: this.handleCreatePublicMatch, type: "submit", className: "btn-large waves-effect waves-light "}, "Create public Match")
+            React.createElement("button", {onClick: this.handleCreatePublicMatch, type: "submit", className: "public-match btn-large waves-effect waves-light light-green accent-3"}, "PUBLIC MATCH")
 
           ), 
           React.createElement("div", {className: "col m6 center-align"}, 
-            React.createElement("button", {onClick: this.handleInviteCrew, type: "submit", className: "btn-large waves-effect waves-light"}, "Invite Crew")
+            React.createElement("button", {onClick: this.handleInviteCrew, type: "submit", className: "crew-match btn-large waves-effect waves-light light-green accent-3"}, "PRIVATE MATCH")
 
           )
 
