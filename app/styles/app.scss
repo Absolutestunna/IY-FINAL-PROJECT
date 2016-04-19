@@ -13,6 +13,7 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
   box-sizing: border-box;
 }
 
+
 body {
     background-image: url('https://farpostfooty.files.wordpress.com/2016/02/goal-photo.jpeg?w=1200');
     background-repeat: no-repeat;
@@ -24,6 +25,19 @@ body {
 
 }
 
+textarea:focus:not {
+  border-bottom: 1px solid orange;
+  -webkit-box-shadow: 0 1px 0 0 orange;
+  -moz-box-shadow: 0 1px 0 0 orange;
+  box-shadow: 0 1px 0 0 orange;
+}
+
+input:focus {
+  border-bottom: 1px solid orange;
+  -webkit-box-shadow: 0 1px 0 0 orange;
+  -moz-box-shadow: 0 1px 0 0 orange;
+  box-shadow: 0 1px 0 0 orange;
+}
 
 /////////////////////////////////app container///////////////////////////////
 #app {
@@ -87,11 +101,11 @@ body {
     }
     .logo-container {
       margin-top: 125px;
-      	filter: grayscale(1);
-      	-webkit-filter: grayscale(1);
-      	-moz-filter: grayscale(1);
-      	-o-filter: grayscale(1);
-      	-ms-filter: grayscale(1);
+      	// filter: grayscale(1);
+      	// -webkit-filter: grayscale(1);
+      	// -moz-filter: grayscale(1);
+      	// -o-filter: grayscale(1);
+      	// -ms-filter: grayscale(1);
       #logo {
         width: 350px;
         height: 150px;
@@ -110,11 +124,11 @@ body {
     #signup-logo {
       height: 100px;
       width: 200px;
-      filter: grayscale(1);
-      -webkit-filter: grayscale(1);
-      -moz-filter: grayscale(1);
-      -o-filter: grayscale(1);
-      -ms-filter: grayscale(1);
+      // filter: grayscale(1);
+      // -webkit-filter: grayscale(1);
+      // -moz-filter: grayscale(1);
+      // -o-filter: grayscale(1);
+      // -ms-filter: grayscale(1);
     }
   }
 
@@ -204,6 +218,10 @@ body {
     left: 620px;
     top: 380px;
   }
+  .edit-button i:hover {
+    background-color: #76ff03;
+    color: black;
+  }
   .gcm {
     margin-top: 20px;
     button {
@@ -282,7 +300,82 @@ body {
   }
 }
 
-///////////////////////////////////          ///////////////////////////////////
+///////////////////////////////////////CREW////////////////////////////////////
+.crew-container {
+  .crew-title {
+    margin-bottom: 40px;
+    h4 {
+      color: white;
+      font-family: 'Oswald', sans-serif;
+    }
+  }
+  .add-crew {
+    a {
+      margin-top: 5px;
+      margin-bottom: 17px;
+      padding-top: 50px;
+      height: 162px;
+      background-color: #211F1F;
+      width: 89%;
+      border-radius: 4%;
+      i {
+        color: black;
+        font-size: 6rem;
+      }
+    }
+    p {
+      color: white;
+      font-family: 'Oswald', sans-serif;
+      font-size: 14px;
+    }
+  }
+  .crew-pics {
+    padding-top: 22px;
+    margin-bottom: 20px;
+    .eachMember {
+      display: inline-block;
+
+      .card {
+        background-color: black;
+
+      }
+      .card-header {
+        img {
+          height: 160px;
+          border-radius: 10%;
+        }
+      }
+      .crew-info {
+        top: 359px;
+        color: white;
+        font-family: 'Oswald', sans-serif;
+
+      }
+
+
+    }
+  }
+  .createMatch {
+    margin-top: 50px;
+    button {
+      color: black;
+      font-family: 'Oswald', sans-serif;
+
+    }
+  }
+  #form-body {
+    margin-top: 50px;
+    button {
+      font-family: 'Oswald', sans-serif;
+      color: black;
+    }
+  }
+}
+
+
+///////////////////////////////////////    ///////////////////////////////////////
+
+
 .map {
   #map {
     position:absolute;
@@ -345,20 +438,7 @@ body {
 }
 
 
-.crew-container {
-  .add-crew {
-    margin-bottom: 50px;
-  }
-  .crew-pics {
-    border-top: 1px solid gray;
-    border-bottom: 1px solid gray;
-    margin-bottom: 20px;
-    .eachMember {
-      display: inline-block;
 
-    }
-  }
-}
 
 
 @media (min-width: 768px) and (max-width: 991px){

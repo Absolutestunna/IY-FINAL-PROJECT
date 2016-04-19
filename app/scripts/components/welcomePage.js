@@ -38,7 +38,7 @@ var WelcomePageComponent = React.createClass({displayName: "WelcomePageComponent
             ), 
             React.createElement("div", {className: "row logo-container"}, 
               React.createElement("div", {className: "col m12 center-align"}, 
-                React.createElement("img", {id: "logo", src: "././images/logo.png", alt: "logo"})
+                React.createElement("img", {id: "logo", src: "././images/Kikkitlogo.png", alt: "logo"})
               )
             )
           )

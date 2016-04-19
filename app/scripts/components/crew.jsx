@@ -53,6 +53,10 @@ var CrewComponent = React.createClass({
     });
 
   },
+  componentDidMount: function(){
+    $("#form-body").hide();
+
+  },
   handleSendInvite: function(e){
     e.preventDefault();
     var email = $('#email').val();
@@ -83,27 +87,32 @@ var CrewComponent = React.createClass({
       return (<CrewMemberComponent
         key={member.id}
         member={member}
-        />);
+        />
+      );
     });
     return (
         <div className="row crew-container">
           <div className="col m12">
             <div className="row">
-              <div className="col m8">
+              <div className="col m12 center-align crew-title">
                 <h4>MY CREW</h4>
-              </div>
-              <div className="col m4 right-align add-crew">
-                <button onClick={this.handleSlider} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">add</i></button>
               </div>
             </div>
           </div>
           <div className="col m12 crew-pics">
-            {crewMember}
+            <div className="row">
+              {crewMember}
+              <div className="col m3 center-align add-crew">
+                <a onClick={this.handleSlider} className="btn-large waves-effect waves-light">
+                  <i className="large material-icons">perm_identity</i>
+                </a>
+                <p>Send Invite</p>
+              </div>
+            </div>
           </div>
-          <div className="col m12 center-align">
-            <button onClick={this.handleCreateMatch} className="btn-large waves-effect waves-light">Create Match</button>
+          <div className="col m12 center-align createMatch">
+            <button onClick={this.handleCreateMatch} className="btn-large waves-effect waves-light light-green accent-3">Create Match</button>
           </div>
-
 
           <form onSubmit={this.handleSendInvite} id="form-body" className="col s12">
             <div className="row">
@@ -111,8 +120,8 @@ var CrewComponent = React.createClass({
                 <input id="email" type="email" className="validate" />
                 <label htmlFor="email" data-error="Please enter a valid email address" data-success="Correct">Email</label>
               </div>
-              <div className="input-field col s12">
-                <button type="submit" className="btn-large waves-effect waves-light">Send Invite</button>
+              <div className="input-field col s12 center-align ">
+                <button type="submit" className="btn-large waves-effect waves-light light-green accent-3">Send Invite</button>
               </div>
             </div>
           </form>
@@ -123,24 +132,19 @@ var CrewComponent = React.createClass({
 });
 
 var CrewMemberComponent = React.createClass({
-  mixins: [Backbone.React.Component.mixin],
-
   render: function(){
     var crewMember = this.props.member;
     return (
-      <div className="row eachMember">
-        <div className="col m2">
+        <div className="col m3 center-align eachMember">
           <div className="card">
             <div className="card-header">
-              <img src={crewMember.get('profilePics')._url}/>
-            </div>
-            <div className="card-content">
-              <div>{crewMember.get("first_name")}</div>
-              <div>{crewMember.get("last_name")}</div>
+              <img src={crewMember.get('profilePics')._url} alt="profile pic"/>
             </div>
           </div>
+          <div className="crew-info center-align">
+            <span>{crewMember.get("username")}</span>
+          </div>
         </div>
-      </div>
     );
   }
 });

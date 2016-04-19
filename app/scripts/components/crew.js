@@ -52,6 +52,10 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
     });
 
   },
+  componentDidMount: function(){
+    $("#form-body").hide();
+
+  },
   handleSendInvite: function(e){
     e.preventDefault();
     var email = $('#email').val();
@@ -82,27 +86,33 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
       return (React.createElement(CrewMemberComponent, {
         key: member.id, 
         member: member}
-        ));
+        )
+      );
     });
     return (
         React.createElement("div", {className: "row crew-container"}, 
           React.createElement("div", {className: "col m12"}, 
             React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col m8"}, 
+              React.createElement("div", {className: "col m12 center-align crew-title"}, 
                 React.createElement("h4", null, "MY CREW")
-              ), 
-              React.createElement("div", {className: "col m4 right-align add-crew"}, 
-                React.createElement("button", {onClick: this.handleSlider, className: "btn-floating btn-large waves-effect waves-light red"}, React.createElement("i", {className: "material-icons"}, "add"))
               )
+
             )
           ), 
           React.createElement("div", {className: "col m12 crew-pics"}, 
-            crewMember
+            React.createElement("div", {className: "row"}, 
+              crewMember, 
+              React.createElement("div", {className: "col m3 center-align add-crew"}, 
+                React.createElement("a", {onClick: this.handleSlider, className: "btn-large waves-effect waves-light"}, 
+                  React.createElement("i", {className: "large material-icons"}, "perm_identity")
+                ), 
+                React.createElement("p", null, "Send Invite")
+              )
+            )
           ), 
-          React.createElement("div", {className: "col m12 center-align"}, 
-            React.createElement("button", {onClick: this.handleCreateMatch, className: "btn-large waves-effect waves-light"}, "Create Match")
+          React.createElement("div", {className: "col m12 center-align createMatch"}, 
+            React.createElement("button", {onClick: this.handleCreateMatch, className: "btn-large waves-effect waves-light light-green accent-3"}, "Create Match")
           ), 
-
 
           React.createElement("form", {onSubmit: this.handleSendInvite, id: "form-body", className: "col s12"}, 
             React.createElement("div", {className: "row"}, 
@@ -110,8 +120,8 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
                 React.createElement("input", {id: "email", type: "email", className: "validate"}), 
                 React.createElement("label", {htmlFor: "email", "data-error": "Please enter a valid email address", "data-success": "Correct"}, "Email")
               ), 
-              React.createElement("div", {className: "input-field col s12"}, 
-                React.createElement("button", {type: "submit", className: "btn-large waves-effect waves-light"}, "Send Invite")
+              React.createElement("div", {className: "input-field col s12 center-align "}, 
+                React.createElement("button", {type: "submit", className: "btn-large waves-effect waves-light light-green accent-3"}, "Send Invite")
               )
             )
           )
@@ -122,24 +132,19 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
 });
 
 var CrewMemberComponent = React.createClass({displayName: "CrewMemberComponent",
-  mixins: [Backbone.React.Component.mixin],
-
   render: function(){
     var crewMember = this.props.member;
     return (
-      React.createElement("div", {className: "row eachMember"}, 
-        React.createElement("div", {className: "col m2"}, 
+        React.createElement("div", {className: "col m3 center-align eachMember"}, 
           React.createElement("div", {className: "card"}, 
             React.createElement("div", {className: "card-header"}, 
-              React.createElement("img", {src: crewMember.get('profilePics')._url})
-            ), 
-            React.createElement("div", {className: "card-content"}, 
-              React.createElement("div", null, crewMember.get("first_name")), 
-              React.createElement("div", null, crewMember.get("last_name"))
+              React.createElement("img", {src: crewMember.get('profilePics')._url, alt: "profile pic"})
             )
+          ), 
+          React.createElement("div", {className: "crew-info center-align"}, 
+            React.createElement("span", null, crewMember.get("username"))
           )
         )
-      )
     );
   }
 });
