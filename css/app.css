@@ -5819,7 +5819,7 @@ body {
       padding: 0 auto;
       color: white; }
     #welcome-body .welcome-container .logo-container {
-      margin-top: 80px;
+      margin-top: 125px;
       filter: grayscale(1);
       -webkit-filter: grayscale(1);
       -moz-filter: grayscale(1);
@@ -5857,7 +5857,7 @@ body {
     margin-bottom: 10px; }
     .sign-in .logo1 #signin-logo {
       height: 100px;
-      width: 200px;
+      width: 230px;
       filter: grayscale(1);
       -webkit-filter: grayscale(1);
       -moz-filter: grayscale(1);
@@ -5892,19 +5892,59 @@ body {
   color: white; }
 .profile-page .edit-button {
   position: absolute;
-  left: 612px;
-  top: 400px; }
+  left: 620px;
+  top: 380px; }
 .profile-page .gcm {
   margin-top: 20px; }
   .profile-page .gcm button {
-    margin-bottom: 40px; }
+    margin-bottom: 40px;
+    background-color: #757575; }
+  .profile-page .gcm button:hover {
+    background-color: #76ff03; }
 
-#map {
+.games .game-nav {
+  margin-bottom: 30px;
+  font-family: 'Oswald', sans-serif;
+  color: #EFECEC; }
+.games .game-name h4 {
+  margin: 2px 0 0 0; }
+.games .search span {
+  margin: 2px 6px 0 0;
+  font-size: 33px; }
+.games .search-button button {
+  color: black;
+  font-family: 'Oswald', sans-serif; }
+.games .create-match {
   position: absolute;
-  top: 300px;
+  top: 140px;
+  left: 560px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  color: black; }
+.games .games-container input {
+  margin-bottom: 50px; }
+.games #current-location {
+  margin-top: -10px; }
+  .games #current-location i {
+    color: black; }
+
+.match-container .createMatch {
+  color: white;
+  font-family: 'Oswald', sans-serif; }
+.match-container .public-match {
+  color: black;
+  font-family: 'Oswald', sans-serif; }
+.match-container .crew-match {
+  color: black;
+  font-family: 'Oswald', sans-serif; }
+
+.map #map {
+  position: absolute;
+  top: 235px;
   bottom: 80px;
-  left: 280px;
-  width: 50%; }
+  left: 206px;
+  width: 67%;
+  height: 400px; }
 
 #map1 {
   position: absolute;
@@ -5925,11 +5965,6 @@ body {
   width: 100%;
   margin-bottom: 30px; }
 
-.games .games-container input {
-  margin-bottom: 50px; }
-.games .games-container #current-location {
-  margin-bottom: 30px; }
-
 .crew-container .add-crew {
   margin-bottom: 50px; }
 .crew-container .crew-pics {
@@ -5938,9 +5973,6 @@ body {
   margin-bottom: 20px; }
   .crew-container .crew-pics .eachMember {
     display: inline-block; }
-
-.match-container {
-  margin-top: 100px; }
 
 @media (min-width: 400px) and (max-width: 767px) {
   #welcome-body {
