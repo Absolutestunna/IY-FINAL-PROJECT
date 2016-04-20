@@ -18,6 +18,15 @@ var GameDetailController = React.createClass({
       geoPoint: []
     }
   },
+  componentWillMount: function(){
+    if (this.props.app.publicMatches.length <= 0){
+      Backbone.history.navigate('games', {trigger: true});
+
+    };
+    if (!Parse.User.current()){
+      Backbone.history.navigate('', {trigger: true});
+    };
+  },
   handleJoinPublicGame: function(model){
     console.log('model is: ', model);
     var relation = model[0].relation("publicGameCrew");
@@ -109,6 +118,7 @@ var DistanceGamesListComponent = React.createClass({
 var GamesDetailComponent = React.createClass({
   componentDidMount: function(){
     $('.icon').hide();
+    $('.join-game').hide();
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map1', 'mapbox.streets')
     this.map = map;
@@ -127,6 +137,8 @@ var GamesDetailComponent = React.createClass({
        }),
     }).addTo(this.map);
     $('.icon').show();
+    $('.join-game').show();
+
 
   },
   handleGame: function(e){
@@ -143,7 +155,7 @@ var GamesDetailComponent = React.createClass({
           <span>{this.props.address}</span>
         </div>
         <p className="pdetails">{this.props.details}</p>
-        <button className="btn" onClick={this.handleGame}>JOIN GAME</button>
+        <button className="btn waves-effect waves-light z-depth-2 light-green accent-3 join-game" onClick={this.handleGame}>JOIN GAME</button>
         <div id="map1"></div>
       </div>
     )

@@ -63,6 +63,9 @@ var MessagesComponent = React.createClass({
   },
 
   componentDidMount: function(){
+    if (!Parse.User.current()){
+      Backbone.history.navigate('', {trigger: true});
+    }
     var user_email = Parse.User.current().getEmail();
     var Invites = Parse.Object.extend("Invites");
     var query = new Parse.Query(Invites);

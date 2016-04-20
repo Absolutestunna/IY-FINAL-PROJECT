@@ -22,6 +22,9 @@ var CreateMatchComponent = React.createClass({displayName: "CreateMatchComponent
     }
   },
   componentWillMount: function(){
+    if (!Parse.User.current()){
+      Backbone.history.navigate('', {trigger: true});
+    }
     var queryNumbers = new Parse.Query(Parse.User);
     var self = this;
     queryNumbers.find({

@@ -6,11 +6,9 @@ var Parse = require('parse');
 require('backbone-react-component');
 var createFragment = require('react-addons-create-fragment');
 
-var phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance()
-        , PNF = require('google-libphonenumber').PhoneNumberFormat
-        , PNT = require('google-libphonenumber').PhoneNumberType;
-
-console.log(phoneUtil);
+var phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance(),
+         PNF = require('google-libphonenumber').PhoneNumberFormat,
+         PNT = require('google-libphonenumber').PhoneNumberType;
 
 var ProfilePageComponent = React.createClass({
   mixins: [Backbone.React.Component.mixin],
@@ -22,6 +20,9 @@ var ProfilePageComponent = React.createClass({
     }
   },
   componentDidMount: function(){
+    if (!Parse.User.current()){
+      Backbone.history.navigate('', {trigger: true});
+    }
     $(".editSlider").hide();
     var profile_pic = Parse.User.current().get('profilePics').toJSON().url;
     var tel = Parse.User.current().get('Phone');

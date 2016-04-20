@@ -22,6 +22,9 @@ var CrewComponent = React.createClass({
     Backbone.history.navigate('createMatch', {trigger: true});
   },
   componentWillMount: function(){
+    if (!Parse.User.current()){
+      Backbone.history.navigate('', {trigger: true});
+    }
     var userID = Parse.User.current().id;
     var userCrewQuery = new Parse.Query(Parse.User);
     userCrewQuery.equalTo("objectId", userID);

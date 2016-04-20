@@ -21,6 +21,9 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
     Backbone.history.navigate('createMatch', {trigger: true});
   },
   componentWillMount: function(){
+    if (!Parse.User.current()){
+      Backbone.history.navigate('', {trigger: true});
+    }
     var userID = Parse.User.current().id;
     var userCrewQuery = new Parse.Query(Parse.User);
     userCrewQuery.equalTo("objectId", userID);
@@ -96,7 +99,6 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
               React.createElement("div", {className: "col m12 center-align crew-title"}, 
                 React.createElement("h4", null, "MY CREW")
               )
-
             )
           ), 
           React.createElement("div", {className: "col m12 crew-pics"}, 

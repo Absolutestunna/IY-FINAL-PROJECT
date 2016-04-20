@@ -14,7 +14,9 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     }
   },
   componentDidMount: function(){
-
+    if (!Parse.User.current()){
+      Backbone.history.navigate('', {trigger: true});
+    }
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map', 'mapbox.streets')
     this.map = map;
@@ -112,9 +114,6 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     handleCurrentLocation: function(e){
     e.preventDefault();
     var geolocation = navigator.geolocation;
-
-    // L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    // this.map.locate({setView: true, maxZoom: 8});
     var self = this;
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -159,13 +158,11 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
               React.createElement("div", {className: "col m11 left-align game-name"}, 
                 React.createElement("h4", null, "GAMES")
               ), 
-
               React.createElement("div", {className: "col m1 right-align"}, 
                 React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
               )
             )
           ), 
-
 
           React.createElement("div", {className: "row editSlider"}, 
             React.createElement("div", {className: "col m9"}, 
@@ -189,7 +186,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
             React.createElement("div", {id: "map"}), 
             React.createElement("div", {className: "gameDetails"})
           ), 
-
+          
           React.createElement("button", {onClick: this.handleCreateMatch, className: "create-match waves-effect waves-light btn center-align light-green accent-3"}, "Create Match")
 
         )

@@ -15,7 +15,9 @@ var GamesComponent = React.createClass({
     }
   },
   componentDidMount: function(){
-
+    if (!Parse.User.current()){
+      Backbone.history.navigate('', {trigger: true});
+    }
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map', 'mapbox.streets')
     this.map = map;
@@ -113,9 +115,6 @@ var GamesComponent = React.createClass({
     handleCurrentLocation: function(e){
     e.preventDefault();
     var geolocation = navigator.geolocation;
-
-    // L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
-    // this.map.locate({setView: true, maxZoom: 8});
     var self = this;
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -160,13 +159,11 @@ var GamesComponent = React.createClass({
               <div className="col m11 left-align game-name">
                 <h4>GAMES</h4>
               </div>
-
               <div className="col m1 right-align">
                 <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
               </div>
             </div>
           </div>
-
 
           <div className="row editSlider">
             <div className="col m9">
@@ -190,7 +187,7 @@ var GamesComponent = React.createClass({
             <div id="map"></div>
             <div className="gameDetails"></div>
           </div>
-
+          
           <button onClick={this.handleCreateMatch} className="create-match waves-effect waves-light btn center-align light-green accent-3">Create Match</button>
 
         </div>
