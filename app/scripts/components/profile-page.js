@@ -53,13 +53,14 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
   },
   handleUploadProfilePic: function(e){
     var file = e.target.files[0];
-    this.setState({'profilePics': file});
-    console.log('file', file);
     var name = file.name;
     var parseFile = new Parse.File(name, file);
     var self = this;
     parseFile.save().then(function(result) {
+      console.log(result);
       // The file has been saved to Parse.
+      self.setState({profilePic: result._url});
+
       console.log('result is: ', result);
       var user = Parse.User.current();
       user.set('profilePics', result);
@@ -82,11 +83,13 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
     this.setState({tel: tel});
     console.log('tel is: ',tel);
   },
-  handleUpdatePhoneNumber: function(){
+  handleUpdatePhoneNumber: function(e){
+    e.preventDefault();
     var user = Parse.User.current();
     console.log(this.state.tel);
     user.set('Phone', this.state.tel);
     user.save();
+    $('#icon_telephone').val('');
   },
   handleSlider: function(e){
     e.preventDefault();
@@ -103,10 +106,18 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
 
      return (
       React.createElement("div", {className: "row profile-page"}, 
-        React.createElement("div", {className: "col m12 right-align"}, 
-            React.createElement("a", {className: "sign-out"}, 
-              React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
+        React.createElement("div", {className: "col m12"}, 
+          React.createElement("div", {className: "row"}, 
+            React.createElement("div", {className: "col m8"}, 
+              React.createElement("img", {id: "profile-logo", src: "././images/Kikkitlogo.png"})
+            ), 
+            React.createElement("div", {className: "col m4 right-align"}, 
+              React.createElement("a", {className: "sign-out"}, 
+                React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
+              )
             )
+          )
+
         ), 
 
 
@@ -140,7 +151,7 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
                  React.createElement("label", {htmlFor: "icon_telephone"}, "Telephone")
                ), 
                React.createElement("div", {className: "col m2"}, 
-                 React.createElement("input", {onClick: this.handleUpdatePhoneNumber, type: "submit", className: "btn"})
+                 React.createElement("input", {onClick: this.handleUpdatePhoneNumber, type: "submit", className: "btn", defaultValue: "UPDATE"})
                )
              )
 

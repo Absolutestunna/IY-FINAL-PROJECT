@@ -74,6 +74,10 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
     var self = this;
     query.find({
       success: function(results) {
+        if (results.length <= 0){
+          $('.invitations-header').append('<li className="collection-header"><h5>There are no new invitations<h5></li>');
+        }
+        console.log('mess result', results);
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           var sender_info = object.get('Sender');
@@ -95,7 +99,12 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
       });
   },
 
-
+  handleLogout: function(e){
+    console.log('logout');
+    e.preventDefault();
+    Parse.User.logOut();
+    Backbone.history.navigate('', {trigger: true})
+  },
   render: function(){
       var save_id = "";
       var self = this;
@@ -111,10 +120,25 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
       })
       return (
         React.createElement("div", null, 
-          React.createElement("ul", {className: "container collection with-header"}, 
-            React.createElement("li", {className: "collection-header"}, React.createElement("h4", null, "Your Messages")), 
-          eachMessage
+          React.createElement("div", {className: "invite-nav row"}, 
+            React.createElement("div", {className: "invitation-logo left-align col m9"}, 
+              React.createElement("img", {id: "invitation-logo", src: "././images/Kikkitlogo.png"})
+            ), 
+            React.createElement("div", {className: "col m3 right-align"}, 
+              React.createElement("a", {className: "invitation-sign-out"}, 
+                React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
+              )
+            )
+          ), 
+          React.createElement("div", {className: "row"}, 
+            React.createElement("ul", {className: "invitations collection with-header"}, 
+              React.createElement("li", {className: "center-align collection-header invitations-header"}, 
+                React.createElement("h4", null, "INVITATIONS")
+              ), 
+            eachMessage
+            )
           )
+
         )
       );
     }
@@ -124,13 +148,13 @@ var Message = React.createClass({displayName: "Message",
   render: function(){
     var nameMod = this.props.sender;
     return (
-      React.createElement("li", {className: "collection-header"}, 
-          React.createElement("div", {className: "col m10"}, "Please accept ", nameMod.firstName + " " + nameMod.lastName, "'s invitation to join their crew"), 
-          React.createElement("div", {className: "col m1 right-align"}, 
-            React.createElement("button", {onClick: this.props.handleAccept.bind(this, nameMod), className: "btn-floating btn-large waves-effect waves-light red"}, React.createElement("i", {className: "material-icons"}, "done"))
+      React.createElement("li", {className: "row collection-header each-invite"}, 
+          React.createElement("div", {className: "col m10 left-align"}, "Please accept ", nameMod.firstName + " " + nameMod.lastName, "'s invitation to join their crew"), 
+          React.createElement("div", {className: "col m1 center-align"}, 
+            React.createElement("a", {onClick: this.props.handleAccept.bind(this, nameMod), className: "btn-tiny btn-floating btn-large waves-effect waves-light light-green accent-3"}, React.createElement("i", {className: "material-icons"}, "done"))
           ), 
           React.createElement("div", {className: "col m1 right-align"}, 
-            React.createElement("button", {onClick: this.props.handleReject.bind(this, nameMod), className: "btn-floating btn-large waves-effect waves-light red"}, React.createElement("i", {className: "material-icons"}, "thumb_down"))
+            React.createElement("button", {onClick: this.props.handleReject.bind(this, nameMod), className: "btn-floating btn-large waves-effect waves-light grey darken-1"}, React.createElement("i", {className: "material-icons"}, "thumb_down"))
           )
       )
 

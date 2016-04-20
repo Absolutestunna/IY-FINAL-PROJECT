@@ -156,10 +156,13 @@ var GamesComponent = React.createClass({
 
           <div className="col m12">
             <div className="row game-nav">
-              <div className="col m11 left-align game-name">
+              <div className="col m3">
+                <img id="games-logo" src="././images/Kikkitlogo.png"/>
+              </div>
+              <div className="col m8 center-align game-name">
                 <h4>GAMES</h4>
               </div>
-              <div className="col m1 right-align">
+              <div className="sign-out-icon col m1 right-align">
                 <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
               </div>
             </div>
@@ -179,7 +182,7 @@ var GamesComponent = React.createClass({
             </div>
 
             <div className="col m3 right-align" id="current-location">
-                <a onClick={this.handleCurrentLocation} className="btn-tiny light-green accent-3 btn-floating btn-large waves-effect waves-light red z-depth-2"><i className="medium material-icons">room</i></a>
+                <a onClick={this.handleCurrentLocation} className="light-green accent-3 btn-floating btn-large waves-effect waves-light"><i className="tiny material-icons">room</i></a>
             </div>
           </div>
 
@@ -187,7 +190,7 @@ var GamesComponent = React.createClass({
             <div id="map"></div>
             <div className="gameDetails"></div>
           </div>
-          
+
           <button onClick={this.handleCreateMatch} className="create-match waves-effect waves-light btn center-align light-green accent-3">Create Match</button>
 
         </div>

@@ -58,7 +58,11 @@ var CrewComponent = React.createClass({
   },
   componentDidMount: function(){
     $("#form-body").hide();
-
+  },
+  handleLogout: function(e){
+    e.preventDefault();
+    Parse.User.logOut();
+    Backbone.history.navigate('', {trigger: true})
   },
   handleSendInvite: function(e){
     e.preventDefault();
@@ -84,9 +88,7 @@ var CrewComponent = React.createClass({
     }
   },
   render: function(){
-    console.log('crewMembers are: ', this.state.crewMembers);
     var crewMember = this.state.crewMembers.map(function(member){
-      console.log('member is: ', member);
       return (<CrewMemberComponent
         key={member.id}
         member={member}
@@ -97,8 +99,13 @@ var CrewComponent = React.createClass({
         <div className="row crew-container">
           <div className="col m12">
             <div className="row">
-              <div className="col m12 center-align crew-title">
+              <div className="col m11 center-align crew-title">
                 <h4>MY CREW</h4>
+              </div>
+              <div className="col m1 right-align">
+                <a className="crew-sign-out">
+                  <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
+                </a>
               </div>
             </div>
           </div>

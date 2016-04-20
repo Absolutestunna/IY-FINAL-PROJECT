@@ -179,8 +179,6 @@ var Game = React.createClass({
           </a>
         </div>
 
-
-
       </li>
     );
   }

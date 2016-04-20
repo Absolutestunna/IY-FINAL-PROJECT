@@ -25,20 +25,6 @@ body {
 
 }
 
-textarea:focus:not {
-  border-bottom: 1px solid orange;
-  -webkit-box-shadow: 0 1px 0 0 orange;
-  -moz-box-shadow: 0 1px 0 0 orange;
-  box-shadow: 0 1px 0 0 orange;
-}
-
-input:focus {
-  border-bottom: 1px solid orange;
-  -webkit-box-shadow: 0 1px 0 0 orange;
-  -moz-box-shadow: 0 1px 0 0 orange;
-  box-shadow: 0 1px 0 0 orange;
-}
-
 /////////////////////////////////app container///////////////////////////////
 #app {
   padding-left: 17%;
@@ -189,7 +175,10 @@ input:focus {
 
 ////////////////////////////////////Profile Page////////////////////////////////
 .profile-page {
-
+  #profile-logo {
+    height: 100px;
+    width: 230px;
+  }
 
   #profilePic {
     width: 40%;
@@ -216,7 +205,7 @@ input:focus {
     // margin-top: -70px;
     position: absolute;
     left: 620px;
-    top: 380px;
+    top: 455px;
   }
   .edit-button i:hover {
     background-color: #76ff03;
@@ -238,16 +227,25 @@ input:focus {
 /////////////////////////////////////GAMES//////////////////////////////////////
 .games {
   .game-nav {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-family: 'Oswald', sans-serif;
     color: #EFECEC;
-
+    #games-logo {
+      height: 80px;
+      width: 100%;
+    }
   }
   .game-name {
+    padding-top: 21px;
     h4 {
       margin: 2px 0 0 0;
     }
   }
+  .sign-out-icon {
+    padding-top: 21px;
+
+  }
+
   .search {
     span {
       margin: 2px 6px 0 0;
@@ -308,6 +306,13 @@ input:focus {
       color: white;
       font-family: 'Oswald', sans-serif;
     }
+  }
+  .crew-sign-out {
+    color: white;
+  }
+  .crew-sign-out:hover {
+    color: red;
+    cursor: pointer;
   }
   .add-crew {
     a {
@@ -409,7 +414,40 @@ input:focus {
     }
   }
 }
-//////////////////////////////    //////////////////////////////
+////////////////////////////////Invitations/////////////////////////////////////
+.invite-nav {
+  .invitation-logo {
+    img {
+      height: 100px;
+      width: 230px;
+      // filter: grayscale(1);
+      // -webkit-filter: grayscale(1);
+      // -moz-filter: grayscale(1);
+      // -o-filter: grayscale(1);
+      // -ms-filter: grayscale(1);
+    }
+  }
+  .invitation-sign-out {
+    color: white;
+  }
+  .invitation-sign-out:hover {
+    color: red;
+    cursor: pointer;
+  }
+}
+.invitations {
+  margin-top: 30px;
+  font-family: 'Oswald', sans-serif;
+  padding: 0;
+  .each-invite {
+    margin-bottom: 0;
+    padding: 10px 30px 10px 20px;
+    .nameMod {
+      padding-top: 10px;
+    }
+  }
+}
+////////////////////////////////      ////////////////////////////////
 .map {
   #map {
     position:absolute;
@@ -418,10 +456,7 @@ input:focus {
     left: 206px;
     width: 67%;
     height: 400px;
-    // canvas {
-    //   width: 300px;
-    //   height: 300px;
-    //   }
+
    }
  }
  #map1 {
@@ -431,13 +466,7 @@ input:focus {
    width: 33%;
    height: 300px;
  }
- // .gameDetails {
- //   border: 1px solid red;
- //   position: absolute;
- //   left: 900px;
- //   width: 24%;
- //   top: 142px;
- // }
+
 
 .create-match {
   margin-top: 480px;

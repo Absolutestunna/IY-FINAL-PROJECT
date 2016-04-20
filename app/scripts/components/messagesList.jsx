@@ -75,6 +75,10 @@ var MessagesComponent = React.createClass({
     var self = this;
     query.find({
       success: function(results) {
+        if (results.length <= 0){
+          $('.invitations-header').append('<li className="collection-header"><h5>There are no new invitations<h5></li>');
+        }
+        console.log('mess result', results);
         for (var i = 0; i < results.length; i++) {
           var object = results[i];
           var sender_info = object.get('Sender');
@@ -96,7 +100,12 @@ var MessagesComponent = React.createClass({
       });
   },
 
-
+  handleLogout: function(e){
+    console.log('logout');
+    e.preventDefault();
+    Parse.User.logOut();
+    Backbone.history.navigate('', {trigger: true})
+  },
   render: function(){
       var save_id = "";
       var self = this;
@@ -111,11 +120,26 @@ var MessagesComponent = React.createClass({
         );
       })
       return (
-        <div>
-          <ul className="container collection with-header">
-            <li className="collection-header"><h4>Your Messages</h4></li>
-          {eachMessage}
-          </ul>
+        <div >
+          <div className="invite-nav row">
+            <div className="invitation-logo left-align col m9">
+              <img id="invitation-logo" src="././images/Kikkitlogo.png"/>
+            </div>
+            <div className="col m3 right-align">
+              <a className="invitation-sign-out">
+                <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <div className="row">
+            <ul className="invitations collection with-header">
+              <li className="center-align collection-header invitations-header">
+                <h4>INVITATIONS</h4>
+              </li>
+            {eachMessage}
+            </ul>
+          </div>
+
         </div>
       );
     }
@@ -125,13 +149,13 @@ var Message = React.createClass({
   render: function(){
     var nameMod = this.props.sender;
     return (
-      <li className="collection-header">
-          <div className="col m10">Please accept {nameMod.firstName + " " + nameMod.lastName}&#39;s invitation to join their crew</div>
-          <div className="col m1 right-align">
-            <button onClick={this.props.handleAccept.bind(this, nameMod)} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">done</i></button>
+      <li className="row collection-header each-invite">
+          <div className="col m10 left-align nameMod">Please accept {nameMod.firstName + " " + nameMod.lastName}&#39;s invitation to join their crew</div>
+          <div className="col m1 center-align">
+            <a onClick={this.props.handleAccept.bind(this, nameMod)} className="btn-tiny btn-floating btn-large waves-effect waves-light light-green accent-3"><i className="material-icons">done</i></a>
           </div>
           <div className="col m1 right-align">
-            <button onClick={this.props.handleReject.bind(this, nameMod)} className="btn-floating btn-large waves-effect waves-light red"><i className="material-icons">thumb_down</i></button>
+            <button onClick={this.props.handleReject.bind(this, nameMod)} className="btn-floating btn-large waves-effect waves-light grey darken-1"><i className="material-icons">thumb_down</i></button>
           </div>
       </li>
 

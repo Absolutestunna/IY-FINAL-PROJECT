@@ -57,7 +57,11 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
   },
   componentDidMount: function(){
     $("#form-body").hide();
-
+  },
+  handleLogout: function(e){
+    e.preventDefault();
+    Parse.User.logOut();
+    Backbone.history.navigate('', {trigger: true})
   },
   handleSendInvite: function(e){
     e.preventDefault();
@@ -83,9 +87,7 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
     }
   },
   render: function(){
-    console.log('crewMembers are: ', this.state.crewMembers);
     var crewMember = this.state.crewMembers.map(function(member){
-      console.log('member is: ', member);
       return (React.createElement(CrewMemberComponent, {
         key: member.id, 
         member: member}
@@ -96,8 +98,13 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
         React.createElement("div", {className: "row crew-container"}, 
           React.createElement("div", {className: "col m12"}, 
             React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col m12 center-align crew-title"}, 
+              React.createElement("div", {className: "col m11 center-align crew-title"}, 
                 React.createElement("h4", null, "MY CREW")
+              ), 
+              React.createElement("div", {className: "col m1 right-align"}, 
+                React.createElement("a", {className: "crew-sign-out"}, 
+                  React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
+                )
               )
             )
           ), 
