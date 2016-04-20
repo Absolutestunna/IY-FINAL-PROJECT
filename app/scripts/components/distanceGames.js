@@ -17,11 +17,12 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
       geoPoint: []
     }
   },
-  // handleJoinPublicGame: function(model){
-  //   var relation = model[0].relation("publicGameCrew");
-  //   relation.add(Parse.User.current());
-  //   model[0].save();
-  // },
+  handleJoinPublicGame: function(model){
+    console.log('model is: ', model);
+    var relation = model[0].relation("publicGameCrew");
+    relation.add(Parse.User.current());
+    model[0].save();
+  },
   handleDetailGame: function(model){
     var DetailQuery = Parse.Object.extend("pumatch")
     var detailQuery = new Parse.Query(DetailQuery);
@@ -32,6 +33,7 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
       success: function(result){
         console.log('your result is: ', result);
         self.setState({
+          game: result[0],
           name: result[0].get('name'),
           time: result[0].get('time'),
           details: result[0].get('details'),
@@ -39,7 +41,7 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
           geoPoint: result[0].get('geoPoint'),
           lat: result[0].get('geoPoint')._latitude,
           log: result[0].get('geoPoint')._longitude
-        })
+        });
       },
       error: function(error){
         console.log(error);
@@ -50,7 +52,7 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
   render: function(){
     var app = this.props.app;
     return(
-      React.createElement("div", {className: "row"}, 
+      React.createElement("div", {className: "row games-info"}, 
         React.createElement(DistanceGamesListComponent, {
           app: app, 
           handleDetailGame: this.handleDetailGame}
@@ -63,8 +65,8 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
           address: this.state.address, 
           lat: this.state.lat, 
           log: this.state.log, 
-          geoPoint: this.state.geoPoint}
-
+          geoPoint: this.state.geoPoint, 
+          handleJoinPublicGame: this.handleJoinPublicGame}
         )
       )
     );
@@ -89,9 +91,12 @@ var DistanceGamesListComponent = React.createClass({displayName: "DistanceGamesL
       });
 
     return (
-        React.createElement("div", {className: "col m5"}, 
+        React.createElement("div", {className: "col m5 area-games"}, 
           React.createElement("ul", {className: "collection with-header"}, 
-            React.createElement("li", {className: "collection-header"}, React.createElement("h4", null, "Games around your area")), 
+            React.createElement("li", {className: "header-collection collection-header"}, 
+              React.createElement("i", {className: "fa fa-futbol-o fa-2x", "aria-hidden": "true"}), 
+              React.createElement("h5", null, "AVAILABLE GAMES")
+            ), 
             games
           )
         )
@@ -102,32 +107,42 @@ var DistanceGamesListComponent = React.createClass({displayName: "DistanceGamesL
 });
 var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent",
   componentDidMount: function(){
+    $('.icon').hide();
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map1', 'mapbox.streets')
     this.map = map;
 
     var geoPoint = this.props.geoPoint
-    this.map.setView([98.4842, 39.0119], 2);
+    this.map.setView([39.0119, -98.4842], 7);
 
   },
   componentWillReceiveProps: function(nextProps){
     var lat = nextProps.geoPoint._latitude;
     var log = nextProps.geoPoint._longitude;
-    this.map.setView([log, lat], 4);
+    this.map.setView([log, lat], 15);
     L.marker([log, lat], {
        icon: L.mapbox.marker.icon({
          'marker-color': '#f86767'
        }),
     }).addTo(this.map);
+    $('.icon').show();
+
+  },
+  handleGame: function(e){
+    e.preventDefault();
+    this.props.handleJoinPublicGame(this.props.game);
   },
   render: function(){
     return (
-      React.createElement("div", {className: "col m7"}, 
-        React.createElement("div", null, this.props.name), 
-        React.createElement("div", null, this.props.time), 
-        React.createElement("div", null, this.props.address), 
-        React.createElement("div", null, this.props.details), 
-
+      React.createElement("div", {className: "col m7 games-details"}, 
+        React.createElement("h3", null, this.props.time), 
+        React.createElement("h1", null, this.props.name), 
+        React.createElement("div", null, 
+          React.createElement("i", {className: "icon medium material-icons"}, "room"), 
+          React.createElement("span", null, this.props.address)
+        ), 
+        React.createElement("p", {className: "pdetails"}, this.props.details), 
+        React.createElement("button", {className: "btn", onClick: this.handleGame}, "JOIN GAME"), 
         React.createElement("div", {id: "map1"})
       )
     )
@@ -143,14 +158,16 @@ var Game = React.createClass({displayName: "Game",
   render: function(){
     var model = this.props.model
     return(
-      React.createElement("li", {className: "row collection-header"}, 
-        React.createElement("div", {className: "col m10"}, 
-          React.createElement("h2", null, model.get('name'))
-        ), 
-        React.createElement("div", {className: "col m1 left-align"}, 
-          React.createElement("button", {onClick: this.handleGameDetail, 
-            className: "btn waves-effect waves-light red"}, React.createElement("i", {className: "material-icons center"}, "send"))
+      React.createElement("li", {className: "row game-list collection-header"}, 
+        React.createElement("div", {className: "col m12"}, 
+          React.createElement("h5", {className: "left-align"}, model.get('name')), 
+          React.createElement("a", {onClick: this.handleGameDetail, className: "btn waves-effect waves-light red right"}, 
+            "DETAILS"
+          )
         )
+
+
+
       )
     );
   }

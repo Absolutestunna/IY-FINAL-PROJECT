@@ -18,11 +18,12 @@ var GameDetailController = React.createClass({
       geoPoint: []
     }
   },
-  // handleJoinPublicGame: function(model){
-  //   var relation = model[0].relation("publicGameCrew");
-  //   relation.add(Parse.User.current());
-  //   model[0].save();
-  // },
+  handleJoinPublicGame: function(model){
+    console.log('model is: ', model);
+    var relation = model[0].relation("publicGameCrew");
+    relation.add(Parse.User.current());
+    model[0].save();
+  },
   handleDetailGame: function(model){
     var DetailQuery = Parse.Object.extend("pumatch")
     var detailQuery = new Parse.Query(DetailQuery);
@@ -33,6 +34,7 @@ var GameDetailController = React.createClass({
       success: function(result){
         console.log('your result is: ', result);
         self.setState({
+          game: result[0],
           name: result[0].get('name'),
           time: result[0].get('time'),
           details: result[0].get('details'),
@@ -40,7 +42,7 @@ var GameDetailController = React.createClass({
           geoPoint: result[0].get('geoPoint'),
           lat: result[0].get('geoPoint')._latitude,
           log: result[0].get('geoPoint')._longitude
-        })
+        });
       },
       error: function(error){
         console.log(error);
@@ -51,7 +53,7 @@ var GameDetailController = React.createClass({
   render: function(){
     var app = this.props.app;
     return(
-      <div className="row">
+      <div className="row games-info">
         <DistanceGamesListComponent
           app={app}
           handleDetailGame={this.handleDetailGame}
@@ -65,7 +67,7 @@ var GameDetailController = React.createClass({
           lat={this.state.lat}
           log={this.state.log}
           geoPoint={this.state.geoPoint}
-
+          handleJoinPublicGame={this.handleJoinPublicGame}
         />
       </div>
     );
@@ -90,9 +92,12 @@ var DistanceGamesListComponent = React.createClass({
       });
 
     return (
-        <div className="col m5">
+        <div className="col m5 area-games">
           <ul className="collection with-header">
-            <li className="collection-header"><h4>Games around your area</h4></li>
+            <li className="header-collection collection-header">
+              <i className="fa fa-futbol-o fa-2x" aria-hidden="true"></i>
+              <h5>AVAILABLE GAMES</h5>
+            </li>
             {games}
           </ul>
         </div>
@@ -103,32 +108,42 @@ var DistanceGamesListComponent = React.createClass({
 });
 var GamesDetailComponent = React.createClass({
   componentDidMount: function(){
+    $('.icon').hide();
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map1', 'mapbox.streets')
     this.map = map;
 
     var geoPoint = this.props.geoPoint
-    this.map.setView([98.4842, 39.0119], 2);
+    this.map.setView([39.0119, -98.4842], 7);
 
   },
   componentWillReceiveProps: function(nextProps){
     var lat = nextProps.geoPoint._latitude;
     var log = nextProps.geoPoint._longitude;
-    this.map.setView([log, lat], 4);
+    this.map.setView([log, lat], 15);
     L.marker([log, lat], {
        icon: L.mapbox.marker.icon({
          'marker-color': '#f86767'
        }),
     }).addTo(this.map);
+    $('.icon').show();
+
+  },
+  handleGame: function(e){
+    e.preventDefault();
+    this.props.handleJoinPublicGame(this.props.game);
   },
   render: function(){
     return (
-      <div className="col m7">
-        <div>{this.props.name}</div>
-        <div>{this.props.time}</div>
-        <div>{this.props.address}</div>
-        <div>{this.props.details}</div>
-
+      <div className="col m7 games-details">
+        <h3>{this.props.time}</h3>
+        <h1>{this.props.name}</h1>
+        <div>
+          <i className="icon medium material-icons">room</i>
+          <span>{this.props.address}</span>
+        </div>
+        <p className="pdetails">{this.props.details}</p>
+        <button className="btn" onClick={this.handleGame}>JOIN GAME</button>
         <div id="map1"></div>
       </div>
     )
@@ -144,14 +159,16 @@ var Game = React.createClass({
   render: function(){
     var model = this.props.model
     return(
-      <li className="row collection-header">
-        <div className="col m10">
-          <h2>{model.get('name')}</h2>
+      <li className="row game-list collection-header">
+        <div className="col m12">
+          <h5 className="left-align">{model.get('name')}</h5>
+          <a onClick={this.handleGameDetail} className="btn waves-effect waves-light red right">
+            DETAILS
+          </a>
         </div>
-        <div className="col m1 left-align">
-          <button onClick={this.handleGameDetail}
-            className="btn waves-effect waves-light red"><i className="material-icons center">send</i></button>
-        </div>
+
+
+
       </li>
     );
   }
