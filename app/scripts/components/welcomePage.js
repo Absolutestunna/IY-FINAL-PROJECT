@@ -18,7 +18,7 @@ var WelcomePageComponent = React.createClass({displayName: "WelcomePageComponent
 
     return (
         React.createElement("div", {className: "row", id: "welcome-body"}, 
-          React.createElement("div", {className: "col m12 col s12 welcome-container"}, 
+          React.createElement("div", {className: "col m12 col s12 col l12 welcome-container"}, 
 
             React.createElement("div", {className: "row play"}, 
               React.createElement("div", {className: "col m12 col m12 col s12"}, 

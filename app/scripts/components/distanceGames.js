@@ -58,10 +58,19 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
     })
   },
 
+  handleLogout: function(e){
+    e.preventDefault();
+    Parse.User.logOut();
+    Backbone.history.navigate('', {trigger: true})
+
+  },
   render: function(){
     var app = this.props.app;
     return(
       React.createElement("div", {className: "row games-info"}, 
+        React.createElement("div", {className: "distance-logout col m12 right-align"}, 
+          React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
+        ), 
         React.createElement(DistanceGamesListComponent, {
           app: app, 
           handleDetailGame: this.handleDetailGame}
@@ -154,7 +163,7 @@ var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent
           React.createElement("span", null, this.props.address)
         ), 
         React.createElement("p", {className: "pdetails"}, this.props.details), 
-        React.createElement("button", {className: "btn waves-effect waves-light z-depth-2 light-green accent-3 join-game", onClick: this.handleGame}, "JOIN GAME"), 
+        React.createElement("button", {className: "btn waves-effect waves-light light-green accent-3 join-game", onClick: this.handleGame}, "JOIN GAME"), 
         React.createElement("div", {id: "map1"})
       )
     )
@@ -177,8 +186,6 @@ var Game = React.createClass({displayName: "Game",
             "DETAILS"
           )
         )
-
-
 
       )
     );

@@ -59,10 +59,19 @@ var GameDetailController = React.createClass({
     })
   },
 
+  handleLogout: function(e){
+    e.preventDefault();
+    Parse.User.logOut();
+    Backbone.history.navigate('', {trigger: true})
+
+  },
   render: function(){
     var app = this.props.app;
     return(
       <div className="row games-info">
+        <div className="distance-logout col m12 right-align">
+          <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
+        </div>
         <DistanceGamesListComponent
           app={app}
           handleDetailGame={this.handleDetailGame}
@@ -155,7 +164,7 @@ var GamesDetailComponent = React.createClass({
           <span>{this.props.address}</span>
         </div>
         <p className="pdetails">{this.props.details}</p>
-        <button className="btn waves-effect waves-light z-depth-2 light-green accent-3 join-game" onClick={this.handleGame}>JOIN GAME</button>
+        <button className="btn waves-effect waves-light light-green accent-3 join-game" onClick={this.handleGame}>JOIN GAME</button>
         <div id="map1"></div>
       </div>
     )

@@ -10,6 +10,7 @@ var phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance(),
          PNF = require('google-libphonenumber').PhoneNumberFormat,
          PNT = require('google-libphonenumber').PhoneNumberType;
 
+
 var ProfilePageComponent = React.createClass({
   mixins: [Backbone.React.Component.mixin],
   getInitialState: function(){
@@ -58,17 +59,12 @@ var ProfilePageComponent = React.createClass({
     var parseFile = new Parse.File(name, file);
     var self = this;
     parseFile.save().then(function(result) {
-      console.log(result);
       // The file has been saved to Parse.
       self.setState({profilePic: result._url});
-
-      console.log('result is: ', result);
       var user = Parse.User.current();
       user.set('profilePics', result);
       user.save();
-      // location.reload();
-      self.forceUpdate();  //attempt to rerender page after pic uploaded.
-
+      $('#profile-pic-file').val(" ");
 
     }, function(error) {
       // The file either could not be read, or could not be saved to Parse.
@@ -77,12 +73,10 @@ var ProfilePageComponent = React.createClass({
 
   },
   handlePhoneNumberCapture: function(e){
-    console.log(e.target.value);
     var telCapture = e.target.value;
     var phoneNumber = phoneUtil.parse(telCapture, 'US');
     var tel = phoneUtil.format(phoneNumber, PNF.INTERNATIONAL);
     this.setState({tel: tel});
-    console.log('tel is: ',tel);
   },
   handleUpdatePhoneNumber: function(e){
     e.preventDefault();
@@ -127,20 +121,20 @@ var ProfilePageComponent = React.createClass({
             <div onClick={this.handleShow} className="profilePic">
               <img id="profilePic" src={this.state.profilePic} alt="profile-pic"/>
             </div>
-          <a onClick={this.handleSlider} className="edit-button btn-floating btn-tiny waves-effect waves-light grey darken-1"><i className="material-icons">mode_edit</i></a>
+
+            <a onClick={this.handleSlider} className="edit-button btn-floating btn-tiny waves-effect waves-light grey darken-1"><i className="material-icons">mode_edit</i></a>
 
             <h3 id="user">{user}</h3>
             <h5 id="tel">{this.state.tel}</h5>
           </div>
-
           <form action="#" className="editSlider"id="fileupload" encType="multipart/form-data" method="post">
            <div className="file-field input-field">
              <div className="btn">
                <span>File</span>
-               <input onChange={this.handleUploadProfilePic} type="file" />
+               <input id="profile-pic-file" onChange={this.handleUploadProfilePic} type="file" />
              </div>
              <div className="file-path-wrapper">
-               <input className="file-path validate" type="text" />
+               <input id="profile-pic-file" className="file-path validate" type="text" />
              </div>
            </div>
 

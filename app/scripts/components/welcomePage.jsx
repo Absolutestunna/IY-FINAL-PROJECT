@@ -19,7 +19,7 @@ var WelcomePageComponent = React.createClass({
 
     return (
         <div className="row" id="welcome-body">
-          <div className="col m12 col s12 welcome-container">
+          <div className="col m12 col s12 col l12 welcome-container">
 
             <div className="row play">
               <div className="col m12 col m12 col s12">
