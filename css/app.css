@@ -18453,6 +18453,24 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     font-size: 1.8rem; }
   .games-info #games-details h1 {
     font-size: 3rem; } }
+@media (min-width: 993px) {
+  .crew-container .crew-pics .eachMember .card-header img {
+    width: 100%;
+    height: 100% !important; }
+
+  .add-crew {
+    height: 209px !important; }
+    .add-crew a {
+      width: 100%;
+      padding-top: 50px;
+      padding-left: 28px; }
+
+  .white-locator {
+    visibility: hidden; }
+
+  .create-match {
+    left: 487px;
+    top: 178px; } }
 /* label color */
 .input-field label {
   color: white; }
@@ -18686,7 +18704,7 @@ body::before {
   padding-top: 50px;
   height: 162px;
   background-color: #211F1F;
-  width: 89%;
+  width: 100%;
   border-radius: 4%; }
   .crew-container .add-crew a i {
     color: black;
@@ -18773,7 +18791,7 @@ body::before {
 
 .map #map {
   position: absolute;
-  top: 235px;
+  top: 272px;
   bottom: 80px;
   left: 206px;
   width: 67%;
