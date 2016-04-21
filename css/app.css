@@ -18352,22 +18352,48 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
-@media only screen and (max-width: 600px) {
-  #app {
-    padding-top: 0; } }
-*,
-*::before,
-*::after {
-  box-sizing: border-box; }
+@media (min-width: 200px) and (max-width: 600px) {
+  body {
+    background-position: 52% 100%; }
 
-body {
-  background-image: url("././goal-photo.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: 40% 100%;
-  position: relative; }
-
+  #app .play {
+    width: 300px; }
+  #app #welcome-body .welcome-container .play .first-set {
+    font-size: 60px;
+    margin-top: 40px; }
+  #app #welcome-body .welcome-container .logo-container {
+    margin-top: 80px; }
+    #app #welcome-body .welcome-container .logo-container #logo {
+      width: 280px;
+      height: 130px; }
+  #app .profile-page .profilePic img {
+    width: 43%;
+    height: 160px; }
+  #app .profile-page .edit-button {
+    left: 46.5%;
+    top: 326px; }
+  #app .map {
+    width: 100%;
+    height: 244px; }
+    #app .map #map {
+      width: 100%;
+      top: 149px;
+      height: 100%;
+      left: 0; }
+  #app .create-match {
+    top: 558px;
+    left: 38%;
+    margin-top: 0; }
+  #app .public-private .public {
+    margin-bottom: 30px; }
+  #app .games-info .distance-logout {
+    margin-bottom: 20px; }
+  #app .games-info .games-details {
+    margin-top: 330px; }
+  #app .games-info #map1 {
+    width: 66%;
+    top: 418px;
+    bottom: 0; } }
 /* label color */
 .input-field label {
   color: white; }
@@ -18386,6 +18412,9 @@ body {
   color: white; }
 
 .input-field input[type=number] {
+  color: white; }
+
+.input-field textarea {
   color: white; }
 
 /* label underline focus color */
@@ -18407,6 +18436,14 @@ body {
 /* icon prefix focus color */
 .input-field .prefix.active {
   color: #FFF; }
+
+body {
+  background-image: url("././goal-photo.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: 40% 100%;
+  position: relative; }
 
 #app {
   padding-left: 17%;
@@ -18611,9 +18648,11 @@ body::before {
     display: inline-block; }
     .crew-container .crew-pics .eachMember .card {
       background-color: black; }
-    .crew-container .crew-pics .eachMember .card-header img {
-      height: 160px;
-      border-radius: 10%; }
+    .crew-container .crew-pics .eachMember .card-header {
+      border: 1px solid #76ff03;
+      border-radius: 5%; }
+      .crew-container .crew-pics .eachMember .card-header img {
+        height: 160px; }
     .crew-container .crew-pics .eachMember .crew-info {
       top: 359px;
       color: white;
