@@ -22,6 +22,10 @@ var CreateMatchComponent = React.createClass({
       crewNumbers: []
     }
   },
+  componentDidMount: function(){
+    $('.crew-notification').hide();
+    $(".publicMatch-notification").hide();
+  },
   componentWillMount: function(){
     if (!Parse.User.current()){
       Backbone.history.navigate('', {trigger: true});
@@ -77,7 +81,10 @@ var CreateMatchComponent = React.createClass({
         console.log('Failed to create new object, with error code: ' + error.message);
         }
     });
-
+    var timer = setTimeout(function(){
+      $(".publicMatch-notification").hide();
+      Backbone.history.navigate('profile', {trigger: true});
+    }, 3000);
 
   },
 addLocation: function(id){
@@ -87,7 +94,6 @@ addLocation: function(id){
       success: function(result) {
         var point = new Parse.GeoPoint(self.state.geoLocation);
 
-        console.log('point is: ', point);
         result.set("geoPoint", point);
         result.save();
       },
@@ -114,10 +120,15 @@ handleInviteCrew: function(e){
     validNumbers: validNumbers
 
   }
-  console.log(data);
   var invite = new InviteModel();
     invite.set('data', data);
     invite.save();
+    $('.crew-notification').show();
+
+    var timer = setTimeout(function(){
+      $(".invite-info").hide();
+      Backbone.history.navigate('profile', {trigger: true});
+    }, 3000);
 
 },
   render: function(){
@@ -154,13 +165,13 @@ handleInviteCrew: function(e){
         <div className="row">
           <div className="col m6 center-align">
             <button onClick={this.handleCreatePublicMatch} type="submit" className="public-match btn-large waves-effect waves-light light-green accent-3">PUBLIC MATCH</button>
-
           </div>
           <div className="col m6 center-align">
-            <button onClick={this.handleInviteCrew} type="submit" className="crew-match btn-large waves-effect waves-light light-green accent-3">PRIVATE MATCH</button>
-
+            <button onClick={this.handleInviteCrew} type="submit" className="crew-match btn-large waves-effect waves-light light-green accent-3">PRIVATE MATCH (Send text notification)</button>
           </div>
-
+        </div>
+        <div className="col m12 right-align">
+          <p className="crew-notification">Your crew has been notified!!</p>
         </div>
       </div>
     );

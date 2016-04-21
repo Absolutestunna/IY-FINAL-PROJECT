@@ -5,7 +5,12 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 // Import Bootstrap
 @import '../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap';
 
+// Import Materialize
+@import "../../materialize-src/sass/materialize";
+
+
 @import "media_queries";
+@import "variable";
 
 *,
 *::before,
@@ -37,6 +42,12 @@ body {
      color: white;
    }
    .input-field input[type=password] {
+     color: white;
+   }
+   .input-field input[type=email] {
+     color: white;
+   }
+   .input-field input[type=number] {
      color: white;
    }
    /* label underline focus color */
@@ -178,6 +189,9 @@ body::before{
 
 .sign-in {
   margin-top: 20px;
+  input {
+    width: 100%;
+  }
   .logo1 {
     margin-bottom: 10px;
     #signin-logo {
@@ -412,6 +426,11 @@ body::before{
       font-family: 'Oswald', sans-serif;
       color: black;
     }
+  }
+  .invite-info {
+    color: #76ff03;;
+    font-family: 'Oswald', sans-serif;
+
   }
 }
 

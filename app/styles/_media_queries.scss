@@ -1,10 +1,25 @@
 
-@media only screen and (max-width: 600px){
-    body {
+// Import Bootstrap
+@import "../../materialize-src/sass/materialize";
 
-    }
+ @media #{$small-and-down} {
+  #app {
+    padding-top: 0;
+  }
+  .sign-in {
+    
+  }
 }
-@media (min-width: 400px) and (max-width: 767px){
-
-
-}
+  // @media #{$small-and-down} {
+  //   // styles for small screens and down
+  //     #app {
+  //       .play {
+  //         .first-set {
+  //           font-size: 50px;
+  //         }
+  //       }
+  //       .logo-container {
+  //         margin-top: 50px;
+  //       }
+  //     }
+  // }

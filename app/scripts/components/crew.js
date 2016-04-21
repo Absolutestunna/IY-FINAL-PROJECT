@@ -57,6 +57,7 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
   },
   componentDidMount: function(){
     $("#form-body").hide();
+    $(".invite-info").hide();
   },
   handleLogout: function(e){
     e.preventDefault();
@@ -85,6 +86,15 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
           }
       });
     }
+    $(".invite-info").show();
+    $("#form-body").slideToggle(500);
+    $('#email').val('');
+
+    var timer = setTimeout(function(){
+      $(".invite-info").hide();
+      Backbone.history.navigate('profile', {trigger: true});
+    }, 3000);
+
   },
   render: function(){
     var crewMember = this.state.crewMembers.map(function(member){
@@ -123,11 +133,13 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
             React.createElement("button", {onClick: this.handleCreateMatch, className: "btn-large waves-effect waves-light light-green accent-3"}, "Create Match")
           ), 
 
+          React.createElement("span", {className: "invite-info light-green-text"}, "Your invite has been successfully sent."), 
+
           React.createElement("form", {onSubmit: this.handleSendInvite, id: "form-body", className: "col s12"}, 
             React.createElement("div", {className: "row"}, 
               React.createElement("div", {className: "input-field col s12"}, 
                 React.createElement("input", {id: "email", type: "email", className: "validate"}), 
-                React.createElement("label", {htmlFor: "email", "data-error": "Please enter a valid email address", "data-success": "Correct"}, "Email")
+                React.createElement("label", {htmlFor: "email", "data-error": "Please enter a valid email address"}, "Email")
               ), 
               React.createElement("div", {className: "input-field col s12 center-align "}, 
                 React.createElement("button", {type: "submit", className: "btn-large waves-effect waves-light light-green accent-3"}, "Send Invite")

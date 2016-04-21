@@ -101,12 +101,12 @@ var ProfilePageComponent = React.createClass({
 
      return (
       <div className="row profile-page">
-        <div className='col m12'>
+        <div className='col m12 col s12 col xs12'>
           <div className="row">
-            <div className="col m8">
+            <div className="col xs8 col s8 col m8 col lg8 left-align">
               <img id="profile-logo" src="././images/Kikkitlogo.png"/>
             </div>
-            <div className="col m4 right-align">
+            <div className="col xs4 col s4 col m4 col lg4 right-align">
               <a className="sign-out">
                 <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
               </a>
@@ -116,7 +116,7 @@ var ProfilePageComponent = React.createClass({
         </div>
 
 
-        <div className="col m12 center-align">
+        <div className="col m12 col s12 col xs12 center-align">
           <div className="profile-info">
             <div onClick={this.handleShow} className="profilePic">
               <img id="profilePic" src={this.state.profilePic} alt="profile-pic"/>
@@ -154,10 +154,10 @@ var ProfilePageComponent = React.createClass({
 
           </form>
 
-          <div className="gcm col m12">
+          <div className="gcm col m12 col s12 col xs12">
             <button onClick={this.handlePublicGames} className="btn btn-default center-align">
               <i className="fa fa-futbol-o" aria-hidden="true"></i>
-                Games
+                FIND Games
               </button>
             <button onClick={this.handleCrewPage} className="btn btn-default center-align">
               <i className="fa fa-users" aria-hidden="true"></i>

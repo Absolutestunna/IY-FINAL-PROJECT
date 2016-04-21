@@ -45,20 +45,20 @@ var SignUpComponent = React.createClass({
     return (
 
       <div className="row user-information">
-        <div className="col m12 logo left-align">
+        <div className="col xs12 col s12 col l12 col m12 logo left-align">
           <img id="signup-logo" src="././images/logo.png"/>
         </div>
-        <div className="col m12 create">CREATE A NEW ACCOUNT FOR KICKKIT</div>
+        <div className="col xs12 col s12 col l12 col m12 create">CREATE A NEW ACCOUNT FOR KICKKIT</div>
 
-          <form data-parsley-validate="" className="col s12">
+          <form data-parsley-validate="" className="col xs12 col s12 col l12 col m12">
             <div className="row">
-              <div className="col m12">
+              <div className="col xs12 col s12 col l12 col m12">
                 <div className="row first-last">
-                  <div className="input-field col m6">
+                  <div className="input-field col xs6 col s6 col l6 col m6">
                     <input data-parsley-minlength="4" id="first_name" type="text" className="validate" required="" />
                     <label required="" htmlFor="first_name">First Name *</label>
                   </div>
-                  <div className="input-field col m6">
+                  <div className="input-field col xs6 col s6 col l6 col m6">
                     <input id="last_name" type="text" className="validate" />
                     <label htmlFor="last_name">Last Name *</label>
                   </div>

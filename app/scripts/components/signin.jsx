@@ -29,28 +29,28 @@ var SignInComponent = React.createClass({
   render: function(){
     return (
       <div className="row sign-in">
-        <div className="col m12 logo1 left-align">
+        <div className="col l12 col m12 col s12 col xs12 logo1 left-align">
           <img id="signin-logo" src="././images/logo.png"/>
         </div>
-        <div className="col m12 create1">LOG IN TO KICKKIT</div>
-          <div className="input-field col-md-12">
+        <div className="col m12 col s12 col xs12 create1">LOG IN TO KICKKIT</div>
+          <div className="input-field col m12 col s12 col xs12">
             <input id="username1" type="text" className="validate" />
             <label htmlFor="email">Username</label>
           </div>
 
-          <div className="input-field col-md-12">
+          <div className="input-field col m12 col s12 col xs12">
             <input id="password1" type="password" className="validate" />
             <label htmlFor="password">Password</label>
           </div>
 
         <div className="row signInButton">
-          <div className="input-field col-md-12 center-align">
+          <div className="input-field col m12 col s12 col xs12 center-align">
             <button onClick={this.handleSignIn} id="login-submit" className="btn btn-default waves-effect waves-light light-green accent-3 m validate" type="submit">SIGN IN</button>
           </div>
         </div>
 
         <div className="row">
-          <div className="input-field col-md-12">
+          <div className="input-field col m12">
             <div id="error"></div>
           </div>
         </div>

@@ -58,6 +58,7 @@ var CrewComponent = React.createClass({
   },
   componentDidMount: function(){
     $("#form-body").hide();
+    $(".invite-info").hide();
   },
   handleLogout: function(e){
     e.preventDefault();
@@ -86,6 +87,15 @@ var CrewComponent = React.createClass({
           }
       });
     }
+    $(".invite-info").show();
+    $("#form-body").slideToggle(500);
+    $('#email').val('');
+
+    var timer = setTimeout(function(){
+      $(".invite-info").hide();
+      Backbone.history.navigate('profile', {trigger: true});
+    }, 3000);
+
   },
   render: function(){
     var crewMember = this.state.crewMembers.map(function(member){
@@ -124,11 +134,13 @@ var CrewComponent = React.createClass({
             <button onClick={this.handleCreateMatch} className="btn-large waves-effect waves-light light-green accent-3">Create Match</button>
           </div>
 
+          <span className="invite-info light-green-text">Your invite has been successfully sent.</span>
+
           <form onSubmit={this.handleSendInvite} id="form-body" className="col s12">
             <div className="row">
               <div className="input-field col s12">
                 <input id="email" type="email" className="validate" />
-                <label htmlFor="email" data-error="Please enter a valid email address" data-success="Correct">Email</label>
+                <label htmlFor="email" data-error="Please enter a valid email address">Email</label>
               </div>
               <div className="input-field col s12 center-align ">
                 <button type="submit" className="btn-large waves-effect waves-light light-green accent-3">Send Invite</button>

@@ -28,28 +28,28 @@ var SignInComponent = React.createClass({displayName: "SignInComponent",
   render: function(){
     return (
       React.createElement("div", {className: "row sign-in"}, 
-        React.createElement("div", {className: "col m12 logo1 left-align"}, 
+        React.createElement("div", {className: "col l12 col m12 col s12 col xs12 logo1 left-align"}, 
           React.createElement("img", {id: "signin-logo", src: "././images/logo.png"})
         ), 
-        React.createElement("div", {className: "col m12 create1"}, "LOG IN TO KICKKIT"), 
-          React.createElement("div", {className: "input-field col-md-12"}, 
+        React.createElement("div", {className: "col m12 col s12 col xs12 create1"}, "LOG IN TO KICKKIT"), 
+          React.createElement("div", {className: "input-field col m12 col s12 col xs12"}, 
             React.createElement("input", {id: "username1", type: "text", className: "validate"}), 
             React.createElement("label", {htmlFor: "email"}, "Username")
           ), 
 
-          React.createElement("div", {className: "input-field col-md-12"}, 
+          React.createElement("div", {className: "input-field col m12 col s12 col xs12"}, 
             React.createElement("input", {id: "password1", type: "password", className: "validate"}), 
             React.createElement("label", {htmlFor: "password"}, "Password")
           ), 
 
         React.createElement("div", {className: "row signInButton"}, 
-          React.createElement("div", {className: "input-field col-md-12 center-align"}, 
+          React.createElement("div", {className: "input-field col m12 col s12 col xs12 center-align"}, 
             React.createElement("button", {onClick: this.handleSignIn, id: "login-submit", className: "btn btn-default waves-effect waves-light light-green accent-3 m validate", type: "submit"}, "SIGN IN")
           )
         ), 
 
         React.createElement("div", {className: "row"}, 
-          React.createElement("div", {className: "input-field col-md-12"}, 
+          React.createElement("div", {className: "input-field col m12"}, 
             React.createElement("div", {id: "error"})
           )
         )

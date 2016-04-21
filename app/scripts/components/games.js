@@ -153,34 +153,38 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
     return (
         React.createElement("div", {className: "row games"}, 
 
-          React.createElement("div", {className: "col m12"}, 
+          React.createElement("div", {className: "col xs12 col s12 col m12 col l12"}, 
             React.createElement("div", {className: "row game-nav"}, 
-              React.createElement("div", {className: "col m3"}, 
+              React.createElement("div", {className: "col m3 col l3 hide-on-small-and-down"}, 
                 React.createElement("img", {id: "games-logo", src: "././images/Kikkitlogo.png"})
               ), 
-              React.createElement("div", {className: "col m8 center-align game-name"}, 
+              React.createElement("div", {className: "col m8 col s11 col xs11 col l8 center-align game-name"}, 
                 React.createElement("h4", null, "GAMES")
               ), 
-              React.createElement("div", {className: "col m1 right-align"}, 
+              React.createElement("div", {className: "col xs1 col s1 right-align hide-on-small-and-up"}, 
+                  React.createElement("a", {onClick: this.handleCurrentLocation, className: "light-green accent-3 btn-floating btn-large waves-effect waves-light"}, React.createElement("i", {className: "tiny material-icons"}, "room"))
+              ), 
+              React.createElement("div", {className: "sign-out-icon col s1 col xs1 col l1 col m1 hide-on-small-only right-align"}, 
                 React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
               )
             )
           ), 
 
           React.createElement("div", {className: "row editSlider"}, 
-            React.createElement("div", {className: "col m9"}, 
+            React.createElement("div", {className: "col m9 hide-on-small-and-down"}, 
               React.createElement("div", {className: "row"}, 
-                React.createElement("div", {className: "input-field col m9 s12"}, 
+                React.createElement("div", {className: "input-field col m9 hide-on-small-and-down"}, 
                   React.createElement("input", {id: "address", type: "text", className: "validate "}), 
                   React.createElement("label", {htmlFor: "address"}, "Search for address")
                 ), 
-                React.createElement("div", {className: "col m3 s12 search-button"}, 
+                React.createElement("div", {className: "col m3 hide-on-small-and-down search-button"}, 
                   React.createElement("button", {onClick: this.handleSetLocation, className: "btn btn-default center-align light-green accent-3"}, "Search Games")
                 )
               )
             ), 
 
-            React.createElement("div", {className: "col m3 right-align", id: "current-location"}, 
+            React.createElement("span", {className: "col xs11 col s11 right-align white-text hide-on-medium-and-up"}, "Use your location"), 
+            React.createElement("div", {className: "col m3 col l1 col xs1 col s1 right-align", id: "current-location"}, 
                 React.createElement("a", {onClick: this.handleCurrentLocation, className: "light-green accent-3 btn-floating btn-large waves-effect waves-light"}, React.createElement("i", {className: "tiny material-icons"}, "room"))
             )
           ), 

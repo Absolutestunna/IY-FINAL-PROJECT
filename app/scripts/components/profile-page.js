@@ -100,12 +100,12 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
 
      return (
       React.createElement("div", {className: "row profile-page"}, 
-        React.createElement("div", {className: "col m12"}, 
+        React.createElement("div", {className: "col m12 col s12 col xs12"}, 
           React.createElement("div", {className: "row"}, 
-            React.createElement("div", {className: "col m8"}, 
+            React.createElement("div", {className: "col xs8 col s8 col m8 col lg8 left-align"}, 
               React.createElement("img", {id: "profile-logo", src: "././images/Kikkitlogo.png"})
             ), 
-            React.createElement("div", {className: "col m4 right-align"}, 
+            React.createElement("div", {className: "col xs4 col s4 col m4 col lg4 right-align"}, 
               React.createElement("a", {className: "sign-out"}, 
                 React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
               )
@@ -115,7 +115,7 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
         ), 
 
 
-        React.createElement("div", {className: "col m12 center-align"}, 
+        React.createElement("div", {className: "col m12 col s12 col xs12 center-align"}, 
           React.createElement("div", {className: "profile-info"}, 
             React.createElement("div", {onClick: this.handleShow, className: "profilePic"}, 
               React.createElement("img", {id: "profilePic", src: this.state.profilePic, alt: "profile-pic"})
@@ -153,10 +153,10 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
 
           ), 
 
-          React.createElement("div", {className: "gcm col m12"}, 
+          React.createElement("div", {className: "gcm col m12 col s12 col xs12"}, 
             React.createElement("button", {onClick: this.handlePublicGames, className: "btn btn-default center-align"}, 
               React.createElement("i", {className: "fa fa-futbol-o", "aria-hidden": "true"}), 
-                "Games"
+                "FIND Games"
               ), 
             React.createElement("button", {onClick: this.handleCrewPage, className: "btn btn-default center-align"}, 
               React.createElement("i", {className: "fa fa-users", "aria-hidden": "true"}), 

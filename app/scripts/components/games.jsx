@@ -154,34 +154,38 @@ var GamesComponent = React.createClass({
     return (
         <div className="row games">
 
-          <div className="col m12">
+          <div className="col xs12 col s12 col m12 col l12">
             <div className="row game-nav">
-              <div className="col m3">
+              <div className="col m3 col l3 hide-on-small-and-down">
                 <img id="games-logo" src="././images/Kikkitlogo.png"/>
               </div>
-              <div className="col m8 center-align game-name">
+              <div className="col m8 col s11 col xs11 col l8 center-align game-name">
                 <h4>GAMES</h4>
               </div>
-              <div className="sign-out-icon col m1 right-align">
+              <div className="col xs1 col s1 right-align hide-on-small-and-up">
+                  <a onClick={this.handleCurrentLocation} className="light-green accent-3 btn-floating btn-large waves-effect waves-light"><i className="tiny material-icons">room</i></a>
+              </div>
+              <div className="sign-out-icon col s1 col xs1 col l1 col m1 hide-on-small-only right-align">
                 <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
               </div>
             </div>
           </div>
 
           <div className="row editSlider">
-            <div className="col m9">
+            <div className="col m9 hide-on-small-and-down">
               <div className="row">
-                <div className="input-field col m9 s12">
+                <div className="input-field col m9 hide-on-small-and-down">
                   <input id="address" type="text" className="validate " />
                   <label htmlFor="address">Search for address</label>
                 </div>
-                <div className="col m3 s12 search-button">
+                <div className="col m3 hide-on-small-and-down search-button">
                   <button onClick={this.handleSetLocation} className="btn btn-default center-align light-green accent-3">Search Games</button>
                 </div>
               </div>
             </div>
 
-            <div className="col m3 right-align" id="current-location">
+            <span className="col xs11 col s11 right-align white-text hide-on-medium-and-up">Use your location</span>
+            <div className="col m3 col l1 col xs1 col s1 right-align" id="current-location">
                 <a onClick={this.handleCurrentLocation} className="light-green accent-3 btn-floating btn-large waves-effect waves-light"><i className="tiny material-icons">room</i></a>
             </div>
           </div>
