@@ -116,15 +116,15 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
 
 
         React.createElement("div", {className: "col m12 col s12 col xs12 center-align"}, 
-          React.createElement("div", {className: "profile-info"}, 
-            React.createElement("div", {onClick: this.handleShow, className: "profilePic"}, 
+          React.createElement("div", {className: "profile-info row"}, 
+            React.createElement("div", {onClick: this.handleShow, className: "profilePic col m12 col xs12 col s12"}, 
               React.createElement("img", {id: "profilePic", src: this.state.profilePic, alt: "profile-pic"})
             ), 
 
             React.createElement("a", {onClick: this.handleSlider, className: "edit-button btn-floating btn-tiny waves-effect waves-light grey darken-1"}, React.createElement("i", {className: "material-icons"}, "mode_edit")), 
 
-            React.createElement("h3", {id: "user"}, user), 
-            React.createElement("h5", {id: "tel"}, this.state.tel)
+            React.createElement("h3", {className: "col m12 col s12 col xs12", id: "user"}, user), 
+            React.createElement("h5", {className: "col m12 col s12 col xs12", id: "tel"}, this.state.tel)
           ), 
           React.createElement("form", {action: "#", className: "editSlider", id: "fileupload", encType: "multipart/form-data", method: "post"}, 
            React.createElement("div", {className: "file-field input-field"}, 
@@ -137,9 +137,9 @@ var ProfilePageComponent = React.createClass({displayName: "ProfilePageComponent
              )
            ), 
 
-           React.createElement("div", {className: "input-field col m12 s6 left-align"}, 
+           React.createElement("div", {className: "input-field col l12 col m12 s6 left-align"}, 
              React.createElement("div", {className: "row"}, 
-               React.createElement("div", {className: "col m10"}, 
+               React.createElement("div", {className: "col m10 col xs10 col s10"}, 
                  React.createElement("i", {className: "material-icons prefix"}, "phone"), 
                  React.createElement("input", {onChange: this.handlePhoneNumberCapture, id: "icon_telephone", type: "tel", className: "validate"}), 
                  React.createElement("label", {htmlFor: "icon_telephone"}, "Telephone")

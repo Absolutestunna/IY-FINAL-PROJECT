@@ -135,7 +135,7 @@ handleInviteCrew: function(e){
 
     return (
       <div className="row match-container">
-        <h4 className="col m12 center-align createMatch">CREATE YOUR MATCH</h4>
+        <h4 className="col m12 col s12 col xs12 col l12 center-align createMatch">CREATE YOUR MATCH</h4>
         <div className="col m12">
           <form id="form-body" className=" form-group col s12">
             <div className="row">
@@ -162,11 +162,11 @@ handleInviteCrew: function(e){
             </div>
           </form>
         </div>
-        <div className="row">
-          <div className="col m6 center-align">
+        <div className="row public-private">
+          <div className="col m6 col xs12 col s12 col l6 center-align public">
             <button onClick={this.handleCreatePublicMatch} type="submit" className="public-match btn-large waves-effect waves-light light-green accent-3">PUBLIC MATCH</button>
           </div>
-          <div className="col m6 center-align">
+          <div className="col m6 col xs12 col s12 col l6 center-align private">
             <button onClick={this.handleInviteCrew} type="submit" className="crew-match btn-large waves-effect waves-light light-green accent-3">PRIVATE MATCH (Send text notification)</button>
           </div>
         </div>

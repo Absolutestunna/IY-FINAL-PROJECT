@@ -161,10 +161,10 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
               React.createElement("div", {className: "col m8 col s11 col xs11 col l8 center-align game-name"}, 
                 React.createElement("h4", null, "GAMES")
               ), 
-              React.createElement("div", {className: "col xs1 col s1 right-align hide-on-small-and-up"}, 
+              React.createElement("div", {className: "col xs1 col m1 col l1 col s1 right-align hide-on-small-and-up"}, 
                   React.createElement("a", {onClick: this.handleCurrentLocation, className: "light-green accent-3 btn-floating btn-large waves-effect waves-light"}, React.createElement("i", {className: "tiny material-icons"}, "room"))
               ), 
-              React.createElement("div", {className: "sign-out-icon col s1 col xs1 col l1 col m1 hide-on-small-only right-align"}, 
+              React.createElement("div", {className: "sign-out-icon col s1 col xs1 col l1 col m1 hide-on-small-and-down right-align"}, 
                 React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
               )
             )
@@ -183,8 +183,8 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
               )
             ), 
 
-            React.createElement("span", {className: "col xs11 col s11 right-align white-text hide-on-medium-and-up"}, "Use your location"), 
-            React.createElement("div", {className: "col m3 col l1 col xs1 col s1 right-align", id: "current-location"}, 
+            React.createElement("span", {className: "col xs11 col s11 right-align white-text hide-on-small-and-down"}, "Use your location"), 
+            React.createElement("div", {className: "col m3 col l1 col xs1 col s1 hide-on-small-and-down right-align", id: "current-location"}, 
                 React.createElement("a", {onClick: this.handleCurrentLocation, className: "light-green accent-3 btn-floating btn-large waves-effect waves-light"}, React.createElement("i", {className: "tiny material-icons"}, "room"))
             )
           ), 

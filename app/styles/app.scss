@@ -7,28 +7,10 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 
 // Import Materialize
 @import "../../materialize-src/sass/materialize";
-
-
 @import "media_queries";
 @import "variable";
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-
-body {
-    background-image: url('././goal-photo.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: 40% 100%;
-    position: relative;
-}
-
-
+/////////////////////////////////UTILITIES//////////////////////////////////////
 
   /* label color */
    .input-field label {
@@ -48,6 +30,9 @@ body {
      color: white;
    }
    .input-field input[type=number] {
+     color: white;
+   }
+   .input-field textarea {
      color: white;
    }
    /* label underline focus color */
@@ -71,7 +56,22 @@ body {
      color: #FFF;
    }
 
-/////////////////////////////////app container///////////////////////////////
+
+
+///////////////////////////////////////BODY////////////////////////////////////
+
+
+body {
+    background-image: url('././goal-photo.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: 40% 100%;
+    position: relative;
+}
+
+
+///////////////////////////////////////APP//////////////////////////////////////
 #app {
   padding-left: 17%;
   padding-right: 17%;
@@ -90,7 +90,9 @@ body::before{
   opacity: 0.8;
 }
 
-///////////////////////////////Welcome-Page/////////////////////////////////
+///////////////////////////////WELCOME-PAGE/////////////////////////////////////
+
+
 #welcome-body {
   // padding: 70px 190px 0 190px;
   -webkit-animation:fadeIn ease-in 1;
@@ -397,9 +399,11 @@ body::before{
 
       }
       .card-header {
+        border: 1px solid #76ff03;
+        border-radius: 5%;
+
         img {
           height: 160px;
-          border-radius: 10%;
         }
       }
       .crew-info {

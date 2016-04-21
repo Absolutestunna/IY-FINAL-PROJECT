@@ -134,7 +134,7 @@ handleInviteCrew: function(e){
 
     return (
       React.createElement("div", {className: "row match-container"}, 
-        React.createElement("h4", {className: "col m12 center-align createMatch"}, "CREATE YOUR MATCH"), 
+        React.createElement("h4", {className: "col m12 col s12 col xs12 col l12 center-align createMatch"}, "CREATE YOUR MATCH"), 
         React.createElement("div", {className: "col m12"}, 
           React.createElement("form", {id: "form-body", className: " form-group col s12"}, 
             React.createElement("div", {className: "row"}, 
@@ -162,10 +162,10 @@ handleInviteCrew: function(e){
           )
         ), 
         React.createElement("div", {className: "row"}, 
-          React.createElement("div", {className: "col m6 center-align"}, 
+          React.createElement("div", {className: "col m6 col xs12 col s12 col l6 center-align"}, 
             React.createElement("button", {onClick: this.handleCreatePublicMatch, type: "submit", className: "public-match btn-large waves-effect waves-light light-green accent-3"}, "PUBLIC MATCH")
           ), 
-          React.createElement("div", {className: "col m6 center-align"}, 
+          React.createElement("div", {className: "col m6 col xs12 col s12 col l6 center-align"}, 
             React.createElement("button", {onClick: this.handleInviteCrew, type: "submit", className: "crew-match btn-large waves-effect waves-light light-green accent-3"}, "PRIVATE MATCH (Send text notification)")
           )
         ), 

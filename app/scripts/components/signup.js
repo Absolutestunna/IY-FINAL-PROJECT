@@ -45,7 +45,7 @@ var SignUpComponent = React.createClass({displayName: "SignUpComponent",
 
       React.createElement("div", {className: "row user-information"}, 
         React.createElement("div", {className: "col xs12 col s12 col l12 col m12 logo left-align"}, 
-          React.createElement("img", {id: "signup-logo", src: "././images/logo.png"})
+          React.createElement("img", {id: "signup-logo", src: "././images/Kikkitlogo.png", alt: "logo"})
         ), 
         React.createElement("div", {className: "col xs12 col s12 col l12 col m12 create"}, "CREATE A NEW ACCOUNT FOR KICKKIT"), 
 
@@ -53,11 +53,11 @@ var SignUpComponent = React.createClass({displayName: "SignUpComponent",
             React.createElement("div", {className: "row"}, 
               React.createElement("div", {className: "col xs12 col s12 col l12 col m12"}, 
                 React.createElement("div", {className: "row first-last"}, 
-                  React.createElement("div", {className: "input-field col xs6 col s6 col l6 col m6"}, 
+                  React.createElement("div", {className: "input-field col xs12 col s12 col l6 col m6"}, 
                     React.createElement("input", {"data-parsley-minlength": "4", id: "first_name", type: "text", className: "validate", required: ""}), 
                     React.createElement("label", {required: "", htmlFor: "first_name"}, "First Name *")
                   ), 
-                  React.createElement("div", {className: "input-field col xs6 col s6 col l6 col m6"}, 
+                  React.createElement("div", {className: "input-field col xs12 col s12 col l6 col m6"}, 
                     React.createElement("input", {id: "last_name", type: "text", className: "validate"}), 
                     React.createElement("label", {htmlFor: "last_name"}, "Last Name *")
                   )

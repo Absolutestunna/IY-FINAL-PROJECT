@@ -2,24 +2,104 @@
 // Import Bootstrap
 @import "../../materialize-src/sass/materialize";
 
- @media #{$small-and-down} {
-  #app {
-    padding-top: 0;
+
+@media (min-width: 200px) and (max-width: 600px) {
+
+  ///////////////////////////////////////BODY////////////////////////////////////
+
+  body {
+    background-position: 52% 100%;
   }
-  .sign-in {
-    
+  #app {
+    .play {
+      width: 300px;
+    }
+
+  //////////////////////////////WELCOME PAGE////////////////////////////////////
+
+    #welcome-body .welcome-container {
+      .play {
+        .first-set {
+          font-size: 60px;
+          margin-top: 40px;
+        }
+
+      }
+      .logo-container {
+        margin-top: 80px;
+        #logo {
+          width: 280px;
+          height: 130px;
+        }
+      }
+    }
+
+
+  //////////////////////////////PROFILE PAGE////////////////////////////////////
+
+  .profile-page {
+    .profilePic {
+      img {
+        width: 43%;
+        height: 160px;
+      }
+    }
+    .edit-button {
+      left: 46.5%;
+      top: 326px;
+    }
+  }
+
+
+//////////////////////////////////FIND GAMES////////////////////////////////////
+  .map {
+    width: 100%;
+    height: 244px;
+    #map {
+      width: 100%;
+      top: 149px;
+      height: 100%;
+      left: 0;
+    }
+
+  }
+  .create-match {
+    top: 558px;
+    left: 38%;
+    margin-top: 0;
+  }
+
+
+////////////////////////////////CREATE MATCH////////////////////////////////////
+.public-private {
+  .public {
+    margin-bottom: 30px;
   }
 }
-  // @media #{$small-and-down} {
-  //   // styles for small screens and down
-  //     #app {
-  //       .play {
-  //         .first-set {
-  //           font-size: 50px;
-  //         }
-  //       }
-  //       .logo-container {
-  //         margin-top: 50px;
-  //       }
-  //     }
-  // }
+
+////////////////////////////////GAMES DISTANCE//////////////////////////////////
+
+.games-info {
+    .distance-logout {
+      margin-bottom: 20px;
+    }
+    .games-details {
+      margin-top: 330px;
+    }
+
+    #map1 {
+      width: 66%;
+      top: 418px;
+      bottom: 0;
+      
+    }
+
+  }
+
+}//END OF APP
+
+
+
+
+
+}

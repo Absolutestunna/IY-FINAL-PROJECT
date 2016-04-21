@@ -117,15 +117,15 @@ var ProfilePageComponent = React.createClass({
 
 
         <div className="col m12 col s12 col xs12 center-align">
-          <div className="profile-info">
-            <div onClick={this.handleShow} className="profilePic">
+          <div className="profile-info row">
+            <div onClick={this.handleShow} className="profilePic col m12 col xs12 col s12">
               <img id="profilePic" src={this.state.profilePic} alt="profile-pic"/>
             </div>
 
             <a onClick={this.handleSlider} className="edit-button btn-floating btn-tiny waves-effect waves-light grey darken-1"><i className="material-icons">mode_edit</i></a>
 
-            <h3 id="user">{user}</h3>
-            <h5 id="tel">{this.state.tel}</h5>
+            <h3 className="col m12 col s12 col xs12" id="user">{user}</h3>
+            <h5 className="col m12 col s12 col xs12" id="tel">{this.state.tel}</h5>
           </div>
           <form action="#" className="editSlider"id="fileupload" encType="multipart/form-data" method="post">
            <div className="file-field input-field">
@@ -138,9 +138,9 @@ var ProfilePageComponent = React.createClass({
              </div>
            </div>
 
-           <div className="input-field col m12 s6 left-align">
+           <div className="input-field col l12 col m12 s6 left-align">
              <div className="row">
-               <div className="col m10">
+               <div className="col m10 col xs10 col s10">
                  <i className="material-icons prefix">phone</i>
                  <input onChange={this.handlePhoneNumberCapture} id="icon_telephone" type="tel" className="validate" />
                  <label htmlFor="icon_telephone">Telephone</label>

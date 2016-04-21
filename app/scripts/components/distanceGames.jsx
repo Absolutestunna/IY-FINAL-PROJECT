@@ -85,7 +85,7 @@ var GameDetailController = React.createClass({
     var app = this.props.app;
     return(
       <div className="row games-info">
-        <div className="distance-logout col m12 right-align">
+        <div className="distance-logout col xs12 col s12 col l12 col m12 right-align">
           <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
         </div>
         <DistanceGamesListComponent
@@ -126,8 +126,8 @@ var DistanceGamesListComponent = React.createClass({
       });
 
     return (
-        <div className="col m5 area-games">
-          <ul className="collection with-header">
+        <div className="col m5 col s12 col xs 12 col l5 area-games">
+          <ul className="collection with-header center-align">
             <li className="header-collection collection-header">
               <i className="fa fa-futbol-o fa-2x" aria-hidden="true"></i>
               <h5>AVAILABLE GAMES</h5>
@@ -172,16 +172,20 @@ var GamesDetailComponent = React.createClass({
   },
   render: function(){
     return (
-      <div className="col m7 games-details">
-        <h3>{this.props.time}</h3>
-        <h1>{this.props.name}</h1>
-        <div>
-          <i className="icon medium material-icons">room</i>
-          <span>{this.props.address}</span>
+      <div>
+        <div className="col m7 col s12 col xs 12 col l7 games-details">
+          <h3>{this.props.time}</h3>
+          <h1>{this.props.name}</h1>
+          <div>
+            <i className="icon medium material-icons">room</i>
+            <span>{this.props.address}</span>
+          </div>
+          <p className="pdetails">{this.props.details}</p>
+          <a className="btn waves-effect waves-light light-green accent-3 join-game " onClick={this.handleGame}>JOIN GAME</a>
+          <div id="map1"></div>
         </div>
-        <p className="pdetails">{this.props.details}</p>
-        <button className="btn waves-effect waves-light light-green accent-3 join-game" onClick={this.handleGame}>JOIN GAME</button>
-        <div id="map1"></div>
+
+
       </div>
     )
   }
@@ -197,13 +201,12 @@ var Game = React.createClass({
     var model = this.props.model
     return(
       <li className="row game-list collection-header">
-        <div className="col m12">
+        <div className="col m12 col s12 col xs 12 col l12">
           <h5 className="left-align">{model.get('name')}</h5>
-          <a onClick={this.handleGameDetail} className="btn waves-effect waves-light red right">
+          <a onClick={this.handleGameDetail} modal-trigger className="btn waves-effect waves-light red right">
             DETAILS
           </a>
         </div>
-
       </li>
     );
   }

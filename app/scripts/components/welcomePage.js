@@ -21,7 +21,7 @@ var WelcomePageComponent = React.createClass({displayName: "WelcomePageComponent
           React.createElement("div", {className: "col m12 col s12 col l12 welcome-container"}, 
 
             React.createElement("div", {className: "row play"}, 
-              React.createElement("div", {className: "col m12 col m12 col s12"}, 
+              React.createElement("div", {className: "col s12 col xs12 col m12 col l12 col s12"}, 
                 React.createElement("div", {className: "description first-set center-align"}, "WELCOME TO KICKKIT."), 
                 React.createElement("div", {className: "description second-set center-align"}, "Let's get a friendly game of soccer.")
               )
@@ -37,7 +37,7 @@ var WelcomePageComponent = React.createClass({displayName: "WelcomePageComponent
               )
             ), 
             React.createElement("div", {className: "row logo-container"}, 
-              React.createElement("div", {className: "col m12 center-align"}, 
+              React.createElement("div", {className: "col m12 col s12 col xs12 col l12 center-align"}, 
                 React.createElement("img", {id: "logo", src: "././images/Kikkitlogo.png", alt: "logo"})
               )
             )

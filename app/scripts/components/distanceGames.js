@@ -84,7 +84,7 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
     var app = this.props.app;
     return(
       React.createElement("div", {className: "row games-info"}, 
-        React.createElement("div", {className: "distance-logout col m12 right-align"}, 
+        React.createElement("div", {className: "distance-logout col xs12 col s12 col l12 col m12 right-align"}, 
           React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
         ), 
         React.createElement(DistanceGamesListComponent, {
@@ -125,8 +125,8 @@ var DistanceGamesListComponent = React.createClass({displayName: "DistanceGamesL
       });
 
     return (
-        React.createElement("div", {className: "col m5 area-games"}, 
-          React.createElement("ul", {className: "collection with-header"}, 
+        React.createElement("div", {className: "col m5 col s12 col xs 12 col l5 area-games"}, 
+          React.createElement("ul", {className: "collection with-header center-align"}, 
             React.createElement("li", {className: "header-collection collection-header"}, 
               React.createElement("i", {className: "fa fa-futbol-o fa-2x", "aria-hidden": "true"}), 
               React.createElement("h5", null, "AVAILABLE GAMES")
@@ -171,16 +171,20 @@ var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent
   },
   render: function(){
     return (
-      React.createElement("div", {className: "col m7 games-details"}, 
-        React.createElement("h3", null, this.props.time), 
-        React.createElement("h1", null, this.props.name), 
-        React.createElement("div", null, 
-          React.createElement("i", {className: "icon medium material-icons"}, "room"), 
-          React.createElement("span", null, this.props.address)
-        ), 
-        React.createElement("p", {className: "pdetails"}, this.props.details), 
-        React.createElement("button", {className: "btn waves-effect waves-light light-green accent-3 join-game", onClick: this.handleGame}, "JOIN GAME"), 
-        React.createElement("div", {id: "map1"})
+      React.createElement("div", null, 
+        React.createElement("div", {className: "col m7 col s12 col xs 12 col l7 games-details"}, 
+          React.createElement("h3", null, this.props.time), 
+          React.createElement("h1", null, this.props.name), 
+          React.createElement("div", null, 
+            React.createElement("i", {className: "icon medium material-icons"}, "room"), 
+            React.createElement("span", null, this.props.address)
+          ), 
+          React.createElement("p", {className: "pdetails"}, this.props.details), 
+          React.createElement("a", {className: "btn waves-effect waves-light light-green accent-3 join-game ", onClick: this.handleGame}, "JOIN GAME"), 
+          React.createElement("div", {id: "map1"})
+        )
+
+
       )
     )
   }
@@ -196,13 +200,12 @@ var Game = React.createClass({displayName: "Game",
     var model = this.props.model
     return(
       React.createElement("li", {className: "row game-list collection-header"}, 
-        React.createElement("div", {className: "col m12"}, 
+        React.createElement("div", {className: "col m12 col s12 col xs 12 col l12"}, 
           React.createElement("h5", {className: "left-align"}, model.get('name')), 
-          React.createElement("a", {onClick: this.handleGameDetail, className: "btn waves-effect waves-light red right"}, 
+          React.createElement("a", {onClick: this.handleGameDetail, "modal-trigger": true, className: "btn waves-effect waves-light red right"}, 
             "DETAILS"
           )
         )
-
       )
     );
   }

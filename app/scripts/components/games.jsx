@@ -162,10 +162,10 @@ var GamesComponent = React.createClass({
               <div className="col m8 col s11 col xs11 col l8 center-align game-name">
                 <h4>GAMES</h4>
               </div>
-              <div className="col xs1 col s1 right-align hide-on-small-and-up">
+              <div className="col xs1 col m1 col l1 col s1 right-align hide-on-small-and-up">
                   <a onClick={this.handleCurrentLocation} className="light-green accent-3 btn-floating btn-large waves-effect waves-light"><i className="tiny material-icons">room</i></a>
               </div>
-              <div className="sign-out-icon col s1 col xs1 col l1 col m1 hide-on-small-only right-align">
+              <div className="sign-out-icon col s1 col xs1 col l1 col m1 hide-on-small-and-down right-align">
                 <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
               </div>
             </div>
@@ -184,8 +184,8 @@ var GamesComponent = React.createClass({
               </div>
             </div>
 
-            <span className="col xs11 col s11 right-align white-text hide-on-medium-and-up">Use your location</span>
-            <div className="col m3 col l1 col xs1 col s1 right-align" id="current-location">
+            <span className="col xs11 col s11 right-align white-text hide-on-small-and-down">Use your location</span>
+            <div className="col m3 col l1 col xs1 col s1 hide-on-small-and-down right-align" id="current-location">
                 <a onClick={this.handleCurrentLocation} className="light-green accent-3 btn-floating btn-large waves-effect waves-light"><i className="tiny material-icons">room</i></a>
             </div>
           </div>

@@ -22,7 +22,7 @@ var WelcomePageComponent = React.createClass({
           <div className="col m12 col s12 col l12 welcome-container">
 
             <div className="row play">
-              <div className="col m12 col m12 col s12">
+              <div className="col s12 col xs12 col m12 col l12 col s12">
                 <div className='description first-set center-align'>WELCOME TO KICKKIT.</div>
                 <div className='description second-set center-align'>Let's get a friendly game of soccer.</div>
               </div>
@@ -38,7 +38,7 @@ var WelcomePageComponent = React.createClass({
               </div>
             </div>
             <div className="row logo-container">
-              <div className="col m12 center-align">
+              <div className="col m12 col s12 col xs12 col l12 center-align">
                 <img id='logo' src='././images/Kikkitlogo.png' alt="logo" />
               </div>
             </div>
