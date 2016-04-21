@@ -15,29 +15,63 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 
 
 body {
-    background-image: url('https://farpostfooty.files.wordpress.com/2016/02/goal-photo.jpeg?w=1200');
+    background-image: url('././goal-photo.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     background-position: 40% 100%;
     position: relative;
-    padding-top: 120px;
-
 }
+
+
+
+  /* label color */
+   .input-field label {
+     color: white;
+   }
+   /* label focus color */
+   .input-field input[type=text]:focus + label {
+     color: white;
+   }
+   .input-field input[type=text] {
+     color: white;
+   }
+   .input-field input[type=password] {
+     color: white;
+   }
+   /* label underline focus color */
+   .input-field input[type=text]:focus {
+     border-bottom: 1px solid #FFF;
+     box-shadow: 0 1px 0 0 black;
+     color: white;
+   }
+   /* valid color */
+   .input-field input[type=text].valid {
+     border-bottom: 1px solid #76ff03;
+     box-shadow: 0 1px 0 0 black;
+   }
+   /* invalid color */
+   .input-field input[type=text].invalid {
+     border-bottom: 1px solid red;
+     box-shadow: 0 1px 0 0 black;
+   }
+   /* icon prefix focus color */
+   .input-field .prefix.active {
+     color: #FFF;
+   }
 
 /////////////////////////////////app container///////////////////////////////
 #app {
   padding-left: 17%;
   padding-right: 17%;
   padding-top: 60px;
-  margin: 0;
   width: 100%;
   position: relative;
 }
-#app::before{
+body::before{
   content:"";
   position: absolute;
-  height:3000px;
+  height:1000px;
   left: 0;
   top: 0;
   right: 0;

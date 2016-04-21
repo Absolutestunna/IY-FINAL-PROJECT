@@ -14,35 +14,35 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
       time: "",
       details: "",
       address: "",
-      geoPoint: []
+      geoPoint: [],
+      crew: []
     }
   },
   componentWillMount: function(){
     if (this.props.app.publicMatches.length <= 0){
       Backbone.history.navigate('games', {trigger: true});
-
     };
     if (!Parse.User.current()){
       Backbone.history.navigate('', {trigger: true});
     };
+
+
   },
   handleJoinPublicGame: function(model){
-    console.log('model is: ', model);
-    var relation = model[0].relation("publicGameCrew");
+    var relation = model.relation("publicGameCrew");
     relation.add(Parse.User.current());
-    model[0].save();
+    model.save();
   },
   handleDetailGame: function(model){
-    var DetailQuery = Parse.Object.extend("pumatch")
+    var DetailQuery = Parse.Object.extend("pumatch");
     var detailQuery = new Parse.Query(DetailQuery);
+    detailQuery.include('publicGameCrew');
     detailQuery.equalTo('objectId', model.id);
-    var id = model.id;
+
     var self = this;
     detailQuery.find({
       success: function(result){
-        console.log('your result is: ', result);
         self.setState({
-          game: result[0],
           name: result[0].get('name'),
           time: result[0].get('time'),
           details: result[0].get('details'),
@@ -55,7 +55,23 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
       error: function(error){
         console.log(error);
       }
-    })
+    });
+
+    // var puMatchQuery = new Parse.Query("pumatch");
+    // var relation = puMatchQuery.relation('publicGameCrew');
+    // console.log(relation);
+    // var query = relation.query();
+    // console.log(query);
+    // query.find({
+    //   success: function(result){
+    //     console.log('relation query', result);
+    //   },
+    //   error: function(error){
+    //     console.log('error', error);
+    //   }
+    // });
+
+
   },
 
   handleLogout: function(e){
