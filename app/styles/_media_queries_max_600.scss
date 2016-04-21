@@ -4,11 +4,13 @@
 
 
 @media (min-width: 200px) and (max-width: 600px) {
-
   ///////////////////////////////////////BODY////////////////////////////////////
 
   body {
     background-position: 52% 100%;
+  }
+  body::before{
+    height: 1200px !important;
   }
   #app {
     .play {
@@ -91,15 +93,42 @@
       width: 66%;
       top: 418px;
       bottom: 0;
-      
+
     }
+
 
   }
 
-}//END OF APP
+///////////////////////////////////////CREW/////////////////////////////////////
+
+
+    .crew-container .crew-pics .eachMember .card-header img {
+      width: 100%;
+      height: 100%;
+    }
+    .add-crew {
+      height: 100%;
+      a {
+        width: 100%;
+        height: 117px;
+        padding-top: 32px;
+        padding-left: 18px;
+      }
+    }
+
+
+  ///////////////////////////////INVITATIONS(MESSAGE)////////////////////////////
+
+    .invite-nav {
+      margin-bottom: 30px;
+    }
+
+
+/////////////////////////////////////////////////////////////////////////////////
+  }//END OF APP
 
 
 
 
 
-}
+}//END OF MEDIA

@@ -7,8 +7,9 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 
 // Import Materialize
 @import "../../materialize-src/sass/materialize";
-@import "media_queries";
-@import "variable";
+@import "media_queries_max_600";
+@import "_media_queries_max_992";
+
 
 /////////////////////////////////UTILITIES//////////////////////////////////////
 
@@ -135,11 +136,6 @@ body::before{
     }
     .logo-container {
       margin-top: 125px;
-      	// filter: grayscale(1);
-      	// -webkit-filter: grayscale(1);
-      	// -moz-filter: grayscale(1);
-      	// -o-filter: grayscale(1);
-      	// -ms-filter: grayscale(1);
       #logo {
         width: 350px;
         height: 150px;
@@ -158,11 +154,6 @@ body::before{
     #signup-logo {
       height: 100px;
       width: 200px;
-      // filter: grayscale(1);
-      // -webkit-filter: grayscale(1);
-      // -moz-filter: grayscale(1);
-      // -o-filter: grayscale(1);
-      // -ms-filter: grayscale(1);
     }
   }
 
@@ -199,11 +190,6 @@ body::before{
     #signin-logo {
       height: 100px;
       width: 230px;
-      filter: grayscale(1);
-      -webkit-filter: grayscale(1);
-      -moz-filter: grayscale(1);
-      -o-filter: grayscale(1);
-      -ms-filter: grayscale(1);
     }
   }
   .create1 {
@@ -399,7 +385,7 @@ body::before{
 
       }
       .card-header {
-        border: 1px solid #76ff03;
+        border: 1px solid #FFF;
         border-radius: 5%;
 
         img {

@@ -156,13 +156,13 @@ var GamesComponent = React.createClass({
 
           <div className="col xs12 col s12 col m12 col l12">
             <div className="row game-nav">
-              <div className="col m3 col l3 hide-on-small-and-down">
+              <div className="col m4 col l3 hide-on-small-and-down">
                 <img id="games-logo" src="././images/Kikkitlogo.png"/>
               </div>
-              <div className="col m8 col s11 col xs11 col l8 center-align game-name">
-                <h4>GAMES</h4>
+              <div className="col m6 col s11 col xs11 col l8 center-align game-name">
+                <h4>FIND GAMES</h4>
               </div>
-              <div className="col xs1 col m1 col l1 col s1 right-align hide-on-small-and-up">
+              <div className="col xs1 col m1 col l1 col s1 right-align hide-on-medium-and-up white-locator">
                   <a onClick={this.handleCurrentLocation} className="light-green accent-3 btn-floating btn-large waves-effect waves-light"><i className="tiny material-icons">room</i></a>
               </div>
               <div className="sign-out-icon col s1 col xs1 col l1 col m1 hide-on-small-and-down right-align">
@@ -179,19 +179,18 @@ var GamesComponent = React.createClass({
                   <label htmlFor="address">Search for address</label>
                 </div>
                 <div className="col m3 hide-on-small-and-down search-button">
-                  <button onClick={this.handleSetLocation} className="btn btn-default center-align light-green accent-3">Search Games</button>
+                  <button onClick={this.handleSetLocation} className="btn btn-default center-align light-green accent-3">Search</button>
                 </div>
               </div>
             </div>
 
-            <span className="col xs11 col s11 right-align white-text hide-on-small-and-down">Use your location</span>
             <div className="col m3 col l1 col xs1 col s1 hide-on-small-and-down right-align" id="current-location">
                 <a onClick={this.handleCurrentLocation} className="light-green accent-3 btn-floating btn-large waves-effect waves-light"><i className="tiny material-icons">room</i></a>
             </div>
           </div>
 
           <div className="map">
-            <div id="map"></div>
+            <div id="map" className="map-space"></div>
             <div className="gameDetails"></div>
           </div>
 

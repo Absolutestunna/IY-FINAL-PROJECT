@@ -125,7 +125,7 @@ var DistanceGamesListComponent = React.createClass({displayName: "DistanceGamesL
       });
 
     return (
-        React.createElement("div", {className: "col m5 col s12 col xs 12 col l5 area-games"}, 
+        React.createElement("div", {id: "area-games", className: "col m5 col s12 col xs 12 col l5 area-games"}, 
           React.createElement("ul", {className: "collection with-header center-align"}, 
             React.createElement("li", {className: "header-collection collection-header"}, 
               React.createElement("i", {className: "fa fa-futbol-o fa-2x", "aria-hidden": "true"}), 

@@ -1,0 +1,103 @@
+@media (min-width: 601px) and (max-width: 992px) {
+  body {
+    background-position: 52% 100%;
+  }
+  body::before{
+    height: 1200px;
+  }
+
+  //////////////////////////////PROFILE PAGE////////////////////////////////////
+  .profile-page {
+    .profilePic {
+      #profilePic {
+        width: 43%;
+        height: 160px;
+      }
+    }
+    #edit-btn {
+      left: 46.5%;
+      top: 325px;
+    }
+  }
+
+///////////////////////////////////////CREW/////////////////////////////////////
+
+.crew-container .crew-pics .eachMember .card-header img {
+  width: 100%;
+  height: 100% !important;
+}
+.add-crew {
+  height: 100%;
+  a {
+    width: 100%;
+    padding-top: 50px;
+    padding-left: 28px;
+  }
+}
+
+
+/////////////////////////////////FIND GAMES/////////////////////////////////////
+
+
+.games {
+  .white-locator {
+    visibility: hidden;
+  }
+
+  .map-space {
+       width: 100% !important;
+       top: 270px !important;
+       bottom: 0;
+       left: 0 !important;
+
+     }
+     .create-match {
+       top: 172px !important;
+       left: 44% !important;
+     }
+
+
+}
+
+
+////////////////////////////////GAMES DISTANCE//////////////////////////////////
+
+.games-info {
+  #area-games {
+    ul {
+      li:first-child {
+        i {
+          font-size: 1em;
+        }
+        h5 {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  #games-details {
+      h3 {
+        font-size: 1.8rem;
+      }
+      h1 {
+        font-size: 3rem;
+      }
+  }
+//     .distance-logout {
+//       margin-bottom: 20px;
+//     }
+//     .games-details {
+//       margin-top: 330px;
+//     }
+//
+//     #map1 {
+//       width: 66%;
+//       top: 418px;
+//       bottom: 0;
+//
+//     }
+//
+//
+  }
+
+}//END OF MEDIA

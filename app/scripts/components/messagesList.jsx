@@ -122,10 +122,10 @@ var MessagesComponent = React.createClass({
       return (
         <div >
           <div className="invite-nav row">
-            <div className="invitation-logo left-align col m9">
+            <div className="invitation-logo left-align col m9 col s9 col xs 9">
               <img id="invitation-logo" src="././images/Kikkitlogo.png"/>
             </div>
-            <div className="col m3 right-align">
+            <div className="col m3 col s3 col xs3 col l3 right-align">
               <a className="invitation-sign-out">
                 <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
               </a>
@@ -150,11 +150,11 @@ var Message = React.createClass({
     var nameMod = this.props.sender;
     return (
       <li className="row collection-header each-invite">
-          <div className="col m10 left-align nameMod">Please accept {nameMod.firstName + " " + nameMod.lastName}&#39;s invitation to join their crew</div>
-          <div className="col m1 center-align">
+          <div className="col m8 col l8 col xs8 col s8 left-align nameMod">Please accept {nameMod.firstName + " " + nameMod.lastName}&#39;s invitation to join their crew</div>
+          <div className="col m2 col l2 xs2 col s2 right-align">
             <a onClick={this.props.handleAccept.bind(this, nameMod)} className="btn-tiny btn-floating btn-large waves-effect waves-light light-green accent-3"><i className="material-icons">done</i></a>
           </div>
-          <div className="col m1 right-align">
+          <div className="col m2 col l2 xs2 col s2 right-align">
             <button onClick={this.props.handleReject.bind(this, nameMod)} className="btn-floating btn-large waves-effect waves-light grey darken-1"><i className="material-icons">thumb_down</i></button>
           </div>
       </li>

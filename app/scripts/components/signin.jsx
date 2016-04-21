@@ -30,7 +30,7 @@ var SignInComponent = React.createClass({
     return (
       <div className="row sign-in">
         <div className="col l12 col m12 col s12 col xs12 logo1 left-align">
-          <img id="signin-logo" src="././images/logo.png"/>
+          <img id="signin-logo" src="././images/Kikkitlogo.png"/>
         </div>
         <div className="col m12 col s12 col xs12 create1">LOG IN TO KICKKIT</div>
           <div className="input-field col m12 col s12 col xs12">
@@ -51,7 +51,7 @@ var SignInComponent = React.createClass({
 
         <div className="row">
           <div className="input-field col m12">
-            <div id="error"></div>
+            <div className="red-text" id="error"></div>
           </div>
         </div>
 

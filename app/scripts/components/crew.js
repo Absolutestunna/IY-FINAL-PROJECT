@@ -106,22 +106,22 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
     });
     return (
         React.createElement("div", {className: "row crew-container"}, 
-          React.createElement("div", {className: "col m12"}, 
+          React.createElement("div", {className: "col xs12 col s12 col l12 col m12"}, 
             React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "col m11 center-align crew-title"}, 
+              React.createElement("div", {className: "col xs9 col s9 col l11 col m11 center-align crew-title"}, 
                 React.createElement("h4", null, "MY CREW")
               ), 
-              React.createElement("div", {className: "col m1 right-align"}, 
+              React.createElement("div", {className: "col xs3 col s3 col l1 col m1 right-align"}, 
                 React.createElement("a", {className: "crew-sign-out"}, 
                   React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
                 )
               )
             )
           ), 
-          React.createElement("div", {className: "col m12 crew-pics"}, 
+          React.createElement("div", {className: "col xs12 col s12 col l12 col m12 crew-pics"}, 
             React.createElement("div", {className: "row"}, 
               crewMember, 
-              React.createElement("div", {className: "col m3 center-align add-crew"}, 
+              React.createElement("div", {className: "col m4 col xs4 col s4 col l3 center-align add-crew"}, 
                 React.createElement("a", {onClick: this.handleSlider, className: "btn-large waves-effect waves-light"}, 
                   React.createElement("i", {className: "large material-icons"}, "perm_identity")
                 ), 
@@ -129,7 +129,7 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
               )
             )
           ), 
-          React.createElement("div", {className: "col m12 center-align createMatch"}, 
+          React.createElement("div", {className: "col xs12 col s12 col l12 col m12 center-align createMatch"}, 
             React.createElement("button", {onClick: this.handleCreateMatch, className: "btn-large waves-effect waves-light light-green accent-3"}, "Create Match")
           ), 
 
@@ -137,11 +137,11 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
 
           React.createElement("form", {onSubmit: this.handleSendInvite, id: "form-body", className: "col s12"}, 
             React.createElement("div", {className: "row"}, 
-              React.createElement("div", {className: "input-field col s12"}, 
+              React.createElement("div", {className: "input-field col xs12 col s12 col l12 col m12"}, 
                 React.createElement("input", {id: "email", type: "email", className: "validate"}), 
                 React.createElement("label", {htmlFor: "email", "data-error": "Please enter a valid email address"}, "Email")
               ), 
-              React.createElement("div", {className: "input-field col s12 center-align "}, 
+              React.createElement("div", {className: "input-field col xs12 col s12 col l12 col m12 center-align "}, 
                 React.createElement("button", {type: "submit", className: "btn-large waves-effect waves-light light-green accent-3"}, "Send Invite")
               )
             )
@@ -156,7 +156,7 @@ var CrewMemberComponent = React.createClass({displayName: "CrewMemberComponent",
   render: function(){
     var crewMember = this.props.member;
     return (
-        React.createElement("div", {className: "col m3 center-align eachMember"}, 
+        React.createElement("div", {className: "col m4 col xs4 col s4 center-align eachMember"}, 
           React.createElement("div", {className: "card"}, 
             React.createElement("div", {className: "card-header"}, 
               React.createElement("img", {src: crewMember.get('profilePics')._url, alt: "profile pic"})

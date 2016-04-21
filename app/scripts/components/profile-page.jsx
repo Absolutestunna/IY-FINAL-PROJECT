@@ -122,12 +122,12 @@ var ProfilePageComponent = React.createClass({
               <img id="profilePic" src={this.state.profilePic} alt="profile-pic"/>
             </div>
 
-            <a onClick={this.handleSlider} className="edit-button btn-floating btn-tiny waves-effect waves-light grey darken-1"><i className="material-icons">mode_edit</i></a>
+            <a onClick={this.handleSlider} id="edit-btn" className="edit-button btn-floating btn-tiny waves-effect waves-light grey darken-1"><i className="material-icons">mode_edit</i></a>
 
             <h3 className="col m12 col s12 col xs12" id="user">{user}</h3>
             <h5 className="col m12 col s12 col xs12" id="tel">{this.state.tel}</h5>
           </div>
-          <form action="#" className="editSlider"id="fileupload" encType="multipart/form-data" method="post">
+          <form action="#" className="editSlider" id="fileupload" encType="multipart/form-data" method="post">
            <div className="file-field input-field">
              <div className="btn">
                <span>File</span>

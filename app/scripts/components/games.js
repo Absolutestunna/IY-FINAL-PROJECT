@@ -155,13 +155,13 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
 
           React.createElement("div", {className: "col xs12 col s12 col m12 col l12"}, 
             React.createElement("div", {className: "row game-nav"}, 
-              React.createElement("div", {className: "col m3 col l3 hide-on-small-and-down"}, 
+              React.createElement("div", {className: "col m4 col l3 hide-on-small-and-down"}, 
                 React.createElement("img", {id: "games-logo", src: "././images/Kikkitlogo.png"})
               ), 
-              React.createElement("div", {className: "col m8 col s11 col xs11 col l8 center-align game-name"}, 
-                React.createElement("h4", null, "GAMES")
+              React.createElement("div", {className: "col m6 col s11 col xs11 col l8 center-align game-name"}, 
+                React.createElement("h4", null, "FIND GAMES")
               ), 
-              React.createElement("div", {className: "col xs1 col m1 col l1 col s1 right-align hide-on-small-and-up"}, 
+              React.createElement("div", {className: "col xs1 col m1 col l1 col s1 right-align hide-on-medium-and-up white-locator"}, 
                   React.createElement("a", {onClick: this.handleCurrentLocation, className: "light-green accent-3 btn-floating btn-large waves-effect waves-light"}, React.createElement("i", {className: "tiny material-icons"}, "room"))
               ), 
               React.createElement("div", {className: "sign-out-icon col s1 col xs1 col l1 col m1 hide-on-small-and-down right-align"}, 
@@ -178,19 +178,18 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
                   React.createElement("label", {htmlFor: "address"}, "Search for address")
                 ), 
                 React.createElement("div", {className: "col m3 hide-on-small-and-down search-button"}, 
-                  React.createElement("button", {onClick: this.handleSetLocation, className: "btn btn-default center-align light-green accent-3"}, "Search Games")
+                  React.createElement("button", {onClick: this.handleSetLocation, className: "btn btn-default center-align light-green accent-3"}, "Search")
                 )
               )
             ), 
 
-            React.createElement("span", {className: "col xs11 col s11 right-align white-text hide-on-small-and-down"}, "Use your location"), 
             React.createElement("div", {className: "col m3 col l1 col xs1 col s1 hide-on-small-and-down right-align", id: "current-location"}, 
                 React.createElement("a", {onClick: this.handleCurrentLocation, className: "light-green accent-3 btn-floating btn-large waves-effect waves-light"}, React.createElement("i", {className: "tiny material-icons"}, "room"))
             )
           ), 
 
           React.createElement("div", {className: "map"}, 
-            React.createElement("div", {id: "map"}), 
+            React.createElement("div", {id: "map", className: "map-space"}), 
             React.createElement("div", {className: "gameDetails"})
           ), 
 

@@ -29,7 +29,7 @@ var SignInComponent = React.createClass({displayName: "SignInComponent",
     return (
       React.createElement("div", {className: "row sign-in"}, 
         React.createElement("div", {className: "col l12 col m12 col s12 col xs12 logo1 left-align"}, 
-          React.createElement("img", {id: "signin-logo", src: "././images/logo.png"})
+          React.createElement("img", {id: "signin-logo", src: "././images/Kikkitlogo.png"})
         ), 
         React.createElement("div", {className: "col m12 col s12 col xs12 create1"}, "LOG IN TO KICKKIT"), 
           React.createElement("div", {className: "input-field col m12 col s12 col xs12"}, 
@@ -50,7 +50,7 @@ var SignInComponent = React.createClass({displayName: "SignInComponent",
 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "input-field col m12"}, 
-            React.createElement("div", {id: "error"})
+            React.createElement("div", {className: "red-text", id: "error"})
           )
         )
 

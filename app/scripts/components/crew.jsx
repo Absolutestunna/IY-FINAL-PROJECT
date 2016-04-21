@@ -107,22 +107,22 @@ var CrewComponent = React.createClass({
     });
     return (
         <div className="row crew-container">
-          <div className="col m12">
+          <div className="col xs12 col s12 col l12 col m12">
             <div className="row">
-              <div className="col m11 center-align crew-title">
+              <div className="col xs9 col s9 col l11 col m11 center-align crew-title">
                 <h4>MY CREW</h4>
               </div>
-              <div className="col m1 right-align">
+              <div className="col xs3 col s3 col l1 col m1 right-align">
                 <a className="crew-sign-out">
                   <i onClick={this.handleLogout} className="fa fa-sign-out fa-3x" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
           </div>
-          <div className="col m12 crew-pics">
+          <div className="col xs12 col s12 col l12 col m12 crew-pics">
             <div className="row">
               {crewMember}
-              <div className="col m3 center-align add-crew">
+              <div className="col m4 col xs4 col s4 col l3 center-align add-crew">
                 <a onClick={this.handleSlider} className="btn-large waves-effect waves-light">
                   <i className="large material-icons">perm_identity</i>
                 </a>
@@ -130,7 +130,7 @@ var CrewComponent = React.createClass({
               </div>
             </div>
           </div>
-          <div className="col m12 center-align createMatch">
+          <div className="col xs12 col s12 col l12 col m12 center-align createMatch">
             <button onClick={this.handleCreateMatch} className="btn-large waves-effect waves-light light-green accent-3">Create Match</button>
           </div>
 
@@ -138,11 +138,11 @@ var CrewComponent = React.createClass({
 
           <form onSubmit={this.handleSendInvite} id="form-body" className="col s12">
             <div className="row">
-              <div className="input-field col s12">
+              <div className="input-field col xs12 col s12 col l12 col m12">
                 <input id="email" type="email" className="validate" />
                 <label htmlFor="email" data-error="Please enter a valid email address">Email</label>
               </div>
-              <div className="input-field col s12 center-align ">
+              <div className="input-field col xs12 col s12 col l12 col m12 center-align ">
                 <button type="submit" className="btn-large waves-effect waves-light light-green accent-3">Send Invite</button>
               </div>
             </div>
@@ -157,7 +157,7 @@ var CrewMemberComponent = React.createClass({
   render: function(){
     var crewMember = this.props.member;
     return (
-        <div className="col m3 center-align eachMember">
+        <div className="col m4 col xs4 col s4 center-align eachMember">
           <div className="card">
             <div className="card-header">
               <img src={crewMember.get('profilePics')._url} alt="profile pic"/>

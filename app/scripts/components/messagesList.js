@@ -121,10 +121,10 @@ var MessagesComponent = React.createClass({displayName: "MessagesComponent",
       return (
         React.createElement("div", null, 
           React.createElement("div", {className: "invite-nav row"}, 
-            React.createElement("div", {className: "invitation-logo left-align col m9"}, 
+            React.createElement("div", {className: "invitation-logo left-align col m9 col s9 col xs 9"}, 
               React.createElement("img", {id: "invitation-logo", src: "././images/Kikkitlogo.png"})
             ), 
-            React.createElement("div", {className: "col m3 right-align"}, 
+            React.createElement("div", {className: "col m3 col s3 col xs3 col l3 right-align"}, 
               React.createElement("a", {className: "invitation-sign-out"}, 
                 React.createElement("i", {onClick: this.handleLogout, className: "fa fa-sign-out fa-3x", "aria-hidden": "true"})
               )
@@ -149,11 +149,11 @@ var Message = React.createClass({displayName: "Message",
     var nameMod = this.props.sender;
     return (
       React.createElement("li", {className: "row collection-header each-invite"}, 
-          React.createElement("div", {className: "col m10 left-align"}, "Please accept ", nameMod.firstName + " " + nameMod.lastName, "'s invitation to join their crew"), 
-          React.createElement("div", {className: "col m1 center-align"}, 
+          React.createElement("div", {className: "col m8 col l8 col xs8 col s8 left-align nameMod"}, "Please accept ", nameMod.firstName + " " + nameMod.lastName, "'s invitation to join their crew"), 
+          React.createElement("div", {className: "col m2 col l2 xs2 col s2 right-align"}, 
             React.createElement("a", {onClick: this.props.handleAccept.bind(this, nameMod), className: "btn-tiny btn-floating btn-large waves-effect waves-light light-green accent-3"}, React.createElement("i", {className: "material-icons"}, "done"))
           ), 
-          React.createElement("div", {className: "col m1 right-align"}, 
+          React.createElement("div", {className: "col m2 col l2 xs2 col s2 right-align"}, 
             React.createElement("button", {onClick: this.props.handleReject.bind(this, nameMod), className: "btn-floating btn-large waves-effect waves-light grey darken-1"}, React.createElement("i", {className: "material-icons"}, "thumb_down"))
           )
       )

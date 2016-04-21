@@ -126,7 +126,7 @@ var DistanceGamesListComponent = React.createClass({
       });
 
     return (
-        <div className="col m5 col s12 col xs 12 col l5 area-games">
+        <div id="area-games" className="col m5 col s12 col xs 12 col l5 area-games">
           <ul className="collection with-header center-align">
             <li className="header-collection collection-header">
               <i className="fa fa-futbol-o fa-2x" aria-hidden="true"></i>
@@ -173,7 +173,7 @@ var GamesDetailComponent = React.createClass({
   render: function(){
     return (
       <div>
-        <div className="col m7 col s12 col xs 12 col l7 games-details">
+        <div id="games-details" className="col m7 col s12 col xs 12 col l7 games-details">
           <h3>{this.props.time}</h3>
           <h1>{this.props.name}</h1>
           <div>
