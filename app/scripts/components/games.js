@@ -158,7 +158,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
               React.createElement("div", {className: "col m4 col l3 hide-on-small-and-down"}, 
                 React.createElement("img", {id: "games-logo", src: "././images/Kikkitlogo.png"})
               ), 
-              React.createElement("div", {className: "col m6 col s11 col xs11 col l8 center-align game-name"}, 
+              React.createElement("div", {className: "col m6 col s11 col xs11 col l7 center-align game-name"}, 
                 React.createElement("h4", null, "FIND GAMES")
               ), 
               React.createElement("div", {className: "col xs1 col m1 col l1 col s1 right-align hide-on-medium-and-up white-locator"}, 
@@ -183,7 +183,7 @@ var GamesComponent = React.createClass({displayName: "GamesComponent",
               )
             ), 
 
-            React.createElement("div", {className: "col m3 col l1 col xs1 col s1 hide-on-small-and-down right-align", id: "current-location"}, 
+            React.createElement("div", {className: "col m3 col l3 col xs1 col s1 hide-on-small-and-down right-align", id: "current-location"}, 
                 React.createElement("a", {onClick: this.handleCurrentLocation, className: "light-green accent-3 btn-floating btn-large waves-effect waves-light"}, React.createElement("i", {className: "tiny material-icons"}, "room"))
             )
           ), 

@@ -159,7 +159,7 @@ var GamesComponent = React.createClass({
               <div className="col m4 col l3 hide-on-small-and-down">
                 <img id="games-logo" src="././images/Kikkitlogo.png"/>
               </div>
-              <div className="col m6 col s11 col xs11 col l8 center-align game-name">
+              <div className="col m6 col s11 col xs11 col l7 center-align game-name">
                 <h4>FIND GAMES</h4>
               </div>
               <div className="col xs1 col m1 col l1 col s1 right-align hide-on-medium-and-up white-locator">
@@ -184,7 +184,7 @@ var GamesComponent = React.createClass({
               </div>
             </div>
 
-            <div className="col m3 col l1 col xs1 col s1 hide-on-small-and-down right-align" id="current-location">
+            <div className="col m3 col l3 col xs1 col s1 hide-on-small-and-down right-align" id="current-location">
                 <a onClick={this.handleCurrentLocation} className="light-green accent-3 btn-floating btn-large waves-effect waves-light"><i className="tiny material-icons">room</i></a>
             </div>
           </div>

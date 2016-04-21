@@ -9,6 +9,7 @@ $icon-font-path: '../../node_modules/bootstrap-sass/assets/fonts/bootstrap/';
 @import "../../materialize-src/sass/materialize";
 @import "media_queries_max_600";
 @import "_media_queries_max_992";
+@import "_media_queries_max_>992";
 
 
 /////////////////////////////////UTILITIES//////////////////////////////////////
@@ -210,7 +211,7 @@ body::before{
 }
 
 
-////////////////////////////////////Profile Page////////////////////////////////
+////////////////////////////////////PROFILE PAGE////////////////////////////////
 .profile-page {
   #profile-logo {
     height: 100px;
@@ -361,7 +362,7 @@ body::before{
       padding-top: 50px;
       height: 162px;
       background-color: #211F1F;
-      width: 89%;
+      width: 100%;
       border-radius: 4%;
       i {
         color: black;
@@ -504,7 +505,7 @@ body::before{
 .map {
   #map {
     position:absolute;
-    top: 235px;
+    top: 272px;
     bottom:80px;
     left: 206px;
     width: 67%;
