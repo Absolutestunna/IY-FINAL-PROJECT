@@ -204,7 +204,7 @@ var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent
             React.createElement("span", null, this.props.address)
           ), 
           React.createElement("p", {className: "pdetails"}, this.props.details), 
-          React.createElement("a", {className: "btn waves-effect waves-light light-green accent-3 join-game ", onClick: this.handleGame}, "JOIN GAME"), 
+          React.createElement("a", {className: "btn waves-effect waves-light light-green accent-3 center-align join-game", onClick: this.handleGame}, "JOIN GAME"), 
 
           React.createElement("div", {className: "row"}, 
             React.createElement("h5", {className: "col m12 col l12 col xs12 col s12 squad-number"}, "SQUAD (", squadNumbers, ")"), 

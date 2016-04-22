@@ -1,14 +1,12 @@
 @media (min-width: 200px) and (max-width: 600px) {
 
-  
+
 ///////////////////////////////////////BODY////////////////////////////////////
 
     body {
       background-position: 52% 100%;
     }
-    body::before{
-      height: 1200px !important;
-    }
+    
     #app {
       .play {
         width: 300px;

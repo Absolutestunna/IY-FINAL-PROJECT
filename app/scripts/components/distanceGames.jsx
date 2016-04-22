@@ -205,7 +205,7 @@ var GamesDetailComponent = React.createClass({
             <span>{this.props.address}</span>
           </div>
           <p className="pdetails">{this.props.details}</p>
-          <a className="btn waves-effect waves-light light-green accent-3 join-game " onClick={this.handleGame}>JOIN GAME</a>
+          <a className="btn waves-effect waves-light light-green accent-3 center-align join-game" onClick={this.handleGame}>JOIN GAME</a>
 
           <div className="row">
             <h5 className="col m12 col l12 col xs12 col s12 squad-number">SQUAD ({squadNumbers})</h5>
