@@ -84,7 +84,7 @@ body {
 body::before{
   content:"";
   position: absolute;
-  height:1000px;
+  height:1500px;
   left: 0;
   top: 0;
   right: 0;
@@ -212,6 +212,8 @@ body::before{
 
 
 ////////////////////////////////////PROFILE PAGE////////////////////////////////
+
+
 .profile-page {
   #profile-logo {
     height: 100px;
@@ -262,7 +264,11 @@ body::before{
 
 }
 
+
 /////////////////////////////////////GAMES//////////////////////////////////////
+
+
+
 .games {
   .game-nav {
     margin-bottom: 20px;
@@ -321,6 +327,9 @@ body::before{
 
 
 ///////////////////////////////////CREATE MATCH/////////////////////////////////
+
+
+
 .match-container {
   // margin-top: 100px;
   .createMatch {
@@ -339,7 +348,10 @@ body::before{
   }
 }
 
+
 ///////////////////////////////////////CREW////////////////////////////////////
+
+
 .crew-container {
   .crew-title {
     margin-bottom: 40px;
@@ -400,7 +412,6 @@ body::before{
 
       }
 
-
     }
   }
   .createMatch {
@@ -427,6 +438,8 @@ body::before{
 
 
 //////////////////////////////GAMES DISTANCE////////////////////////////////////
+
+
 .games-info {
   .distance-logout {
     color: white;
@@ -474,11 +487,6 @@ body::before{
     img {
       height: 100px;
       width: 230px;
-      // filter: grayscale(1);
-      // -webkit-filter: grayscale(1);
-      // -moz-filter: grayscale(1);
-      // -o-filter: grayscale(1);
-      // -ms-filter: grayscale(1);
     }
   }
   .invitation-sign-out {
@@ -501,7 +509,7 @@ body::before{
     }
   }
 }
-////////////////////////////////      ////////////////////////////////
+
 .map {
   #map {
     position:absolute;
@@ -515,7 +523,7 @@ body::before{
  }
  #map1 {
    position: absolute;
-   top: 490px;
+   top: 700px;
    bottom:80px;
    width: 33%;
    height: 300px;
@@ -528,9 +536,6 @@ body::before{
 }
 
 .profile-page {
-  // max-width: 600px;
-  // margin-top: 180px;
-  // border: 1px solid black;
   h3 {
     margin-top: 40px;
   }
@@ -545,12 +550,4 @@ body::before{
     margin-bottom: 30px;
 
   }
-  // display: inline-block;
-  // text-align: center;
-  // margin: 0 auto;
-  // margin-left: 50%;
-  // margin-right: 50%;
-
-  // padding: 170px 290px 0 290px;
-
 }

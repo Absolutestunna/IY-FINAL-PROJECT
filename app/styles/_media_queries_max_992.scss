@@ -7,6 +7,8 @@
   }
 
   //////////////////////////////PROFILE PAGE////////////////////////////////////
+
+
   .profile-page {
     .profilePic {
       #profilePic {
@@ -19,6 +21,7 @@
       top: 325px;
     }
   }
+
 
 ///////////////////////////////////////CREW/////////////////////////////////////
 
@@ -55,49 +58,33 @@
        top: 172px !important;
        left: 44% !important;
      }
-
-
 }
 
 
 ////////////////////////////////GAMES DISTANCE//////////////////////////////////
 
+
 .games-info {
-  #area-games {
-    ul {
-      li:first-child {
-        i {
-          font-size: 1em;
-        }
-        h5 {
-          font-size: 1rem;
+    #area-games {
+      ul {
+        li:first-child {
+          i {
+            font-size: 1em;
+          }
+          h5 {
+            font-size: 1rem;
+          }
         }
       }
     }
+    #games-details {
+        h3 {
+          font-size: 1.8rem;
+        }
+        h1 {
+          font-size: 3rem;
+        }
+    }
   }
-  #games-details {
-      h3 {
-        font-size: 1.8rem;
-      }
-      h1 {
-        font-size: 3rem;
-      }
-  }
-//     .distance-logout {
-//       margin-bottom: 20px;
-//     }
-//     .games-details {
-//       margin-top: 330px;
-//     }
-//
-//     #map1 {
-//       width: 66%;
-//       top: 418px;
-//       bottom: 0;
-//
-//     }
-//
-//
-  }
-
+  
 }//END OF MEDIA

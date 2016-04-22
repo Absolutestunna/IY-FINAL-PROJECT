@@ -1,23 +1,22 @@
-
-// Import Bootstrap
-@import "../../materialize-src/sass/materialize";
-
-
 @media (min-width: 200px) and (max-width: 600px) {
-  ///////////////////////////////////////BODY////////////////////////////////////
 
-  body {
-    background-position: 52% 100%;
-  }
-  body::before{
-    height: 1200px !important;
-  }
-  #app {
-    .play {
-      width: 300px;
+  
+///////////////////////////////////////BODY////////////////////////////////////
+
+    body {
+      background-position: 52% 100%;
     }
+    body::before{
+      height: 1200px !important;
+    }
+    #app {
+      .play {
+        width: 300px;
+      }
 
-  //////////////////////////////WELCOME PAGE////////////////////////////////////
+
+//////////////////////////////WELCOME PAGE////////////////////////////////////
+
 
     #welcome-body .welcome-container {
       .play {
@@ -37,98 +36,96 @@
     }
 
 
-  //////////////////////////////PROFILE PAGE////////////////////////////////////
+//////////////////////////////PROFILE PAGE////////////////////////////////////
 
-  .profile-page {
-    .profilePic {
-      img {
-        width: 43%;
-        height: 160px;
+    .profile-page {
+      .profilePic {
+        img {
+          width: 43%;
+          height: 160px;
+        }
+      }
+      .edit-button {
+        left: 46.5%;
+        top: 326px;
       }
     }
-    .edit-button {
-      left: 46.5%;
-      top: 326px;
-    }
-  }
 
 
 //////////////////////////////////FIND GAMES////////////////////////////////////
-  .map {
-    width: 100%;
-    height: 244px;
-    #map {
-      width: 100%;
-      top: 149px;
-      height: 100%;
-      left: 0;
-    }
 
-  }
-  .create-match {
-    top: 558px;
-    left: 38%;
-    margin-top: 0;
-  }
+
+    .map {
+      width: 100%;
+      height: 244px;
+      #map {
+        width: 100%;
+        top: 149px;
+        height: 100%;
+        left: 0;
+      }
+
+    }
+    .create-match {
+      top: 558px;
+      left: 38%;
+      margin-top: 0;
+    }
 
 
 ////////////////////////////////CREATE MATCH////////////////////////////////////
-.public-private {
-  .public {
-    margin-bottom: 30px;
-  }
-}
+
+
+    .public-private {
+      .public {
+        margin-bottom: 30px;
+      }
+    }
 
 ////////////////////////////////GAMES DISTANCE//////////////////////////////////
 
-.games-info {
-    .distance-logout {
-      margin-bottom: 20px;
-    }
-    .games-details {
-      margin-top: 330px;
-    }
 
-    #map1 {
-      width: 66%;
-      top: 418px;
-      bottom: 0;
+    .games-info {
+        .distance-logout {
+          margin-bottom: 20px;
+        }
+        .games-details {
+          margin-top: 330px;
+        }
 
-    }
+        #map1 {
+          width: 66%;
+          top: 418px;
+          bottom: 0;
+
+        }
 
 
-  }
+      }
 
 ///////////////////////////////////////CREW/////////////////////////////////////
 
 
-    .crew-container .crew-pics .eachMember .card-header img {
-      width: 100%;
-      height: 100%;
-    }
-    .add-crew {
-      height: 100%;
-      a {
+      .crew-container .crew-pics .eachMember .card-header img {
         width: 100%;
-        height: 117px;
-        padding-top: 32px;
-        padding-left: 18px;
+        height: 100%;
       }
-    }
+      .add-crew {
+        height: 100%;
+        a {
+          width: 100%;
+          height: 117px;
+          padding-top: 32px;
+          padding-left: 18px;
+        }
+      }
 
 
-  ///////////////////////////////INVITATIONS(MESSAGE)////////////////////////////
+///////////////////////////////INVITATIONS(MESSAGE)////////////////////////////
 
-    .invite-nav {
-      margin-bottom: 30px;
-    }
+      .invite-nav {
+        margin-bottom: 30px;
+      }
 
-
-/////////////////////////////////////////////////////////////////////////////////
-  }//END OF APP
-
-
-
-
-
+    }//END OF APP
 }//END OF MEDIA

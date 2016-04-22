@@ -56,14 +56,12 @@ var CreateMatchComponent = React.createClass({
     var url = urlBase+body+q+'.json?access_token='+accessToken;
     var self = this;
     $.get(url, function( data ) {
-
-      {/*geojson data to be passed to render the map*/}
+      //geojson data to be passed to render the map
       self.setState({
         geoLocation: data.features[0].center
       });
 
     });
-    console.log('stateLocation is: ', this.state.geoLocation);
     var puMatch = new PuMatch();
     puMatch.set({
       name: $("#park_name").val(),
@@ -75,7 +73,7 @@ var CreateMatchComponent = React.createClass({
     puMatch.save(null, {
       success: function(info) {
             console.log('New object created with objectId: ' + info.id);
-            self.addLocation(info.id)
+            self.addLocation(info.id);
         },
       error: function(info, error) {
         console.log('Failed to create new object, with error code: ' + error.message);
@@ -83,7 +81,6 @@ var CreateMatchComponent = React.createClass({
     });
     var timer = setTimeout(function(){
       $(".publicMatch-notification").hide();
-      Backbone.history.navigate('profile', {trigger: true});
     }, 3000);
 
   },
@@ -96,6 +93,7 @@ addLocation: function(id){
 
         result.set("geoPoint", point);
         result.save();
+        console.log('geoPoint created');
       },
       error: function(error) {
         console.log('objectId error is: ', error);
@@ -110,7 +108,6 @@ handleInviteCrew: function(e){
   var validNumbers = this.state.crewNumbers.filter(function(number){
     return number !== undefined;
   });
-  console.log(validNumbers);
   var data = {
     name: state.name,
     time: state.time,
@@ -118,7 +115,6 @@ handleInviteCrew: function(e){
     details: state.details,
     user: Parse.User.current().get('username'),
     validNumbers: validNumbers
-
   }
   var invite = new InviteModel();
     invite.set('data', data);
@@ -129,7 +125,6 @@ handleInviteCrew: function(e){
       $(".invite-info").hide();
       Backbone.history.navigate('profile', {trigger: true});
     }, 3000);
-
 },
   render: function(){
 

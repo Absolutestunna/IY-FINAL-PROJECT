@@ -2,6 +2,7 @@ var Backbone = require('backbone');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Parse = require('parse');
+var _ = require('underscore');
 require('backbone-react-component');
 
 var GameDetailController = React.createClass({displayName: "GameDetailController",
@@ -15,7 +16,8 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
       details: "",
       address: "",
       geoPoint: [],
-      crew: []
+      crew: [],
+      game: false
     }
   },
   componentWillMount: function(){
@@ -25,24 +27,35 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
     if (!Parse.User.current()){
       Backbone.history.navigate('', {trigger: true});
     };
-
-
   },
   handleJoinPublicGame: function(model){
-    var relation = model.relation("publicGameCrew");
-    relation.add(Parse.User.current());
-    model.save();
+    console.log('model here', model);
+    var self = this;
+    var crew = model.get('crew') || [];
+    var IDs = crew.map(function(crewID){
+      return crewID.id;
+    });
+     if (_.contains(IDs, Parse.User.current().id) === false) {
+        crew.push(Parse.User.current());
+        model.set({'crew': crew});
+        model.save().then(function(){
+          self.forceUpdate();
+        });
+      }
+
+
+
   },
   handleDetailGame: function(model){
     var DetailQuery = Parse.Object.extend("pumatch");
     var detailQuery = new Parse.Query(DetailQuery);
-    detailQuery.include('publicGameCrew');
     detailQuery.equalTo('objectId', model.id);
 
     var self = this;
     detailQuery.find({
       success: function(result){
         self.setState({
+          game: result[0],
           name: result[0].get('name'),
           time: result[0].get('time'),
           details: result[0].get('details'),
@@ -57,21 +70,6 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
       }
     });
 
-    // var puMatchQuery = new Parse.Query("pumatch");
-    // var relation = puMatchQuery.relation('publicGameCrew');
-    // console.log(relation);
-    // var query = relation.query();
-    // console.log(query);
-    // query.find({
-    //   success: function(result){
-    //     console.log('relation query', result);
-    //   },
-    //   error: function(error){
-    //     console.log('error', error);
-    //   }
-    // });
-
-
   },
 
   handleLogout: function(e){
@@ -82,6 +80,9 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
   },
   render: function(){
     var app = this.props.app;
+
+    console.log('controller');
+
     return(
       React.createElement("div", {className: "row games-info"}, 
         React.createElement("div", {className: "distance-logout col xs12 col s12 col l12 col m12 right-align"}, 
@@ -109,6 +110,8 @@ var GameDetailController = React.createClass({displayName: "GameDetailController
 
 var DistanceGamesListComponent = React.createClass({displayName: "DistanceGamesListComponent",
   render: function(){
+    console.log('list');
+
     var app = this.props.app;
     var publicMatches = app.publicMatches;
     var self = this;
@@ -143,6 +146,7 @@ var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent
   componentDidMount: function(){
     $('.icon').hide();
     $('.join-game').hide();
+    $('.squad-number').hide();
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map1', 'mapbox.streets')
     this.map = map;
@@ -163,16 +167,36 @@ var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent
     $('.icon').show();
     $('.join-game').show();
 
-
+    console.log('new props');
   },
   handleGame: function(e){
     e.preventDefault();
     this.props.handleJoinPublicGame(this.props.game);
   },
   render: function(){
+    var players = [];
+    try{
+      players = this.props.game.get("crew");
+    }catch(error){
+      // ignore
+    }
+
+    players = players || [];
+    console.log('players', players);
+    var squadNumbers = players.length;
+    var playerList = players.map(function(player){
+      return (
+        React.createElement("span", {className: "col m4 col l4 center-align", key: player.id}, 
+          React.createElement("img", {className: "circle responsive-img member-profile-pic", src: player.get('profilePics')._url, alt: "member pic"}), 
+          player.get('username')
+        )
+
+      );
+    })
+
     return (
       React.createElement("div", null, 
-        React.createElement("div", {className: "col m7 col s12 col xs 12 col l7 games-details"}, 
+        React.createElement("div", {id: "games-details", className: "col m7 col s12 col xs 12 col l7 games-details"}, 
           React.createElement("h3", null, this.props.time), 
           React.createElement("h1", null, this.props.name), 
           React.createElement("div", null, 
@@ -181,6 +205,15 @@ var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent
           ), 
           React.createElement("p", {className: "pdetails"}, this.props.details), 
           React.createElement("a", {className: "btn waves-effect waves-light light-green accent-3 join-game ", onClick: this.handleGame}, "JOIN GAME"), 
+
+          React.createElement("div", {className: "row"}, 
+            React.createElement("h5", {className: "col m12 col l12 col xs12 col s12 squad-number"}, "SQUAD (", squadNumbers, ")"), 
+            React.createElement("div", {className: "row"}, 
+              playerList
+            )
+          ), 
+
+
           React.createElement("div", {id: "map1"})
         )
 
@@ -194,10 +227,12 @@ var GamesDetailComponent = React.createClass({displayName: "GamesDetailComponent
 var Game = React.createClass({displayName: "Game",
   handleGameDetail: function(){
     this.props.handleDetailGame(this.props.model);
+    $('.squad-number').show();
 
   },
   render: function(){
-    var model = this.props.model
+    var model = this.props.model;
+
     return(
       React.createElement("li", {className: "row game-list collection-header"}, 
         React.createElement("div", {className: "col m12 col s12 col xs 12 col l12"}, 

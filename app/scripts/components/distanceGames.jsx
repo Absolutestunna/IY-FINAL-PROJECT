@@ -3,6 +3,7 @@ var Backbone = require('backbone');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
 var Parse = require('parse');
+var _ = require('underscore');
 require('backbone-react-component');
 
 var GameDetailController = React.createClass({
@@ -16,7 +17,8 @@ var GameDetailController = React.createClass({
       details: "",
       address: "",
       geoPoint: [],
-      crew: []
+      crew: [],
+      game: false
     }
   },
   componentWillMount: function(){
@@ -26,24 +28,35 @@ var GameDetailController = React.createClass({
     if (!Parse.User.current()){
       Backbone.history.navigate('', {trigger: true});
     };
-
-
   },
   handleJoinPublicGame: function(model){
-    var relation = model.relation("publicGameCrew");
-    relation.add(Parse.User.current());
-    model.save();
+    console.log('model here', model);
+    var self = this;
+    var crew = model.get('crew') || [];
+    var IDs = crew.map(function(crewID){
+      return crewID.id;
+    });
+     if (_.contains(IDs, Parse.User.current().id) === false) {
+        crew.push(Parse.User.current());
+        model.set({'crew': crew});
+        model.save().then(function(){
+          self.forceUpdate();
+        });
+      }
+
+
+
   },
   handleDetailGame: function(model){
     var DetailQuery = Parse.Object.extend("pumatch");
     var detailQuery = new Parse.Query(DetailQuery);
-    detailQuery.include('publicGameCrew');
     detailQuery.equalTo('objectId', model.id);
 
     var self = this;
     detailQuery.find({
       success: function(result){
         self.setState({
+          game: result[0],
           name: result[0].get('name'),
           time: result[0].get('time'),
           details: result[0].get('details'),
@@ -58,21 +71,6 @@ var GameDetailController = React.createClass({
       }
     });
 
-    // var puMatchQuery = new Parse.Query("pumatch");
-    // var relation = puMatchQuery.relation('publicGameCrew');
-    // console.log(relation);
-    // var query = relation.query();
-    // console.log(query);
-    // query.find({
-    //   success: function(result){
-    //     console.log('relation query', result);
-    //   },
-    //   error: function(error){
-    //     console.log('error', error);
-    //   }
-    // });
-
-
   },
 
   handleLogout: function(e){
@@ -83,6 +81,9 @@ var GameDetailController = React.createClass({
   },
   render: function(){
     var app = this.props.app;
+
+    console.log('controller');
+
     return(
       <div className="row games-info">
         <div className="distance-logout col xs12 col s12 col l12 col m12 right-align">
@@ -110,6 +111,8 @@ var GameDetailController = React.createClass({
 
 var DistanceGamesListComponent = React.createClass({
   render: function(){
+    console.log('list');
+
     var app = this.props.app;
     var publicMatches = app.publicMatches;
     var self = this;
@@ -144,6 +147,7 @@ var GamesDetailComponent = React.createClass({
   componentDidMount: function(){
     $('.icon').hide();
     $('.join-game').hide();
+    $('.squad-number').hide();
     L.mapbox.accessToken = 'pk.eyJ1IjoiYWJzb2x1dGVzdHVubmEiLCJhIjoiY2ltdGhrd3k4MDIzMHZobTRpcmcyMnhreSJ9.BhWC0ZLzfdyDmWQ7dGRi4Q';
     var map = L.mapbox.map('map1', 'mapbox.streets')
     this.map = map;
@@ -164,13 +168,33 @@ var GamesDetailComponent = React.createClass({
     $('.icon').show();
     $('.join-game').show();
 
-
+    console.log('new props');
   },
   handleGame: function(e){
     e.preventDefault();
     this.props.handleJoinPublicGame(this.props.game);
   },
   render: function(){
+    var players = [];
+    try{
+      players = this.props.game.get("crew");
+    }catch(error){
+      // ignore
+    }
+
+    players = players || [];
+    console.log('players', players);
+    var squadNumbers = players.length;
+    var playerList = players.map(function(player){
+      return (
+        <span className="col m4 col l4 center-align" key={player.id}>
+          <img className="circle responsive-img member-profile-pic" src={player.get('profilePics')._url} alt='member pic' />
+          {player.get('username')}
+        </span>
+
+      );
+    })
+
     return (
       <div>
         <div id="games-details" className="col m7 col s12 col xs 12 col l7 games-details">
@@ -182,6 +206,15 @@ var GamesDetailComponent = React.createClass({
           </div>
           <p className="pdetails">{this.props.details}</p>
           <a className="btn waves-effect waves-light light-green accent-3 join-game " onClick={this.handleGame}>JOIN GAME</a>
+
+          <div className="row">
+            <h5 className="col m12 col l12 col xs12 col s12 squad-number">SQUAD ({squadNumbers})</h5>
+            <div className="row">
+              {playerList}
+            </div>
+          </div>
+
+
           <div id="map1"></div>
         </div>
 
@@ -195,10 +228,12 @@ var GamesDetailComponent = React.createClass({
 var Game = React.createClass({
   handleGameDetail: function(){
     this.props.handleDetailGame(this.props.model);
+    $('.squad-number').show();
 
   },
   render: function(){
-    var model = this.props.model
+    var model = this.props.model;
+
     return(
       <li className="row game-list collection-header">
         <div className="col m12 col s12 col xs 12 col l12">
