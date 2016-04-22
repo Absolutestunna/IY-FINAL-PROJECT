@@ -12093,9 +12093,6 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   body {
     background-position: 52% 100%; }
 
-  body::before {
-    height: 1200px !important; }
-
   #app .play {
     width: 300px; }
   #app #welcome-body .welcome-container .play .first-set {
@@ -12505,7 +12502,8 @@ body::before {
     font-family: 'Oswald', sans-serif;
     font-size: 14px;
     margin-left: 47%;
-    margin-top: 20px; }
+    margin-top: 25px;
+    margin-bottom: 20px; }
 
 .invite-nav .invitation-logo img {
   height: 100px;
