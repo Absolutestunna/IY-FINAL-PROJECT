@@ -61,9 +61,9 @@ var CrewComponent = React.createClass({
     $(".invite-info").hide();
   },
   handleLogout: function(e){
-    e.preventDefault();
     Parse.User.logOut();
-    Backbone.history.navigate('', {trigger: true})
+    Backbone.history.navigate('', {trigger: true});
+    this.forceUpdate();
   },
   handleSendInvite: function(e){
     e.preventDefault();
@@ -99,11 +99,12 @@ var CrewComponent = React.createClass({
   },
   render: function(){
     var crewMember = this.state.crewMembers.map(function(member){
-      return (<CrewMemberComponent
-        key={member.id}
-        member={member}
+      return(
+        <CrewMemberComponent
+          key={member.id}
+          member={member}
         />
-      );
+      )
     });
     return (
         <div className="row crew-container">

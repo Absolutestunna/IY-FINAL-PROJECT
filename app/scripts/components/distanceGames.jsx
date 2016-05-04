@@ -111,19 +111,14 @@ var GameDetailController = React.createClass({
 
 var DistanceGamesListComponent = React.createClass({
   render: function(){
-    console.log('list');
-
     var app = this.props.app;
     var publicMatches = app.publicMatches;
     var self = this;
       var games = publicMatches.map(function(game){
-
-
         return (<Game
           model={game}
           key={game.id}
           handleDetailGame={self.props.handleDetailGame}
-
           />
         );
       });

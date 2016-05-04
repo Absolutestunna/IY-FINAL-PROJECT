@@ -60,9 +60,9 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
     $(".invite-info").hide();
   },
   handleLogout: function(e){
-    e.preventDefault();
     Parse.User.logOut();
-    Backbone.history.navigate('', {trigger: true})
+    Backbone.history.navigate('', {trigger: true});
+    this.forceUpdate();
   },
   handleSendInvite: function(e){
     e.preventDefault();
@@ -98,11 +98,12 @@ var CrewComponent = React.createClass({displayName: "CrewComponent",
   },
   render: function(){
     var crewMember = this.state.crewMembers.map(function(member){
-      return (React.createElement(CrewMemberComponent, {
-        key: member.id, 
-        member: member}
+      return(
+        React.createElement(CrewMemberComponent, {
+          key: member.id, 
+          member: member}
         )
-      );
+      )
     });
     return (
         React.createElement("div", {className: "row crew-container"}, 
